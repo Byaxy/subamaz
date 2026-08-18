@@ -5,6 +5,10 @@ app_description = "Garage Management System built on frappe"
 app_email = "charlesbyaxy@gmail.com"
 app_license = "mit"
 
+# Fixtures
+# --------
+fixtures = ["Role", "Role Profile", "Custom Field", "Print Format", "Query Report", "Workflow"]
+
 # Apps
 # ------------------
 
@@ -56,13 +60,21 @@ app_license = "mit"
 # Home Pages
 # ----------
 
-# application home page (will override Website Settings)
-# home_page = "login"
-
 # website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
+role_home_page = {
+	"Garage Technician": "garage",
+	"Garage Reception": "garage",
+	"Garage Inspector": "garage",
+	"Garage Supervisor": "garage",
+	"Garage Service Advisor": "garage",
+	"Garage Manager": "garage",
+}
+
+# Website routes
+website_route_rules = [
+	{"from_route": "/portal/<path:app_path>", "to_route": "portal"},
+	{"from_route": "/garage/<path:app_path>", "to_route": "garage"},
+]
 
 # Generators
 # ----------
@@ -138,13 +150,12 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"*": {
+		"on_update": "subamaz.events.on_update",
+		"on_trash": "subamaz.events.on_trash",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -205,7 +216,7 @@ app_license = "mit"
 
 # Request Events
 # ----------------
-# before_request = ["subamaz.utils.before_request"]
+before_request = ["subamaz.auth.enforce_app_lockout"]
 # after_request = ["subamaz.utils.after_request"]
 
 # Job Events

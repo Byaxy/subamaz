@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-18 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_duration_threshold_days",
+  "project_cost_threshold",
+  "reminder_mileage_interval",
+  "reminder_days_interval",
+  "enable_satisfaction_survey",
+  "survey_email_body",
+  "reception_photo_requirements"
+ ],
+ "fields": [
+  {
+   "default": "14",
+   "description": "Auto-Project trigger for Service Orders",
+   "fieldname": "project_duration_threshold_days",
+   "fieldtype": "Int",
+   "label": "Project Duration Threshold (days)"
+  },
+  {
+   "default": "5000000",
+   "fieldname": "project_cost_threshold",
+   "fieldtype": "Currency",
+   "label": "Project Cost Threshold"
+  },
+  {
+   "fieldname": "reminder_mileage_interval",
+   "fieldtype": "Int",
+   "label": "Service Reminder Mileage Interval"
+  },
+  {
+   "fieldname": "reminder_days_interval",
+   "fieldtype": "Int",
+   "label": "Service Reminder Days Interval"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_satisfaction_survey",
+   "fieldtype": "Check",
+   "label": "Enable Satisfaction Survey"
+  },
+  {
+   "fieldname": "survey_email_body",
+   "fieldtype": "Text Editor",
+   "label": "Survey Email Body"
+  },
+  {
+   "default": "Front, Rear, Interior, Dashboard",
+   "description": "Comma-separated list of required photos on vehicle arrival",
+   "fieldname": "reception_photo_requirements",
+   "fieldtype": "Small Text",
+   "label": "Required Arrival Photos"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Garage Settings",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
