@@ -7,7 +7,29 @@ app_license = "mit"
 
 # Fixtures
 # --------
-fixtures = ["Role", "Role Profile", "Custom Field", "Print Format", "Query Report", "Workflow"]
+# Scoped by `module` so export-fixtures only captures records owned by Subamaz.
+# Role Profile / Workflow / Query Report are added by later phases that create them.
+fixtures = [
+	{
+		"doctype": "Role",
+		"filters": {
+			"role_name": [
+				"in",
+				[
+					"Garage Reception",
+					"Garage Technician",
+					"Garage Inspector",
+					"Garage Supervisor",
+					"Garage Service Advisor",
+					"Garage Manager",
+					"Garage Accountant",
+				],
+			]
+		},
+	},
+	{"doctype": "Custom Field", "filters": {"module": "Subamaz"}},
+	{"doctype": "Print Format", "filters": {"module": "Subamaz"}},
+]
 
 # Apps
 # ------------------
@@ -29,8 +51,8 @@ fixtures = ["Role", "Role Profile", "Custom Field", "Print Format", "Query Repor
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/subamaz/css/subamaz.css"
-# app_include_js = "/assets/subamaz/js/subamaz.js"
+app_include_css = ["/assets/subamaz/css/theme.css"]
+app_include_js = ["/assets/subamaz/js/theme.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/subamaz/css/subamaz.css"
@@ -61,6 +83,8 @@ fixtures = ["Role", "Role Profile", "Custom Field", "Print Format", "Query Repor
 # ----------
 
 # website user home page (by Role)
+get_website_user_home_page = "subamaz.auth.get_website_user_home_page"
+
 role_home_page = {
 	"Garage Technician": "garage",
 	"Garage Reception": "garage",
