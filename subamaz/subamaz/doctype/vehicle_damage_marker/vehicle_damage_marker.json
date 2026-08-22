@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "creation": "2026-08-21 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "panel",
+  "damage_type",
+  "severity",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "panel",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Panel",
+   "options": "Front Bumper\nRear Bumper\nHood\nRoof\nLeft Fender\nRight Fender\nLeft Door Front\nLeft Door Rear\nRight Door Front\nRight Door Rear\nTrunk\nWindshield\nRear Glass",
+   "reqd": 1
+  },
+  {
+   "fieldname": "damage_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Damage Type",
+   "options": "Scratch\nDent\nCrack\nMissing Part\nPaint Damage\nRust\nBroken Glass",
+   "reqd": 1
+  },
+  {
+   "default": "Minor",
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Severity",
+   "options": "Minor\nModerate\nSevere"
+  },
+  {
+   "columns": 2,
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Vehicle Damage Marker",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

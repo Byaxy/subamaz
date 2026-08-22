@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2026-08-21 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "accessory_name",
+  "custom_label",
+  "present"
+ ],
+ "fields": [
+  {
+   "fieldname": "accessory_name",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Accessory",
+   "options": "Spare Tire\nJack\nWheel Spanner\nFloor Mats\nFire Extinguisher\nRadio\nDash Camera\nFirst Aid Kit\nTool Kit\nTow Hook\nService Book\nRegistration Documents\nOther",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.accessory_name=='Other'",
+   "fieldname": "custom_label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Custom Label"
+  },
+  {
+   "default": "0",
+   "fieldname": "present",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Present"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Vehicle Accessory Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,320 @@
+{
+ "actions": [],
+ "autoname": "VR-.YYYY.-.#####",
+ "creation": "2026-08-21 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "general_section",
+  "reception_date",
+  "customer",
+  "vehicle",
+  "reception_advisor",
+  "appointment",
+  "service_order",
+  "status",
+  "arrival_section",
+  "odometer_reading",
+  "fuel_level",
+  "battery_condition",
+  "engine_starts",
+  "vehicle_drivable",
+  "complaint_section",
+  "customer_complaint",
+  "requested_services",
+  "walkaround_section",
+  "damage_markers",
+  "accessories",
+  "personal_belongings",
+  "photos",
+  "signatures_section",
+  "column_break_signatures",
+  "customer_signature",
+  "advisor_signature",
+  "terms_accepted",
+  "amended_from",
+  "amended_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "default": "Now",
+   "fieldname": "reception_date",
+   "fieldtype": "Datetime",
+   "label": "Reception Date"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Vehicle",
+   "options": "Garage Vehicle",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "reception_advisor",
+   "fieldtype": "Link",
+   "label": "Reception Advisor",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "description": "External reference (e.g. booking system) until a scheduling module exists",
+   "fieldname": "appointment",
+   "fieldtype": "Data",
+   "label": "Appointment"
+  },
+  {
+   "description": "Set once the downstream Service Order is created",
+   "fieldname": "service_order",
+   "fieldtype": "Data",
+   "label": "Service Order",
+   "read_only": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nDraft — Parked\nSubmitted"
+  },
+  {
+   "fieldname": "arrival_section",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Status at Arrival"
+  },
+  {
+   "fieldname": "odometer_reading",
+   "fieldtype": "Int",
+   "label": "Odometer Reading"
+  },
+  {
+   "fieldname": "fuel_level",
+   "fieldtype": "Select",
+   "label": "Fuel Level",
+   "options": "\nEmpty\nQuarter\nHalf\nThree Quarter\nFull"
+  },
+  {
+   "fieldname": "battery_condition",
+   "fieldtype": "Select",
+   "label": "Battery Condition",
+   "options": "\nGood\nWeak\nDead\nNot Checked"
+  },
+  {
+   "default": "0",
+   "fieldname": "engine_starts",
+   "fieldtype": "Check",
+   "label": "Engine Starts"
+  },
+  {
+   "default": "0",
+   "fieldname": "vehicle_drivable",
+   "fieldtype": "Check",
+   "label": "Vehicle Drivable"
+  },
+  {
+   "fieldname": "complaint_section",
+   "fieldtype": "Section Break",
+   "label": "Complaint & Requested Services"
+  },
+  {
+   "description": "Preserved verbatim once submitted",
+   "fieldname": "customer_complaint",
+   "fieldtype": "Small Text",
+   "label": "Customer Complaint"
+  },
+  {
+   "fieldname": "requested_services",
+   "fieldtype": "Table MultiSelect",
+   "label": "Requested Services",
+   "options": "Reception Requested Service"
+  },
+  {
+   "fieldname": "walkaround_section",
+   "fieldtype": "Section Break",
+   "label": "Walkaround"
+  },
+  {
+   "fieldname": "damage_markers",
+   "fieldtype": "Table",
+   "label": "Damage Markers",
+   "options": "Vehicle Damage Marker"
+  },
+  {
+   "fieldname": "accessories",
+   "fieldtype": "Table",
+   "label": "Accessories",
+   "options": "Vehicle Accessory Item"
+  },
+  {
+   "fieldname": "personal_belongings",
+   "fieldtype": "Table",
+   "label": "Personal Belongings",
+   "options": "Personal Belonging Item"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "Photos",
+   "options": "Garage Photo"
+  },
+  {
+   "fieldname": "signatures_section",
+   "fieldtype": "Section Break",
+   "label": "Signatures & Terms"
+  },
+  {
+   "fieldname": "column_break_signatures",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_signature",
+   "fieldtype": "Attach Image",
+   "label": "Customer Signature"
+  },
+  {
+   "fieldname": "advisor_signature",
+   "fieldtype": "Attach Image",
+   "label": "Reception Advisor Signature"
+  },
+  {
+   "description": "Required before submit",
+   "fieldname": "terms_accepted",
+   "fieldtype": "Check",
+   "label": "Terms & Conditions Accepted"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Reception",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_by",
+   "fieldtype": "Data",
+   "label": "Amended By",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Vehicle Reception",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Reception",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Supervisor",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Service Advisor",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Technician"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Inspector"
+  }
+ ],
+ "search_fields": "customer,vehicle,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
