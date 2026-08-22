@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "creation": "2026-08-21 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "photo",
+  "photo_type",
+  "taken_on",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo",
+   "reqd": 1
+  },
+  {
+   "default": "Front",
+   "fieldname": "photo_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Photo Type",
+   "options": "Front\nRear\nLeft Side\nRight Side\nInterior\nDashboard\nEngine Bay\nDamage Close-up\nBefore\nDuring\nAfter"
+  },
+  {
+   "default": "Now",
+   "fieldname": "taken_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Taken On"
+  },
+  {
+   "columns": 2,
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Garage Photo",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
