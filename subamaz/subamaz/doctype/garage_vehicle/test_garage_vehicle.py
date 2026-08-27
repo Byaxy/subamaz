@@ -96,6 +96,7 @@ class TestGarageVehicle(IntegrationTestCase):
 			"Ready",
 			"Delivered",
 			"Cancelled",
+			"Available",
 		]
 		options = frappe.get_meta("Garage Vehicle").get_field("current_status").options.split("\n")
 		self.assertEqual(options, expected)

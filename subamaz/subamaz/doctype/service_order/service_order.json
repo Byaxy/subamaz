@@ -235,6 +235,7 @@
    "label": "Timeline"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "timeline",
    "fieldtype": "Table",
    "label": "Timeline",

@@ -22,6 +22,11 @@
   "column_break_planning",
   "actual_hours",
   "actual_cost",
+  "qa_section",
+  "qa_result",
+  "quality_checklist",
+  "additional_parts_section",
+  "additional_parts",
   "children_section",
   "time_logs",
   "consumed_parts",
@@ -123,6 +128,38 @@
    "fieldtype": "Currency",
    "label": "Actual Cost",
    "read_only": 1
+  },
+  {
+   "fieldname": "qa_section",
+   "fieldtype": "Section Break",
+   "label": "QA"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Pending",
+   "fieldname": "qa_result",
+   "fieldtype": "Select",
+   "label": "QA Result",
+   "options": "Pending\nPass\nFail"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "quality_checklist",
+   "fieldtype": "Table",
+   "label": "Quality Checklist",
+   "options": "Quality Checklist Item"
+  },
+  {
+   "fieldname": "additional_parts_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Parts"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "additional_parts",
+   "fieldtype": "Table",
+   "label": "Additional Parts",
+   "options": "Additional Part Request"
   },
   {
    "fieldname": "children_section",

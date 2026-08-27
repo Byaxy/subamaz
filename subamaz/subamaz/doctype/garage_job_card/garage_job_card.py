@@ -31,8 +31,17 @@ def _get_previous_status(name):
 class GarageJobCard(Document):
 	def validate(self):
 		self._validate_status_transition()
+		self._validate_qa()
 		self._recompute_child_amounts()
 		self._recompute_totals()
+
+	def _validate_qa(self):
+		if self.qa_result == "Pass":
+			if not self.quality_checklist:
+				frappe.throw(_("QA Pass requires at least one Quality Checklist row"))
+			for row in self.quality_checklist or []:
+				if row.result != "Pass":
+					frappe.throw(_("All Quality Checklist rows must be Pass for QA Pass"))
 
 	def _validate_status_transition(self):
 		if self.is_new():
