@@ -29,6 +29,8 @@ fixtures = [
 	},
 	{"doctype": "Custom Field", "filters": {"module": "Subamaz"}},
 	{"doctype": "Print Format", "filters": {"module": "Subamaz"}},
+	{"doctype": "Workflow State", "filters": {"name": ["in", ["Draft", "Open", "Waiting Customer", "Waiting Parts", "In Progress", "Quality Check", "Completed", "Closed", "Cancelled", "On Hold"]]}},
+	{"doctype": "Workflow", "filters": {"name": ["in", ["Service Order Workflow"]]}},
 ]
 
 # Apps
@@ -178,7 +180,10 @@ doc_events = {
 	"*": {
 		"on_update": "subamaz.events.on_update",
 		"on_trash": "subamaz.events.on_trash",
-	}
+	},
+	"Job Card": {
+		"on_update": "subamaz.subamaz.doctype.service_order.service_order.on_job_card_update"
+	},
 }
 
 # Scheduled Tasks

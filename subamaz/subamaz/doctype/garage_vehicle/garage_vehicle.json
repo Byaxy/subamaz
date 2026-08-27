@@ -124,7 +124,7 @@
   },
   {
    "fieldname": "current_service_order",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Current Service Order",
    "options": "Service Order",
    "read_only": 1

@@ -1,0 +1,153 @@
+[
+ {
+  "doctype": "Workflow",
+  "name": "Service Order Workflow",
+  "workflow_name": "Service Order Workflow",
+  "document_type": "Service Order",
+  "workflow_state_field": "status",
+  "is_active": 1,
+  "override_status": 0,
+  "send_email_alert": 0,
+  "states": [
+   {
+    "state": "Draft",
+    "doc_status": "0",
+    "allow_edit": "Garage Reception",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Open",
+    "doc_status": "0",
+    "allow_edit": "Garage Inspector",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Waiting Customer",
+    "doc_status": "0",
+    "allow_edit": "Garage Service Advisor",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Waiting Parts",
+    "doc_status": "0",
+    "allow_edit": "Garage Manager",
+    "is_optional_state": 0
+   },
+   {
+    "state": "In Progress",
+    "doc_status": "0",
+    "allow_edit": "Garage Technician",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Quality Check",
+    "doc_status": "0",
+    "allow_edit": "Garage Supervisor",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Completed",
+    "doc_status": "0",
+    "allow_edit": "Garage Supervisor",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Closed",
+    "doc_status": "0",
+    "allow_edit": "Garage Manager",
+    "is_optional_state": 0
+   },
+   {
+    "state": "Cancelled",
+    "doc_status": "0",
+    "allow_edit": "Garage Manager",
+    "is_optional_state": 0
+   },
+   {
+    "state": "On Hold",
+    "doc_status": "0",
+    "allow_edit": "Garage Manager",
+    "is_optional_state": 1
+   }
+  ],
+  "transitions": [
+   {
+    "state": "Draft",
+    "action": "Open",
+    "next_state": "Open",
+    "allowed": "Garage Inspector",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Open",
+    "action": "Wait Customer",
+    "next_state": "Waiting Customer",
+    "allowed": "Garage Service Advisor",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Waiting Customer",
+    "action": "Wait Parts",
+    "next_state": "Waiting Parts",
+    "allowed": "Garage Manager",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Waiting Customer",
+    "action": "Start Work",
+    "next_state": "In Progress",
+    "allowed": "Garage Technician",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Waiting Parts",
+    "action": "Start Work",
+    "next_state": "In Progress",
+    "allowed": "Garage Technician",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "In Progress",
+    "action": "Send to QA",
+    "next_state": "Quality Check",
+    "allowed": "Garage Supervisor",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Quality Check",
+    "action": "Complete",
+    "next_state": "Completed",
+    "allowed": "Garage Supervisor",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Completed",
+    "action": "Close",
+    "next_state": "Closed",
+    "allowed": "Garage Manager",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Draft",
+    "action": "Cancel",
+    "next_state": "Cancelled",
+    "allowed": "Garage Manager",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Open",
+    "action": "Cancel",
+    "next_state": "Cancelled",
+    "allowed": "Garage Manager",
+    "allow_self_approval": 1
+   },
+   {
+    "state": "Waiting Customer",
+    "action": "Cancel",
+    "next_state": "Cancelled",
+    "allowed": "Garage Manager",
+    "allow_self_approval": 1
+   }
+  ]
+ }
+]

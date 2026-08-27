@@ -133,4 +133,5 @@ class TestInspectionCrossDoctype(IntegrationTestCase):
 		meta = frappe.get_meta("Garage Vehicle")
 		field = meta.get_field("current_service_order")
 		self.assertIsNotNone(field)
-		self.assertEqual(field.fieldtype, "Data")
+		self.assertEqual(field.fieldtype, "Link")
+		self.assertEqual(field.options, "Service Order")

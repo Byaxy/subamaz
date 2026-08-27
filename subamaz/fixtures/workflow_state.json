@@ -1,0 +1,62 @@
+[
+ {
+  "doctype": "Workflow State",
+  "name": "Draft",
+  "workflow_state_name": "Draft",
+  "style": "Primary"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Open",
+  "workflow_state_name": "Open",
+  "style": "Primary"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Waiting Customer",
+  "workflow_state_name": "Waiting Customer",
+  "style": "Warning"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Waiting Parts",
+  "workflow_state_name": "Waiting Parts",
+  "style": "Warning"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "In Progress",
+  "workflow_state_name": "In Progress",
+  "style": "Primary"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Quality Check",
+  "workflow_state_name": "Quality Check",
+  "style": "Warning"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Completed",
+  "workflow_state_name": "Completed",
+  "style": "Success"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Closed",
+  "workflow_state_name": "Closed",
+  "style": "Success"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "Cancelled",
+  "workflow_state_name": "Cancelled",
+  "style": "Danger"
+ },
+ {
+  "doctype": "Workflow State",
+  "name": "On Hold",
+  "workflow_state_name": "On Hold",
+  "style": "Danger"
+ }
+]
