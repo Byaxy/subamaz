@@ -17,49 +17,49 @@
    },
    {
     "state": "Open",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Inspector",
     "is_optional_state": 0
    },
    {
     "state": "Waiting Customer",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Service Advisor",
     "is_optional_state": 0
    },
    {
     "state": "Waiting Parts",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Manager",
     "is_optional_state": 0
    },
    {
     "state": "In Progress",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Technician",
     "is_optional_state": 0
    },
    {
     "state": "Quality Check",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Supervisor",
     "is_optional_state": 0
    },
    {
     "state": "Completed",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Supervisor",
     "is_optional_state": 0
    },
    {
     "state": "Closed",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Manager",
     "is_optional_state": 0
    },
    {
     "state": "Cancelled",
-    "doc_status": "0",
+    "doc_status": "1",
     "allow_edit": "Garage Manager",
     "is_optional_state": 0
    },

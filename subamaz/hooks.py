@@ -181,7 +181,7 @@ doc_events = {
 		"on_update": "subamaz.events.on_update",
 		"on_trash": "subamaz.events.on_trash",
 	},
-	"Job Card": {
+	"Garage Job Card": {
 		"on_update": "subamaz.subamaz.doctype.service_order.service_order.on_job_card_update"
 	},
 }

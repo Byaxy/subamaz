@@ -119,14 +119,14 @@ class TestServiceOrderCross(IntegrationTestCase):
 		original_get_all = frappe.get_all
 
 		def get_all_side_effect(doctype, *args, **kwargs):
-			if doctype == "Job Card":
+			if doctype == "Garage Job Card":
 				return fake_cards
-			if doctype in ("Job Card Time Log", "Job Card Consumed Part"):
+			if doctype in ("Time Log Entry", "Consumed Part Entry"):
 				return []
 			return original_get_all(doctype, *args, **kwargs)
 
 		def exists_side_effect(doctype, name=None):
-			if doctype == "DocType" and name in ("Job Card", "Job Card Time Log", "Job Card Consumed Part"):
+			if doctype == "DocType" and name in ("Garage Job Card", "Time Log Entry", "Consumed Part Entry"):
 				return True
 			if doctype == "Service Order" and isinstance(name, str):
 				return frappe.db.exists(doctype, name)

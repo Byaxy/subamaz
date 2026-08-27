@@ -27,18 +27,18 @@ def add_timeline_entry(service_order, description, event_type="System", visible=
 
 
 def recompute_rollup(service_order):
-	"""Recompute financial rollups from linked Job Cards. Guarded for phase 06 (no Job Card yet)."""
+	"""Recompute financial rollups from linked Garage Job Cards. Guarded for phase 06 (no Garage Job Card yet)."""
 	if isinstance(service_order, str):
 		doc = frappe.get_doc("Service Order", service_order)
 	else:
 		doc = service_order
 
-	if not frappe.db.exists("DocType", "Job Card"):
+	if not frappe.db.exists("DocType", "Garage Job Card"):
 		_update_estimated_total(doc)
 		return doc
 
 	job_cards = frappe.get_all(
-		"Job Card",
+		"Garage Job Card",
 		filters={"service_order": doc.name},
 		fields=["name", "estimated_cost", "completion_percent"],
 	)
@@ -57,17 +57,17 @@ def recompute_rollup(service_order):
 		total_estimated += estimated
 		jc_name = jc.get("name")
 		# Time logs and consumed parts are phase 07 — try to fetch if doctypes exist
-		if frappe.db.exists("DocType", "Job Card Time Log"):
+		if frappe.db.exists("DocType", "Time Log Entry"):
 			time_logs = frappe.get_all(
-				"Job Card Time Log",
+				"Time Log Entry",
 				filters={"parent": jc_name},
 				fields=["labour_cost"],
 			)
 			for tl in time_logs:
 				total_actual_labour += tl.get("labour_cost") or 0
-		if frappe.db.exists("DocType", "Job Card Consumed Part"):
+		if frappe.db.exists("DocType", "Consumed Part Entry"):
 			parts = frappe.get_all(
-				"Job Card Consumed Part",
+				"Consumed Part Entry",
 				filters={"parent": jc_name},
 				fields=["amount"],
 			)
@@ -96,7 +96,7 @@ def _update_estimated_total(doc):
 
 
 def on_job_card_update(doc, method=None):
-	"""Hook for Job Card.on_update — recompute rollup on linked Service Order."""
+	"""Hook for Garage Job Card.on_update — recompute rollup on linked Service Order."""
 	service_order = getattr(doc, "service_order", None)
 	if not service_order:
 		return
