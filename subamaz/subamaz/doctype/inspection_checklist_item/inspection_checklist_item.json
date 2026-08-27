@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "creation": "2026-08-27 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section",
+  "checklist_item",
+  "result",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Section",
+   "options": "Engine\nTransmission\nSuspension\nElectrical\nInterior\nExterior"
+  },
+  {
+   "fieldname": "checklist_item",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item"
+  },
+  {
+   "default": "Not Checked",
+   "fieldname": "result",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Result",
+   "options": "Pass\nFail\nAdvisory\nNot Checked"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-27 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Inspection Checklist Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

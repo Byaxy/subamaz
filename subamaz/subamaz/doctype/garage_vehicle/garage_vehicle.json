@@ -21,6 +21,7 @@
   "mileage_status_section",
   "current_mileage",
   "current_status",
+  "current_service_order",
   "current_technician",
   "photos_section",
   "photos"
@@ -119,6 +120,13 @@
    "in_standard_filter": 1,
    "label": "Current Status",
    "options": "Received\nWaiting Inspection\nWaiting Approval\nWaiting Parts\nRepairing\nTesting\nReady\nDelivered\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_service_order",
+   "fieldtype": "Data",
+   "label": "Current Service Order",
+   "options": "Service Order",
    "read_only": 1
   },
   {
