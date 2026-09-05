@@ -1,0 +1,189 @@
+[
+ {
+  "capability_key": "module:service",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "SERVICE",
+  "modified": "2026-09-05 12:44:33.107522",
+  "module_group": "SERVICE",
+  "name": "module:service"
+ },
+ {
+  "capability_key": "module:customers_vehicles",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "CUSTOMERS & VEHICLES",
+  "modified": "2026-09-05 12:44:33.412074",
+  "module_group": "CUSTOMERS & VEHICLES",
+  "name": "module:customers_vehicles"
+ },
+ {
+  "capability_key": "module:parts_stock",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "PARTS & STOCK",
+  "modified": "2026-09-05 12:44:33.414217",
+  "module_group": "PARTS & STOCK",
+  "name": "module:parts_stock"
+ },
+ {
+  "capability_key": "module:procurement",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "PROCUREMENT",
+  "modified": "2026-09-05 12:44:33.416830",
+  "module_group": "PROCUREMENT",
+  "name": "module:procurement"
+ },
+ {
+  "capability_key": "module:records_money",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "RECORDS & MONEY",
+  "modified": "2026-09-05 12:44:33.418681",
+  "module_group": "RECORDS & MONEY",
+  "name": "module:records_money"
+ },
+ {
+  "capability_key": "module:staff",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "STAFF",
+  "modified": "2026-09-05 12:44:33.420928",
+  "module_group": "STAFF",
+  "name": "module:staff"
+ },
+ {
+  "capability_key": "module:insights",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "INSIGHTS",
+  "modified": "2026-09-05 12:44:33.423629",
+  "module_group": "INSIGHTS",
+  "name": "module:insights"
+ },
+ {
+  "capability_key": "module:setup",
+  "capability_type": "Module",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "SETUP",
+  "modified": "2026-09-05 12:44:33.425581",
+  "module_group": "SETUP",
+  "name": "module:setup"
+ },
+ {
+  "capability_key": "action:approve_additional_part",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Approve Additional Part",
+  "modified": "2026-09-05 12:44:33.427446",
+  "module_group": "SERVICE",
+  "name": "action:approve_additional_part"
+ },
+ {
+  "capability_key": "action:apply_invoice_discount",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Apply Invoice Discount",
+  "modified": "2026-09-05 12:44:33.428946",
+  "module_group": "RECORDS & MONEY",
+  "name": "action:apply_invoice_discount"
+ },
+ {
+  "capability_key": "action:void_invoice",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Void Invoice",
+  "modified": "2026-09-05 12:44:33.431767",
+  "module_group": "RECORDS & MONEY",
+  "name": "action:void_invoice"
+ },
+ {
+  "capability_key": "action:edit_job_card_after_qa",
+  "capability_type": "Action",
+  "default_enabled": 0,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Edit Job Card After QA",
+  "modified": "2026-09-05 12:44:33.434734",
+  "module_group": "SERVICE",
+  "name": "action:edit_job_card_after_qa"
+ },
+ {
+  "capability_key": "action:approve_credit_sale",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Approve Credit Sale",
+  "modified": "2026-09-05 12:44:33.436945",
+  "module_group": "RECORDS & MONEY",
+  "name": "action:approve_credit_sale"
+ },
+ {
+  "capability_key": "action:record_petty_cash",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Record Petty Cash",
+  "modified": "2026-09-05 12:44:33.439103",
+  "module_group": "RECORDS & MONEY",
+  "name": "action:record_petty_cash"
+ },
+ {
+  "capability_key": "action:manage_staff",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Manage Staff",
+  "modified": "2026-09-05 12:44:33.440883",
+  "module_group": "STAFF",
+  "name": "action:manage_staff"
+ },
+ {
+  "capability_key": "action:change_settings",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "Change Settings",
+  "modified": "2026-09-05 12:44:33.442662",
+  "module_group": "SETUP",
+  "name": "action:change_settings"
+ },
+ {
+  "capability_key": "action:view_all_technician_performance",
+  "capability_type": "Action",
+  "default_enabled": 1,
+  "docstatus": 0,
+  "doctype": "Capability",
+  "label": "View All Technician Performance",
+  "modified": "2026-09-05 12:44:33.444624",
+  "module_group": "STAFF",
+  "name": "action:view_all_technician_performance"
+ }
+]

@@ -1,13 +1,27 @@
 import frappe
 from frappe import _
-from frappe.utils import has_common
 
 ALLOWED_ROLES = ("Garage Service Advisor", "Garage Supervisor", "Garage Manager")
 
 
+def _has_approve_capability():
+	"""Capability check for approving additional parts — ceiling-aware."""
+	try:
+		if frappe.db.exists("DocType", "Capability"):
+			from subamaz.api.access_control import has_capability
+
+			return bool(has_capability(frappe.session.user, "action:approve_additional_part"))
+	except Exception:
+		pass
+	# fallback to role list when capability infra not yet migrated (dev / early phase)
+	from frappe.utils import has_common
+
+	return bool(has_common(ALLOWED_ROLES, frappe.get_roles()))
+
+
 @frappe.whitelist(methods=["POST"])
 def approve_additional_part(job_card, row_name, approve=True):
-	if not has_common(ALLOWED_ROLES, frappe.get_roles()):
+	if not _has_approve_capability():
 		frappe.throw(_("Not permitted to approve additional parts"), frappe.PermissionError)
 	# Normalize approve param (could be string from JS)
 	if isinstance(approve, str):

@@ -1,0 +1,452 @@
+[
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.448313",
+  "name": "3buga87b9o",
+  "role": "Garage Technician"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.477577",
+  "name": "3bu166ub8f",
+  "role": "Garage Technician"
+ },
+ {
+  "capability": "module:parts_stock",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.482199",
+  "name": "3bu8ide5md",
+  "role": "Garage Technician"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.486075",
+  "name": "3bukabuacu",
+  "role": "Garage Technician"
+ },
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.489184",
+  "name": "3buncgu3pf",
+  "role": "Garage Reception"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.491844",
+  "name": "3buerhsfqs",
+  "role": "Garage Reception"
+ },
+ {
+  "capability": "module:records_money",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.493803",
+  "name": "3buhnr0ned",
+  "role": "Garage Reception"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.496925",
+  "name": "3budt4qg1q",
+  "role": "Garage Reception"
+ },
+ {
+  "capability": "action:record_petty_cash",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.499024",
+  "name": "3bu2stu735",
+  "role": "Garage Reception"
+ },
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.501709",
+  "name": "3bvstf7gqr",
+  "role": "Garage Inspector"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.505200",
+  "name": "3bvcpl6h1i",
+  "role": "Garage Inspector"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.508931",
+  "name": "3bvl3kkp33",
+  "role": "Garage Inspector"
+ },
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.513254",
+  "name": "3bvj9n6ed8",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.517055",
+  "name": "3bvljo8f4s",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:parts_stock",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.519678",
+  "name": "3bvn4a5bve",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:procurement",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.522596",
+  "name": "3bvs90ltnj",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:records_money",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.527767",
+  "name": "3bvv7cfo8c",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.536524",
+  "name": "3bvm2cve4k",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:approve_additional_part",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.545134",
+  "name": "3bv4ujg0s9",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:apply_invoice_discount",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.556203",
+  "name": "3bv6sfrbnd",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:edit_job_card_after_qa",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 0,
+  "modified": "2026-09-05 12:44:33.564890",
+  "name": "3bvv6028hh",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:approve_credit_sale",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.570062",
+  "name": "3bv3vu490t",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:record_petty_cash",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.574105",
+  "name": "3bv6le08uu",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "action:view_all_technician_performance",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.576908",
+  "name": "3bvs8itgho",
+  "role": "Garage Supervisor"
+ },
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.580077",
+  "name": "3bvma6jkg7",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.584477",
+  "name": "3bvh3uncau",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "module:parts_stock",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.587812",
+  "name": "3bvsp75r7m",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "module:records_money",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.591225",
+  "name": "3bvrk6ch1l",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.595198",
+  "name": "3bvbe2pgbn",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "action:approve_additional_part",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.597847",
+  "name": "3bv73pq46o",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "action:apply_invoice_discount",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.600464",
+  "name": "3c055fqcgl",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "action:approve_credit_sale",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.602764",
+  "name": "3c0jh4rgbr",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "action:record_petty_cash",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.605795",
+  "name": "3c0772nfsf",
+  "role": "Garage Service Advisor"
+ },
+ {
+  "capability": "module:service",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.608978",
+  "name": "3c04ulgc4n",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:customers_vehicles",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.612816",
+  "name": "3c0f12u22v",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:parts_stock",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.617096",
+  "name": "3c0jchmn6t",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:procurement",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.620545",
+  "name": "3c0od0569q",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:records_money",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.624431",
+  "name": "3c0aubp1vf",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:staff",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.627534",
+  "name": "3c0vro2hrf",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:insights",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.631493",
+  "name": "3c047t2s7h",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "module:setup",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.635884",
+  "name": "3c0079qicv",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:approve_additional_part",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.640063",
+  "name": "3c01q72svr",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:apply_invoice_discount",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.643083",
+  "name": "3c0cfd82mr",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:void_invoice",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.645835",
+  "name": "3c08081unl",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:edit_job_card_after_qa",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 0,
+  "modified": "2026-09-05 12:44:33.649554",
+  "name": "3c0umoj0i3",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:approve_credit_sale",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.652061",
+  "name": "3c0fvj3or3",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:record_petty_cash",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.655897",
+  "name": "3c0e76p3e1",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:manage_staff",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.659929",
+  "name": "3c0263gr7l",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:change_settings",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.665357",
+  "name": "3c0iaft7vk",
+  "role": "Garage Manager"
+ },
+ {
+  "capability": "action:view_all_technician_performance",
+  "docstatus": 0,
+  "doctype": "Role Capability",
+  "enabled": 1,
+  "modified": "2026-09-05 12:44:33.671284",
+  "name": "3c0j2voor3",
+  "role": "Garage Manager"
+ }
+]

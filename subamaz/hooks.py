@@ -31,6 +31,23 @@ fixtures = [
 	{"doctype": "Print Format", "filters": {"module": "Subamaz"}},
 	{"doctype": "Workflow State", "filters": {"name": ["in", ["Draft", "Open", "Waiting Customer", "Waiting Parts", "In Progress", "Quality Check", "Completed", "Closed", "Cancelled", "On Hold"]]}},
 	{"doctype": "Workflow", "filters": {"name": ["in", ["Service Order Workflow"]]}},
+	{"doctype": "Capability"},
+	{
+		"doctype": "Role Capability",
+		"filters": {
+			"role": [
+				"in",
+				[
+					"Garage Reception",
+					"Garage Technician",
+					"Garage Inspector",
+					"Garage Supervisor",
+					"Garage Service Advisor",
+					"Garage Manager",
+				],
+			]
+		},
+	},
 ]
 
 # Apps

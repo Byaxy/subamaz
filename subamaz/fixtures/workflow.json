@@ -1,153 +1,281 @@
 [
  {
+  "docstatus": 0,
   "doctype": "Workflow",
-  "name": "Service Order Workflow",
-  "workflow_name": "Service Order Workflow",
   "document_type": "Service Order",
-  "workflow_state_field": "status",
+  "enable_action_confirmation": 0,
   "is_active": 1,
+  "modified": "2026-09-05 12:39:30.275355",
+  "name": "Service Order Workflow",
   "override_status": 0,
   "send_email_alert": 0,
   "states": [
    {
-    "state": "Draft",
-    "doc_status": "0",
     "allow_edit": "Garage Reception",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Open",
-    "doc_status": "1",
-    "allow_edit": "Garage Inspector",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Waiting Customer",
-    "doc_status": "1",
-    "allow_edit": "Garage Service Advisor",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Waiting Parts",
-    "doc_status": "1",
-    "allow_edit": "Garage Manager",
-    "is_optional_state": 0
-   },
-   {
-    "state": "In Progress",
-    "doc_status": "1",
-    "allow_edit": "Garage Technician",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Quality Check",
-    "doc_status": "1",
-    "allow_edit": "Garage Supervisor",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Completed",
-    "doc_status": "1",
-    "allow_edit": "Garage Supervisor",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Closed",
-    "doc_status": "1",
-    "allow_edit": "Garage Manager",
-    "is_optional_state": 0
-   },
-   {
-    "state": "Cancelled",
-    "doc_status": "1",
-    "allow_edit": "Garage Manager",
-    "is_optional_state": 0
-   },
-   {
-    "state": "On Hold",
+    "avoid_status_override": 0,
     "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Draft",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Inspector",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Open",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Service Advisor",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Waiting Customer",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
     "allow_edit": "Garage Manager",
-    "is_optional_state": 1
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Waiting Parts",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Technician",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "In Progress",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Supervisor",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Quality Check",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Supervisor",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Completed",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Manager",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Closed",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Manager",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "Cancelled",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Garage Manager",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 1,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 0,
+    "state": "On Hold",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
    }
   ],
   "transitions": [
    {
-    "state": "Draft",
     "action": "Open",
-    "next_state": "Open",
+    "allow_self_approval": 1,
     "allowed": "Garage Inspector",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Open",
-    "action": "Wait Customer",
-    "next_state": "Waiting Customer",
-    "allowed": "Garage Service Advisor",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Waiting Customer",
-    "action": "Wait Parts",
-    "next_state": "Waiting Parts",
-    "allowed": "Garage Manager",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Waiting Customer",
-    "action": "Start Work",
-    "next_state": "In Progress",
-    "allowed": "Garage Technician",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Waiting Parts",
-    "action": "Start Work",
-    "next_state": "In Progress",
-    "allowed": "Garage Technician",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "In Progress",
-    "action": "Send to QA",
-    "next_state": "Quality Check",
-    "allowed": "Garage Supervisor",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Quality Check",
-    "action": "Complete",
-    "next_state": "Completed",
-    "allowed": "Garage Supervisor",
-    "allow_self_approval": 1
-   },
-   {
-    "state": "Completed",
-    "action": "Close",
-    "next_state": "Closed",
-    "allowed": "Garage Manager",
-    "allow_self_approval": 1
-   },
-   {
+    "condition": null,
+    "next_state": "Open",
+    "send_email_to_creator": 0,
     "state": "Draft",
-    "action": "Cancel",
-    "next_state": "Cancelled",
-    "allowed": "Garage Manager",
-    "allow_self_approval": 1
+    "transition_tasks": null,
+    "workflow_builder_id": null
    },
    {
+    "action": "Wait Customer",
+    "allow_self_approval": 1,
+    "allowed": "Garage Service Advisor",
+    "condition": null,
+    "next_state": "Waiting Customer",
+    "send_email_to_creator": 0,
     "state": "Open",
-    "action": "Cancel",
-    "next_state": "Cancelled",
-    "allowed": "Garage Manager",
-    "allow_self_approval": 1
+    "transition_tasks": null,
+    "workflow_builder_id": null
    },
    {
-    "state": "Waiting Customer",
-    "action": "Cancel",
-    "next_state": "Cancelled",
+    "action": "Wait Parts",
+    "allow_self_approval": 1,
     "allowed": "Garage Manager",
-    "allow_self_approval": 1
+    "condition": null,
+    "next_state": "Waiting Parts",
+    "send_email_to_creator": 0,
+    "state": "Waiting Customer",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Start Work",
+    "allow_self_approval": 1,
+    "allowed": "Garage Technician",
+    "condition": null,
+    "next_state": "In Progress",
+    "send_email_to_creator": 0,
+    "state": "Waiting Customer",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Start Work",
+    "allow_self_approval": 1,
+    "allowed": "Garage Technician",
+    "condition": null,
+    "next_state": "In Progress",
+    "send_email_to_creator": 0,
+    "state": "Waiting Parts",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Send to QA",
+    "allow_self_approval": 1,
+    "allowed": "Garage Supervisor",
+    "condition": null,
+    "next_state": "Quality Check",
+    "send_email_to_creator": 0,
+    "state": "In Progress",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Complete",
+    "allow_self_approval": 1,
+    "allowed": "Garage Supervisor",
+    "condition": null,
+    "next_state": "Completed",
+    "send_email_to_creator": 0,
+    "state": "Quality Check",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Close",
+    "allow_self_approval": 1,
+    "allowed": "Garage Manager",
+    "condition": null,
+    "next_state": "Closed",
+    "send_email_to_creator": 0,
+    "state": "Completed",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Cancel",
+    "allow_self_approval": 1,
+    "allowed": "Garage Manager",
+    "condition": null,
+    "next_state": "Cancelled",
+    "send_email_to_creator": 0,
+    "state": "Draft",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Cancel",
+    "allow_self_approval": 1,
+    "allowed": "Garage Manager",
+    "condition": null,
+    "next_state": "Cancelled",
+    "send_email_to_creator": 0,
+    "state": "Open",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Cancel",
+    "allow_self_approval": 1,
+    "allowed": "Garage Manager",
+    "condition": null,
+    "next_state": "Cancelled",
+    "send_email_to_creator": 0,
+    "state": "Waiting Customer",
+    "transition_tasks": null,
+    "workflow_builder_id": null
    }
-  ]
+  ],
+  "workflow_data": null,
+  "workflow_name": "Service Order Workflow",
+  "workflow_state_field": "status"
  }
 ]
