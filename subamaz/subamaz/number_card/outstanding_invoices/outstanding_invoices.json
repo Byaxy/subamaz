@@ -1,0 +1,23 @@
+{
+ "creation": "2026-09-05 13:23:40.532418",
+ "currency": "UGX",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Sales Invoice",
+ "filters_json": "[[\"Sales Invoice\",\"outstanding_amount\",\">\",\"0\"],[\"Sales Invoice\",\"docstatus\",\"=\",\"1\"]]",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Outstanding Invoices",
+ "modified": "2026-09-05 13:23:40.532418",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Outstanding Invoices",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_full_number": 0,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Document Type"
+}

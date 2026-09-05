@@ -1,0 +1,23 @@
+{
+ "creation": "2026-09-05 13:23:40.547664",
+ "currency": "UGX",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Garage Job Card",
+ "filters_json": "[[\"Garage Job Card\",\"status\",\"=\",\"Completed\"],[\"Garage Job Card\",\"docstatus\",\"=\",\"1\"]]",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Jobs Completed This Month",
+ "modified": "2026-09-05 13:23:40.547664",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Jobs Completed This Month",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_full_number": 0,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Document Type"
+}
