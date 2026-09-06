@@ -442,3 +442,29 @@ def create_petty_cash(amount, description, expense_type=None, paid_by=None):
 	)
 	doc.insert(ignore_permissions=True)
 	return {"name": doc.name}
+
+
+@frappe.whitelist()
+def update_garage_settings(values):
+	"""Update Garage Settings singleton — gated by action:change_settings."""
+	_require_capability("action:change_settings")
+	if isinstance(values, str):
+		values = frappe.parse_json(values) or {}
+	if not isinstance(values, dict):
+		frappe.throw(_("Invalid values"))
+	# Whitelist allowed fields
+	allowed = {
+		"project_duration_threshold_days",
+		"project_cost_threshold",
+		"reminder_mileage_interval",
+		"reminder_days_interval",
+		"enable_satisfaction_survey",
+		"survey_email_body",
+		"reception_photo_requirements",
+	}
+	filtered = {k: v for k, v in values.items() if k in allowed}
+	if not filtered:
+		frappe.throw(_("No valid fields to update"))
+	for k, v in filtered.items():
+		frappe.db.set_single_value("Garage Settings", k, v)
+	return frappe.get_single("Garage Settings").as_dict()

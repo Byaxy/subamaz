@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CustomersRouteImport } from './routes/customers'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as VehiclesRouteImport } from './routes/vehicles'
+import { Route as InsightsReportsRouteImport } from './routes/insights.reports'
 import { Route as PartsItemsRouteImport } from './routes/parts.items'
 import { Route as PartsRestockRouteImport } from './routes/parts.restock'
 import { Route as PartsStockTakeRouteImport } from './routes/parts.stock-take'
@@ -35,6 +36,12 @@ import { Route as ServiceJobCardsRouteImport } from './routes/service/job-cards'
 import { Route as ServiceOrdersRouteImport } from './routes/service/orders'
 import { Route as ServiceQualityChecksRouteImport } from './routes/service/quality-checks'
 import { Route as ServiceReceptionsRouteImport } from './routes/service/receptions'
+import { Route as SetupAccessControlRouteImport } from './routes/setup.access-control'
+import { Route as SetupChecklistTemplatesRouteImport } from './routes/setup.checklist-templates'
+import { Route as SetupDepartmentsRouteImport } from './routes/setup.departments'
+import { Route as SetupGarageSettingsRouteImport } from './routes/setup.garage-settings'
+import { Route as StaffRolesRouteImport } from './routes/staff.roles'
+import { Route as StaffTechniciansRouteImport } from './routes/staff.technicians'
 import { Route as ServiceReceptionNewRouteImport } from './routes/service/reception.new'
 import { Route as ServiceReceptionsQueueRouteImport } from './routes/service/receptions.queue'
 import { Route as VehiclesVehicleIdHistoryRouteImport } from './routes/vehicles.$vehicleId.history'
@@ -57,6 +64,11 @@ const LoginRoute = LoginRouteImport.update({
 const VehiclesRoute = VehiclesRouteImport.update({
   id: '/vehicles',
   path: '/vehicles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsReportsRoute = InsightsReportsRouteImport.update({
+  id: '/insights/reports',
+  path: '/insights/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartsItemsRoute = PartsItemsRouteImport.update({
@@ -174,6 +186,36 @@ const ServiceReceptionsRoute = ServiceReceptionsRouteImport.update({
   path: '/service/receptions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SetupAccessControlRoute = SetupAccessControlRouteImport.update({
+  id: '/setup/access-control',
+  path: '/setup/access-control',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupChecklistTemplatesRoute = SetupChecklistTemplatesRouteImport.update({
+  id: '/setup/checklist-templates',
+  path: '/setup/checklist-templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupDepartmentsRoute = SetupDepartmentsRouteImport.update({
+  id: '/setup/departments',
+  path: '/setup/departments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupGarageSettingsRoute = SetupGarageSettingsRouteImport.update({
+  id: '/setup/garage-settings',
+  path: '/setup/garage-settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffRolesRoute = StaffRolesRouteImport.update({
+  id: '/staff/roles',
+  path: '/staff/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffTechniciansRoute = StaffTechniciansRouteImport.update({
+  id: '/staff/technicians',
+  path: '/staff/technicians',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServiceReceptionNewRoute = ServiceReceptionNewRouteImport.update({
   id: '/service/reception/new',
   path: '/service/reception/new',
@@ -196,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
   '/vehicles': typeof VehiclesRouteWithChildren
+  '/insights/reports': typeof InsightsReportsRoute
   '/parts/items': typeof PartsItemsRoute
   '/parts/restock': typeof PartsRestockRoute
   '/parts/stock-take': typeof PartsStockTakeRoute
@@ -218,6 +261,12 @@ export interface FileRoutesByFullPath {
   '/service/orders': typeof ServiceOrdersRoute
   '/service/quality-checks': typeof ServiceQualityChecksRoute
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/setup/access-control': typeof SetupAccessControlRoute
+  '/setup/checklist-templates': typeof SetupChecklistTemplatesRoute
+  '/setup/departments': typeof SetupDepartmentsRoute
+  '/setup/garage-settings': typeof SetupGarageSettingsRoute
+  '/staff/roles': typeof StaffRolesRoute
+  '/staff/technicians': typeof StaffTechniciansRoute
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
   '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
@@ -227,6 +276,7 @@ export interface FileRoutesByTo {
   '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
   '/vehicles': typeof VehiclesRouteWithChildren
+  '/insights/reports': typeof InsightsReportsRoute
   '/parts/items': typeof PartsItemsRoute
   '/parts/restock': typeof PartsRestockRoute
   '/parts/stock-take': typeof PartsStockTakeRoute
@@ -249,6 +299,12 @@ export interface FileRoutesByTo {
   '/service/orders': typeof ServiceOrdersRoute
   '/service/quality-checks': typeof ServiceQualityChecksRoute
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/setup/access-control': typeof SetupAccessControlRoute
+  '/setup/checklist-templates': typeof SetupChecklistTemplatesRoute
+  '/setup/departments': typeof SetupDepartmentsRoute
+  '/setup/garage-settings': typeof SetupGarageSettingsRoute
+  '/staff/roles': typeof StaffRolesRoute
+  '/staff/technicians': typeof StaffTechniciansRoute
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
   '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
@@ -259,6 +315,7 @@ export interface FileRoutesById {
   '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
   '/vehicles': typeof VehiclesRouteWithChildren
+  '/insights/reports': typeof InsightsReportsRoute
   '/parts/items': typeof PartsItemsRoute
   '/parts/restock': typeof PartsRestockRoute
   '/parts/stock-take': typeof PartsStockTakeRoute
@@ -281,6 +338,12 @@ export interface FileRoutesById {
   '/service/orders': typeof ServiceOrdersRoute
   '/service/quality-checks': typeof ServiceQualityChecksRoute
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/setup/access-control': typeof SetupAccessControlRoute
+  '/setup/checklist-templates': typeof SetupChecklistTemplatesRoute
+  '/setup/departments': typeof SetupDepartmentsRoute
+  '/setup/garage-settings': typeof SetupGarageSettingsRoute
+  '/staff/roles': typeof StaffRolesRoute
+  '/staff/technicians': typeof StaffTechniciansRoute
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
   '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
@@ -292,6 +355,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/login'
     | '/vehicles'
+    | '/insights/reports'
     | '/parts/items'
     | '/parts/restock'
     | '/parts/stock-take'
@@ -314,6 +378,12 @@ export interface FileRouteTypes {
     | '/service/orders'
     | '/service/quality-checks'
     | '/service/receptions'
+    | '/setup/access-control'
+    | '/setup/checklist-templates'
+    | '/setup/departments'
+    | '/setup/garage-settings'
+    | '/staff/roles'
+    | '/staff/technicians'
     | '/service/reception/new'
     | '/service/receptions/queue'
     | '/vehicles/$vehicleId/history'
@@ -323,6 +393,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/login'
     | '/vehicles'
+    | '/insights/reports'
     | '/parts/items'
     | '/parts/restock'
     | '/parts/stock-take'
@@ -345,6 +416,12 @@ export interface FileRouteTypes {
     | '/service/orders'
     | '/service/quality-checks'
     | '/service/receptions'
+    | '/setup/access-control'
+    | '/setup/checklist-templates'
+    | '/setup/departments'
+    | '/setup/garage-settings'
+    | '/staff/roles'
+    | '/staff/technicians'
     | '/service/reception/new'
     | '/service/receptions/queue'
     | '/vehicles/$vehicleId/history'
@@ -354,6 +431,7 @@ export interface FileRouteTypes {
     | '/customers'
     | '/login'
     | '/vehicles'
+    | '/insights/reports'
     | '/parts/items'
     | '/parts/restock'
     | '/parts/stock-take'
@@ -376,6 +454,12 @@ export interface FileRouteTypes {
     | '/service/orders'
     | '/service/quality-checks'
     | '/service/receptions'
+    | '/setup/access-control'
+    | '/setup/checklist-templates'
+    | '/setup/departments'
+    | '/setup/garage-settings'
+    | '/staff/roles'
+    | '/staff/technicians'
     | '/service/reception/new'
     | '/service/receptions/queue'
     | '/vehicles/$vehicleId/history'
@@ -386,6 +470,7 @@ export interface RootRouteChildren {
   CustomersRoute: typeof CustomersRoute
   LoginRoute: typeof LoginRoute
   VehiclesRoute: typeof VehiclesRouteWithChildren
+  InsightsReportsRoute: typeof InsightsReportsRoute
   PartsItemsRoute: typeof PartsItemsRoute
   PartsRestockRoute: typeof PartsRestockRoute
   PartsStockTakeRoute: typeof PartsStockTakeRoute
@@ -408,6 +493,12 @@ export interface RootRouteChildren {
   ServiceOrdersRoute: typeof ServiceOrdersRoute
   ServiceQualityChecksRoute: typeof ServiceQualityChecksRoute
   ServiceReceptionsRoute: typeof ServiceReceptionsRouteWithChildren
+  SetupAccessControlRoute: typeof SetupAccessControlRoute
+  SetupChecklistTemplatesRoute: typeof SetupChecklistTemplatesRoute
+  SetupDepartmentsRoute: typeof SetupDepartmentsRoute
+  SetupGarageSettingsRoute: typeof SetupGarageSettingsRoute
+  StaffRolesRoute: typeof StaffRolesRoute
+  StaffTechniciansRoute: typeof StaffTechniciansRoute
   ServiceReceptionNewRoute: typeof ServiceReceptionNewRoute
 }
 
@@ -439,6 +530,13 @@ declare module '@tanstack/react-router' {
       path: '/vehicles'
       fullPath: '/vehicles'
       preLoaderRoute: typeof VehiclesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights/reports': {
+      id: '/insights/reports'
+      path: '/insights/reports'
+      fullPath: '/insights/reports'
+      preLoaderRoute: typeof InsightsReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/parts/items': {
@@ -595,6 +693,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServiceReceptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/setup/access-control': {
+      id: '/setup/access-control'
+      path: '/setup/access-control'
+      fullPath: '/setup/access-control'
+      preLoaderRoute: typeof SetupAccessControlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup/checklist-templates': {
+      id: '/setup/checklist-templates'
+      path: '/setup/checklist-templates'
+      fullPath: '/setup/checklist-templates'
+      preLoaderRoute: typeof SetupChecklistTemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup/departments': {
+      id: '/setup/departments'
+      path: '/setup/departments'
+      fullPath: '/setup/departments'
+      preLoaderRoute: typeof SetupDepartmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup/garage-settings': {
+      id: '/setup/garage-settings'
+      path: '/setup/garage-settings'
+      fullPath: '/setup/garage-settings'
+      preLoaderRoute: typeof SetupGarageSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/roles': {
+      id: '/staff/roles'
+      path: '/staff/roles'
+      fullPath: '/staff/roles'
+      preLoaderRoute: typeof StaffRolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/technicians': {
+      id: '/staff/technicians'
+      path: '/staff/technicians'
+      fullPath: '/staff/technicians'
+      preLoaderRoute: typeof StaffTechniciansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/service/reception/new': {
       id: '/service/reception/new'
       path: '/service/reception/new'
@@ -647,6 +787,7 @@ const rootRouteChildren: RootRouteChildren = {
   CustomersRoute: CustomersRoute,
   LoginRoute: LoginRoute,
   VehiclesRoute: VehiclesRouteWithChildren,
+  InsightsReportsRoute: InsightsReportsRoute,
   PartsItemsRoute: PartsItemsRoute,
   PartsRestockRoute: PartsRestockRoute,
   PartsStockTakeRoute: PartsStockTakeRoute,
@@ -669,6 +810,12 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceOrdersRoute: ServiceOrdersRoute,
   ServiceQualityChecksRoute: ServiceQualityChecksRoute,
   ServiceReceptionsRoute: ServiceReceptionsRouteWithChildren,
+  SetupAccessControlRoute: SetupAccessControlRoute,
+  SetupChecklistTemplatesRoute: SetupChecklistTemplatesRoute,
+  SetupDepartmentsRoute: SetupDepartmentsRoute,
+  SetupGarageSettingsRoute: SetupGarageSettingsRoute,
+  StaffRolesRoute: StaffRolesRoute,
+  StaffTechniciansRoute: StaffTechniciansRoute,
   ServiceReceptionNewRoute: ServiceReceptionNewRoute,
 }
 export const routeTree = rootRouteImport
