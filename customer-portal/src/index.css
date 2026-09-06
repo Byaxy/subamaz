@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    /* Garage theme vars — populated by get_theme() */
+    --app-primary: #1A1A1A;
+    --app-primary-hover: #000000;
+    --app-danger: #DC2626;
+    --app-danger-hover: #B91C1C;
+    --app-accent-color: #C9A227;
+    --app-sidebar-bg: #F4F4F4;
+    --app-sidebar-text: #3D3D3D;
+    --app-sidebar-active-bg: #1A1A1A;
+    --app-sidebar-active-text: #C9A227;
+    --app-navbar-bg: #1A1A1A;
+    --app-navbar-text: #FFFFFF;
+    --app-navbar-icon: #FFFFFF;
+    --app-page-head-bg: #F4F4F4;
+    --app-page-head-text: #1A1A1A;
+    --app-table-header-bg: #1A1A1A;
+    --app-table-header-text: #FFFFFF;
+    --app-table-even-bg: #F7F7F7;
+    --app-table-row-hover-bg: #EFEFEF;
+    --app-select-row-hover-bg: #EFEFEF;
+    --app-btn-primary-bg: #1A1A1A;
+    --app-btn-primary-hover: #000000;
+    --app-btn-primary-text: #FFFFFF;
+    --app-btn-danger-bg: #DC2626;
+    --app-btn-danger-hover: #B91C1C;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

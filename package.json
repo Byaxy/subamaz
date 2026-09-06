@@ -1,0 +1,24 @@
+{
+  "name": "subamaz",
+  "version": "1.0.0",
+  "description": "Garage Management System built on frappe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "(cd customer-portal && yarn install)",
+    "build": "(cd customer-portal && yarn build)",
+    "dev": "(cd customer-portal && yarn dev)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Byaxy/subamaz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Byaxy/subamaz/issues"
+  },
+  "homepage": "https://github.com/Byaxy/subamaz#readme"
+}
