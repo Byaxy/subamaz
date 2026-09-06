@@ -1,0 +1,13 @@
+{% extends "templates/web.html" %}
+{% block title %}About — {{ branding.garage_name or "SubaMaz" }}{% endblock %}
+{% block page_content %}
+<div class="container py-5">
+ <h1 style="font-family:'Fraunces',serif">About {{ branding.garage_name or "SubaMaz" }}</h1>
+ {% if branding.tagline %}<p class="lead text-muted">{{ branding.tagline }}</p>{% endif %}
+ {% if branding.motto %}<blockquote class="blockquote" style="border-left:3px solid {{ branding.accent_color or '#C9A227' }};padding-left:1rem"><em>"{{ branding.motto }}"</em></blockquote>{% endif %}
+ <p class="mt-4">We provide end-to-end vehicle care — from reception walk-around and inspection to service orders, job cards, QA and delivery. Every step is tracked, photographed, and visible to you via the Customer Portal.</p>
+ {% if branding.address %}<p class="text-muted"><strong>Visit us:</strong> {{ branding.address }}</p>{% endif %}
+ {% if branding.phone %}<p class="text-muted"><strong>Call:</strong> {{ branding.phone }}{% if branding.email %} · {{ branding.email }}{% endif %}</p>{% endif %}
+ <a href="/booking" class="btn rounded-pill mt-2" style="background:{{ branding.primary_color or '#1A1A1A' }};color:#fff">Book a Visit</a>
+</div>
+{% endblock %}

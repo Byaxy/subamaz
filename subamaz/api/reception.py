@@ -44,6 +44,17 @@ def create_reception(vehicle, customer, payload):
 		doc.set(table_fieldname, _sanitize_rows(table_fieldname, rows))
 	doc.insert()
 	doc.submit()
+	# handoff: if appointment linked, mark converted
+	if doc.appointment:
+		try:
+			if frappe.db.exists("Appointment Request", doc.appointment):
+				frappe.db.set_value(
+					"Appointment Request",
+					doc.appointment,
+					{"status": "Converted", "linked_reception": doc.name},
+				)
+		except Exception:
+			frappe.log_error(title="Appointment handoff failed", message=frappe.get_traceback())
 	return {"name": doc.name}
 
 

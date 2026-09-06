@@ -1,0 +1,14 @@
+{% extends "templates/web.html" %}
+{% block title %}Contact — {{ branding.garage_name or "SubaMaz" }}{% endblock %}
+{% block page_content %}
+<div class="container py-5" style="max-width:640px">
+ <h1 style="font-family:'Fraunces',serif">Contact Us</h1>
+ <div class="card p-4 mt-3" style="border-radius:1.25rem">
+  {% if branding.address %}<p><strong>Address:</strong> {{ branding.address }}</p>{% endif %}
+  {% if branding.phone %}<p><strong>Phone:</strong> <a href="tel:{{ branding.phone }}">{{ branding.phone }}</a></p>{% endif %}
+  {% if branding.email %}<p><strong>Email:</strong> <a href="mailto:{{ branding.email }}">{{ branding.email }}</a></p>{% endif %}
+  {% if branding.website %}<p><strong>Website:</strong> <a href="{{ branding.website }}">{{ branding.website }}</a></p>{% endif %}
+  <a href="/booking" class="btn rounded-pill mt-2" style="background:{{ branding.accent_color or '#C9A227' }};color:#000">Book Appointment</a>
+ </div>
+</div>
+{% endblock %}

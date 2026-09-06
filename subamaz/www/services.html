@@ -1,0 +1,18 @@
+{% extends "templates/web.html" %}
+{% block title %}Services — {{ branding.garage_name or "SubaMaz" }}{% endblock %}
+{% block page_content %}
+<div class="container py-5">
+ <h1 class="mb-2" style="font-family:'Fraunces',serif">Our Services</h1>
+ <p class="text-muted">Professional repair services backed by our inspection & QA workflow.</p>
+ {% if services %}
+ <div class="row g-3 mt-2">
+  {% for s in services %}
+  <div class="col-md-6"><div class="card h-100" style="border-radius:1rem;border:1px solid #e8e8e8"><div class="card-body"><h5 class="card-title">{{ s.template_name }}</h5>{% if s.items %}<ul class="small text-muted mb-0">{% for it in s.items %}<li>{{ it }}</li>{% endfor %}</ul>{% else %}<p class="small text-muted mb-0">Full {{ s.template_name }} coverage</p>{% endif %}</div><div class="card-footer bg-white border-0"><a href="/booking" class="btn btn-sm rounded-pill" style="background:{{ branding.primary_color or '#1A1A1A' }};color:#fff">Book for {{ s.template_name }}</a></div></div></div>
+  {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-light">No repair templates configured yet.</div>
+ {% endif %}
+ <div class="mt-4"><a href="/booking" class="btn rounded-pill" style="background:{{ branding.accent_color or '#C9A227' }}">Book Appointment</a></div>
+</div>
+{% endblock %}
