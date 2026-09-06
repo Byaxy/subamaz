@@ -18,6 +18,16 @@ import { Route as PartsRestockRouteImport } from './routes/parts.restock'
 import { Route as PartsStockTakeRouteImport } from './routes/parts.stock-take'
 import { Route as PartsTransfersRouteImport } from './routes/parts.transfers'
 import { Route as PartsWarehousesRouteImport } from './routes/parts.warehouses'
+import { Route as ProcurementGuideRouteImport } from './routes/procurement.guide'
+import { Route as ProcurementPurchaseInvoicesRouteImport } from './routes/procurement.purchase-invoices'
+import { Route as ProcurementPurchaseOrdersRouteImport } from './routes/procurement.purchase-orders'
+import { Route as ProcurementPurchaseReceiptsRouteImport } from './routes/procurement.purchase-receipts'
+import { Route as ProcurementSupplierQuotationsRouteImport } from './routes/procurement.supplier-quotations'
+import { Route as RecordsCustomerStatementRouteImport } from './routes/records.customer-statement'
+import { Route as RecordsInvoicesRouteImport } from './routes/records.invoices'
+import { Route as RecordsPaymentsRouteImport } from './routes/records.payments'
+import { Route as RecordsPettyCashRouteImport } from './routes/records.petty-cash'
+import { Route as RecordsQuotationsRouteImport } from './routes/records.quotations'
 import { Route as ServiceDeliveriesRouteImport } from './routes/service/deliveries'
 import { Route as ServiceGuideRouteImport } from './routes/service/guide'
 import { Route as ServiceInspectionsRouteImport } from './routes/service/inspections'
@@ -72,6 +82,61 @@ const PartsTransfersRoute = PartsTransfersRouteImport.update({
 const PartsWarehousesRoute = PartsWarehousesRouteImport.update({
   id: '/parts/warehouses',
   path: '/parts/warehouses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcurementGuideRoute = ProcurementGuideRouteImport.update({
+  id: '/procurement/guide',
+  path: '/procurement/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcurementPurchaseInvoicesRoute =
+  ProcurementPurchaseInvoicesRouteImport.update({
+    id: '/procurement/purchase-invoices',
+    path: '/procurement/purchase-invoices',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProcurementPurchaseOrdersRoute =
+  ProcurementPurchaseOrdersRouteImport.update({
+    id: '/procurement/purchase-orders',
+    path: '/procurement/purchase-orders',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProcurementPurchaseReceiptsRoute =
+  ProcurementPurchaseReceiptsRouteImport.update({
+    id: '/procurement/purchase-receipts',
+    path: '/procurement/purchase-receipts',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProcurementSupplierQuotationsRoute =
+  ProcurementSupplierQuotationsRouteImport.update({
+    id: '/procurement/supplier-quotations',
+    path: '/procurement/supplier-quotations',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RecordsCustomerStatementRoute =
+  RecordsCustomerStatementRouteImport.update({
+    id: '/records/customer-statement',
+    path: '/records/customer-statement',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RecordsInvoicesRoute = RecordsInvoicesRouteImport.update({
+  id: '/records/invoices',
+  path: '/records/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecordsPaymentsRoute = RecordsPaymentsRouteImport.update({
+  id: '/records/payments',
+  path: '/records/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecordsPettyCashRoute = RecordsPettyCashRouteImport.update({
+  id: '/records/petty-cash',
+  path: '/records/petty-cash',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecordsQuotationsRoute = RecordsQuotationsRouteImport.update({
+  id: '/records/quotations',
+  path: '/records/quotations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServiceDeliveriesRoute = ServiceDeliveriesRouteImport.update({
@@ -136,6 +201,16 @@ export interface FileRoutesByFullPath {
   '/parts/stock-take': typeof PartsStockTakeRoute
   '/parts/transfers': typeof PartsTransfersRoute
   '/parts/warehouses': typeof PartsWarehousesRoute
+  '/procurement/guide': typeof ProcurementGuideRoute
+  '/procurement/purchase-invoices': typeof ProcurementPurchaseInvoicesRoute
+  '/procurement/purchase-orders': typeof ProcurementPurchaseOrdersRoute
+  '/procurement/purchase-receipts': typeof ProcurementPurchaseReceiptsRoute
+  '/procurement/supplier-quotations': typeof ProcurementSupplierQuotationsRoute
+  '/records/customer-statement': typeof RecordsCustomerStatementRoute
+  '/records/invoices': typeof RecordsInvoicesRoute
+  '/records/payments': typeof RecordsPaymentsRoute
+  '/records/petty-cash': typeof RecordsPettyCashRoute
+  '/records/quotations': typeof RecordsQuotationsRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -157,6 +232,16 @@ export interface FileRoutesByTo {
   '/parts/stock-take': typeof PartsStockTakeRoute
   '/parts/transfers': typeof PartsTransfersRoute
   '/parts/warehouses': typeof PartsWarehousesRoute
+  '/procurement/guide': typeof ProcurementGuideRoute
+  '/procurement/purchase-invoices': typeof ProcurementPurchaseInvoicesRoute
+  '/procurement/purchase-orders': typeof ProcurementPurchaseOrdersRoute
+  '/procurement/purchase-receipts': typeof ProcurementPurchaseReceiptsRoute
+  '/procurement/supplier-quotations': typeof ProcurementSupplierQuotationsRoute
+  '/records/customer-statement': typeof RecordsCustomerStatementRoute
+  '/records/invoices': typeof RecordsInvoicesRoute
+  '/records/payments': typeof RecordsPaymentsRoute
+  '/records/petty-cash': typeof RecordsPettyCashRoute
+  '/records/quotations': typeof RecordsQuotationsRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -179,6 +264,16 @@ export interface FileRoutesById {
   '/parts/stock-take': typeof PartsStockTakeRoute
   '/parts/transfers': typeof PartsTransfersRoute
   '/parts/warehouses': typeof PartsWarehousesRoute
+  '/procurement/guide': typeof ProcurementGuideRoute
+  '/procurement/purchase-invoices': typeof ProcurementPurchaseInvoicesRoute
+  '/procurement/purchase-orders': typeof ProcurementPurchaseOrdersRoute
+  '/procurement/purchase-receipts': typeof ProcurementPurchaseReceiptsRoute
+  '/procurement/supplier-quotations': typeof ProcurementSupplierQuotationsRoute
+  '/records/customer-statement': typeof RecordsCustomerStatementRoute
+  '/records/invoices': typeof RecordsInvoicesRoute
+  '/records/payments': typeof RecordsPaymentsRoute
+  '/records/petty-cash': typeof RecordsPettyCashRoute
+  '/records/quotations': typeof RecordsQuotationsRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -202,6 +297,16 @@ export interface FileRouteTypes {
     | '/parts/stock-take'
     | '/parts/transfers'
     | '/parts/warehouses'
+    | '/procurement/guide'
+    | '/procurement/purchase-invoices'
+    | '/procurement/purchase-orders'
+    | '/procurement/purchase-receipts'
+    | '/procurement/supplier-quotations'
+    | '/records/customer-statement'
+    | '/records/invoices'
+    | '/records/payments'
+    | '/records/petty-cash'
+    | '/records/quotations'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -223,6 +328,16 @@ export interface FileRouteTypes {
     | '/parts/stock-take'
     | '/parts/transfers'
     | '/parts/warehouses'
+    | '/procurement/guide'
+    | '/procurement/purchase-invoices'
+    | '/procurement/purchase-orders'
+    | '/procurement/purchase-receipts'
+    | '/procurement/supplier-quotations'
+    | '/records/customer-statement'
+    | '/records/invoices'
+    | '/records/payments'
+    | '/records/petty-cash'
+    | '/records/quotations'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -244,6 +359,16 @@ export interface FileRouteTypes {
     | '/parts/stock-take'
     | '/parts/transfers'
     | '/parts/warehouses'
+    | '/procurement/guide'
+    | '/procurement/purchase-invoices'
+    | '/procurement/purchase-orders'
+    | '/procurement/purchase-receipts'
+    | '/procurement/supplier-quotations'
+    | '/records/customer-statement'
+    | '/records/invoices'
+    | '/records/payments'
+    | '/records/petty-cash'
+    | '/records/quotations'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -266,6 +391,16 @@ export interface RootRouteChildren {
   PartsStockTakeRoute: typeof PartsStockTakeRoute
   PartsTransfersRoute: typeof PartsTransfersRoute
   PartsWarehousesRoute: typeof PartsWarehousesRoute
+  ProcurementGuideRoute: typeof ProcurementGuideRoute
+  ProcurementPurchaseInvoicesRoute: typeof ProcurementPurchaseInvoicesRoute
+  ProcurementPurchaseOrdersRoute: typeof ProcurementPurchaseOrdersRoute
+  ProcurementPurchaseReceiptsRoute: typeof ProcurementPurchaseReceiptsRoute
+  ProcurementSupplierQuotationsRoute: typeof ProcurementSupplierQuotationsRoute
+  RecordsCustomerStatementRoute: typeof RecordsCustomerStatementRoute
+  RecordsInvoicesRoute: typeof RecordsInvoicesRoute
+  RecordsPaymentsRoute: typeof RecordsPaymentsRoute
+  RecordsPettyCashRoute: typeof RecordsPettyCashRoute
+  RecordsQuotationsRoute: typeof RecordsQuotationsRoute
   ServiceDeliveriesRoute: typeof ServiceDeliveriesRoute
   ServiceGuideRoute: typeof ServiceGuideRoute
   ServiceInspectionsRoute: typeof ServiceInspectionsRoute
@@ -339,6 +474,76 @@ declare module '@tanstack/react-router' {
       path: '/parts/warehouses'
       fullPath: '/parts/warehouses'
       preLoaderRoute: typeof PartsWarehousesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement/guide': {
+      id: '/procurement/guide'
+      path: '/procurement/guide'
+      fullPath: '/procurement/guide'
+      preLoaderRoute: typeof ProcurementGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement/purchase-invoices': {
+      id: '/procurement/purchase-invoices'
+      path: '/procurement/purchase-invoices'
+      fullPath: '/procurement/purchase-invoices'
+      preLoaderRoute: typeof ProcurementPurchaseInvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement/purchase-orders': {
+      id: '/procurement/purchase-orders'
+      path: '/procurement/purchase-orders'
+      fullPath: '/procurement/purchase-orders'
+      preLoaderRoute: typeof ProcurementPurchaseOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement/purchase-receipts': {
+      id: '/procurement/purchase-receipts'
+      path: '/procurement/purchase-receipts'
+      fullPath: '/procurement/purchase-receipts'
+      preLoaderRoute: typeof ProcurementPurchaseReceiptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement/supplier-quotations': {
+      id: '/procurement/supplier-quotations'
+      path: '/procurement/supplier-quotations'
+      fullPath: '/procurement/supplier-quotations'
+      preLoaderRoute: typeof ProcurementSupplierQuotationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records/customer-statement': {
+      id: '/records/customer-statement'
+      path: '/records/customer-statement'
+      fullPath: '/records/customer-statement'
+      preLoaderRoute: typeof RecordsCustomerStatementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records/invoices': {
+      id: '/records/invoices'
+      path: '/records/invoices'
+      fullPath: '/records/invoices'
+      preLoaderRoute: typeof RecordsInvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records/payments': {
+      id: '/records/payments'
+      path: '/records/payments'
+      fullPath: '/records/payments'
+      preLoaderRoute: typeof RecordsPaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records/petty-cash': {
+      id: '/records/petty-cash'
+      path: '/records/petty-cash'
+      fullPath: '/records/petty-cash'
+      preLoaderRoute: typeof RecordsPettyCashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records/quotations': {
+      id: '/records/quotations'
+      path: '/records/quotations'
+      fullPath: '/records/quotations'
+      preLoaderRoute: typeof RecordsQuotationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/service/deliveries': {
@@ -447,6 +652,16 @@ const rootRouteChildren: RootRouteChildren = {
   PartsStockTakeRoute: PartsStockTakeRoute,
   PartsTransfersRoute: PartsTransfersRoute,
   PartsWarehousesRoute: PartsWarehousesRoute,
+  ProcurementGuideRoute: ProcurementGuideRoute,
+  ProcurementPurchaseInvoicesRoute: ProcurementPurchaseInvoicesRoute,
+  ProcurementPurchaseOrdersRoute: ProcurementPurchaseOrdersRoute,
+  ProcurementPurchaseReceiptsRoute: ProcurementPurchaseReceiptsRoute,
+  ProcurementSupplierQuotationsRoute: ProcurementSupplierQuotationsRoute,
+  RecordsCustomerStatementRoute: RecordsCustomerStatementRoute,
+  RecordsInvoicesRoute: RecordsInvoicesRoute,
+  RecordsPaymentsRoute: RecordsPaymentsRoute,
+  RecordsPettyCashRoute: RecordsPettyCashRoute,
+  RecordsQuotationsRoute: RecordsQuotationsRoute,
   ServiceDeliveriesRoute: ServiceDeliveriesRoute,
   ServiceGuideRoute: ServiceGuideRoute,
   ServiceInspectionsRoute: ServiceInspectionsRoute,

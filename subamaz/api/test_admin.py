@@ -184,3 +184,104 @@ class TestAdminSearch(IntegrationTestCase):
 			self.assertRaises(frappe.PermissionError, get_stock_status)
 		finally:
 			frappe.set_user("Administrator")
+
+	def test_procurement_counts(self):
+		user = self._create_user("Garage Manager")
+		frappe.set_user(user)
+		try:
+			from subamaz.api.admin import get_procurement_counts
+
+			counts = get_procurement_counts()
+			self.assertIn("purchase_orders", counts)
+			self.assertIn("supplier_quotations", counts)
+		finally:
+			frappe.set_user("Administrator")
+
+	def test_procurement_capability_denied(self):
+		user = self._create_user("Garage Technician")
+		frappe.set_user(user)
+		try:
+			from subamaz.api.admin import get_procurement_counts
+
+			self.assertRaises(frappe.PermissionError, get_procurement_counts)
+		finally:
+			frappe.set_user("Administrator")
+
+	def test_money_counts_and_petty_cash(self):
+		user = self._create_user("Garage Manager")
+		frappe.set_user(user)
+		try:
+			from subamaz.api.admin import create_petty_cash, get_money_counts
+
+			counts = get_money_counts()
+			self.assertIn("invoices", counts)
+			# Petty cash requires action:record_petty_cash
+			res = create_petty_cash(amount=5000, description="Test petty", expense_type="Misc")
+			self.assertIn("name", res)
+			self.assertTrue(frappe.db.exists("Petty Cash Log", res["name"]))
+		finally:
+			frappe.set_user("Administrator")
+
+	def test_money_capability_denied(self):
+		user = self._create_user("Garage Technician")
+		frappe.set_user(user)
+		try:
+			from subamaz.api.admin import get_money_counts
+
+			self.assertRaises(frappe.PermissionError, get_money_counts)
+		finally:
+			frappe.set_user("Administrator")
+
+	def test_apply_discount_and_void_capability(self):
+		# Manager has both, Service Advisor has discount but not void
+		manager = self._create_user("Garage Manager")
+		advisor = self._create_user("Garage Service Advisor")
+		# Create invoice as Administrator
+		company = frappe.db.get_value("Company", {}, "name")
+		currency = frappe.db.get_value("Company", company, "default_currency") or "USD"
+		customer = frappe.db.get_value("Customer", {}, "name")
+		item = frappe.db.get_value("Item", {}, "item_code")
+		inv = frappe.get_doc(
+			{
+				"doctype": "Sales Invoice",
+				"customer": customer,
+				"company": company,
+				"currency": currency,
+				"conversion_rate": 1,
+				"set_posting_time": 1,
+				"posting_date": frappe.utils.today(),
+				"due_date": frappe.utils.add_days(frappe.utils.today(), 10),
+				"items": [{"item_code": item, "qty": 1, "rate": 1000, "conversion_rate": 1}],
+			}
+		)
+		inv.insert(ignore_permissions=True)
+		inv.submit()
+
+		# Advisor can discount
+		frappe.set_user(advisor)
+		try:
+			from subamaz.api.admin import apply_invoice_discount
+
+			res = apply_invoice_discount(inv.name, "100")
+			self.assertEqual(res["invoice"], inv.name)
+		finally:
+			frappe.set_user("Administrator")
+
+		# Advisor cannot void
+		frappe.set_user(advisor)
+		try:
+			from subamaz.api.admin import void_invoice
+
+			self.assertRaises(frappe.PermissionError, void_invoice, inv.name)
+		finally:
+			frappe.set_user("Administrator")
+
+		# Manager can void
+		frappe.set_user(manager)
+		try:
+			from subamaz.api.admin import void_invoice
+
+			res = void_invoice(inv.name)
+			self.assertIn("status", res)
+		finally:
+			frappe.set_user("Administrator")

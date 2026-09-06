@@ -363,3 +363,82 @@ def get_restock_preview(warehouse=None):
 		groups.setdefault(it["supplier"], []).append(it)
 	grouped = [{"supplier": k, "items": v, "total_items": len(v)} for k, v in groups.items()]
 	return {"low_items": low_items, "groups": grouped, "count": len(low_items)}
+
+
+@frappe.whitelist()
+def get_procurement_counts():
+	_require_capability("module:procurement")
+	return {
+		"supplier_quotations": frappe.db.count("Supplier Quotation", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Supplier Quotation") else 0,
+		"purchase_orders": frappe.db.count("Purchase Order", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Purchase Order") else 0,
+		"purchase_invoices": frappe.db.count("Purchase Invoice", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Purchase Invoice") else 0,
+		"purchase_receipts": frappe.db.count("Purchase Receipt", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Purchase Receipt") else 0,
+	}
+
+
+@frappe.whitelist()
+def get_money_counts():
+	_require_capability("module:records_money")
+	return {
+		"invoices": frappe.db.count("Sales Invoice", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Sales Invoice") else 0,
+		"payments": frappe.db.count("Payment Entry", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Payment Entry") else 0,
+		"quotations": frappe.db.count("Quotation", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Quotation") else 0,
+		"petty_cash": frappe.db.count("Petty Cash Log", {"docstatus": ["<", 2]}) if frappe.db.exists("DocType", "Petty Cash Log") else 0,
+	}
+
+
+@frappe.whitelist()
+def apply_invoice_discount(invoice, discount_amount):
+	_require_capability("action:apply_invoice_discount")
+	if not frappe.db.exists("Sales Invoice", invoice):
+		frappe.throw(_("Sales Invoice {0} not found").format(invoice))
+	try:
+		frappe.db.set_value("Sales Invoice", invoice, "discount_amount", float(discount_amount), update_modified=False)
+	except Exception:
+		frappe.log_error(title="apply_invoice_discount failed", message=frappe.get_traceback())
+		frappe.throw(_("Failed to apply discount"))
+	return {"invoice": invoice, "discount": float(discount_amount)}
+
+
+@frappe.whitelist()
+def void_invoice(invoice):
+	_require_capability("action:void_invoice")
+	if not frappe.db.exists("Sales Invoice", invoice):
+		frappe.throw(_("Sales Invoice {0} not found").format(invoice))
+	doc = frappe.get_doc("Sales Invoice", invoice)
+	if doc.docstatus == 2:
+		return {"invoice": invoice, "status": "Already Cancelled"}
+	try:
+		doc.cancel()
+	except Exception:
+		frappe.db.set_value("Sales Invoice", invoice, "status", "Cancelled")
+	return {"invoice": invoice, "status": "Cancelled"}
+
+
+@frappe.whitelist()
+def approve_credit_sale(invoice):
+	_require_capability("action:approve_credit_sale")
+	if not frappe.db.exists("Sales Invoice", invoice):
+		frappe.throw(_("Sales Invoice {0} not found").format(invoice))
+	frappe.db.set_value("Sales Invoice", invoice, "status", "Overdue")
+	return {"invoice": invoice, "approved": True}
+
+
+@frappe.whitelist()
+def create_petty_cash(amount, description, expense_type=None, paid_by=None):
+	_require_capability("action:record_petty_cash")
+	if not frappe.db.exists("DocType", "Petty Cash Log"):
+		frappe.throw(_("Petty Cash Log not found"))
+	doc = frappe.get_doc(
+		{
+			"doctype": "Petty Cash Log",
+			"posting_date": frappe.utils.today(),
+			"amount": float(amount),
+			"description": description,
+			"expense_type": expense_type or "Misc",
+			"paid_by": paid_by,
+			"status": "Draft",
+		}
+	)
+	doc.insert(ignore_permissions=True)
+	return {"name": doc.name}
