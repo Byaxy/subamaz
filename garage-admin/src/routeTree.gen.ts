@@ -10,7 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CustomersRouteImport } from './routes/customers'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as VehiclesRouteImport } from './routes/vehicles'
+import { Route as PartsItemsRouteImport } from './routes/parts.items'
+import { Route as PartsRestockRouteImport } from './routes/parts.restock'
+import { Route as PartsStockTakeRouteImport } from './routes/parts.stock-take'
+import { Route as PartsTransfersRouteImport } from './routes/parts.transfers'
+import { Route as PartsWarehousesRouteImport } from './routes/parts.warehouses'
 import { Route as ServiceDeliveriesRouteImport } from './routes/service/deliveries'
 import { Route as ServiceGuideRouteImport } from './routes/service/guide'
 import { Route as ServiceInspectionsRouteImport } from './routes/service/inspections'
@@ -20,15 +27,51 @@ import { Route as ServiceQualityChecksRouteImport } from './routes/service/quali
 import { Route as ServiceReceptionsRouteImport } from './routes/service/receptions'
 import { Route as ServiceReceptionNewRouteImport } from './routes/service/reception.new'
 import { Route as ServiceReceptionsQueueRouteImport } from './routes/service/receptions.queue'
+import { Route as VehiclesVehicleIdHistoryRouteImport } from './routes/vehicles.$vehicleId.history'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomersRoute = CustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VehiclesRoute = VehiclesRouteImport.update({
+  id: '/vehicles',
+  path: '/vehicles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartsItemsRoute = PartsItemsRouteImport.update({
+  id: '/parts/items',
+  path: '/parts/items',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartsRestockRoute = PartsRestockRouteImport.update({
+  id: '/parts/restock',
+  path: '/parts/restock',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartsStockTakeRoute = PartsStockTakeRouteImport.update({
+  id: '/parts/stock-take',
+  path: '/parts/stock-take',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartsTransfersRoute = PartsTransfersRouteImport.update({
+  id: '/parts/transfers',
+  path: '/parts/transfers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartsWarehousesRoute = PartsWarehousesRouteImport.update({
+  id: '/parts/warehouses',
+  path: '/parts/warehouses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServiceDeliveriesRoute = ServiceDeliveriesRouteImport.update({
@@ -76,10 +119,23 @@ const ServiceReceptionsQueueRoute = ServiceReceptionsQueueRouteImport.update({
   path: '/queue',
   getParentRoute: () => ServiceReceptionsRoute,
 } as any)
+const VehiclesVehicleIdHistoryRoute =
+  VehiclesVehicleIdHistoryRouteImport.update({
+    id: '/$vehicleId/history',
+    path: '/$vehicleId/history',
+    getParentRoute: () => VehiclesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
+  '/vehicles': typeof VehiclesRouteWithChildren
+  '/parts/items': typeof PartsItemsRoute
+  '/parts/restock': typeof PartsRestockRoute
+  '/parts/stock-take': typeof PartsStockTakeRoute
+  '/parts/transfers': typeof PartsTransfersRoute
+  '/parts/warehouses': typeof PartsWarehousesRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -89,10 +145,18 @@ export interface FileRoutesByFullPath {
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
+  '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
+  '/vehicles': typeof VehiclesRouteWithChildren
+  '/parts/items': typeof PartsItemsRoute
+  '/parts/restock': typeof PartsRestockRoute
+  '/parts/stock-take': typeof PartsStockTakeRoute
+  '/parts/transfers': typeof PartsTransfersRoute
+  '/parts/warehouses': typeof PartsWarehousesRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -102,11 +166,19 @@ export interface FileRoutesByTo {
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
+  '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
   '/login': typeof LoginRoute
+  '/vehicles': typeof VehiclesRouteWithChildren
+  '/parts/items': typeof PartsItemsRoute
+  '/parts/restock': typeof PartsRestockRoute
+  '/parts/stock-take': typeof PartsStockTakeRoute
+  '/parts/transfers': typeof PartsTransfersRoute
+  '/parts/warehouses': typeof PartsWarehousesRoute
   '/service/deliveries': typeof ServiceDeliveriesRoute
   '/service/guide': typeof ServiceGuideRoute
   '/service/inspections': typeof ServiceInspectionsRoute
@@ -116,12 +188,20 @@ export interface FileRoutesById {
   '/service/receptions': typeof ServiceReceptionsRouteWithChildren
   '/service/reception/new': typeof ServiceReceptionNewRoute
   '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
+  '/vehicles/$vehicleId/history': typeof VehiclesVehicleIdHistoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/customers'
     | '/login'
+    | '/vehicles'
+    | '/parts/items'
+    | '/parts/restock'
+    | '/parts/stock-take'
+    | '/parts/transfers'
+    | '/parts/warehouses'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -131,10 +211,18 @@ export interface FileRouteTypes {
     | '/service/receptions'
     | '/service/reception/new'
     | '/service/receptions/queue'
+    | '/vehicles/$vehicleId/history'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/customers'
     | '/login'
+    | '/vehicles'
+    | '/parts/items'
+    | '/parts/restock'
+    | '/parts/stock-take'
+    | '/parts/transfers'
+    | '/parts/warehouses'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -144,10 +232,18 @@ export interface FileRouteTypes {
     | '/service/receptions'
     | '/service/reception/new'
     | '/service/receptions/queue'
+    | '/vehicles/$vehicleId/history'
   id:
     | '__root__'
     | '/'
+    | '/customers'
     | '/login'
+    | '/vehicles'
+    | '/parts/items'
+    | '/parts/restock'
+    | '/parts/stock-take'
+    | '/parts/transfers'
+    | '/parts/warehouses'
     | '/service/deliveries'
     | '/service/guide'
     | '/service/inspections'
@@ -157,11 +253,19 @@ export interface FileRouteTypes {
     | '/service/receptions'
     | '/service/reception/new'
     | '/service/receptions/queue'
+    | '/vehicles/$vehicleId/history'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CustomersRoute: typeof CustomersRoute
   LoginRoute: typeof LoginRoute
+  VehiclesRoute: typeof VehiclesRouteWithChildren
+  PartsItemsRoute: typeof PartsItemsRoute
+  PartsRestockRoute: typeof PartsRestockRoute
+  PartsStockTakeRoute: typeof PartsStockTakeRoute
+  PartsTransfersRoute: typeof PartsTransfersRoute
+  PartsWarehousesRoute: typeof PartsWarehousesRoute
   ServiceDeliveriesRoute: typeof ServiceDeliveriesRoute
   ServiceGuideRoute: typeof ServiceGuideRoute
   ServiceInspectionsRoute: typeof ServiceInspectionsRoute
@@ -181,11 +285,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/customers': {
+      id: '/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vehicles': {
+      id: '/vehicles'
+      path: '/vehicles'
+      fullPath: '/vehicles'
+      preLoaderRoute: typeof VehiclesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parts/items': {
+      id: '/parts/items'
+      path: '/parts/items'
+      fullPath: '/parts/items'
+      preLoaderRoute: typeof PartsItemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parts/restock': {
+      id: '/parts/restock'
+      path: '/parts/restock'
+      fullPath: '/parts/restock'
+      preLoaderRoute: typeof PartsRestockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parts/stock-take': {
+      id: '/parts/stock-take'
+      path: '/parts/stock-take'
+      fullPath: '/parts/stock-take'
+      preLoaderRoute: typeof PartsStockTakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parts/transfers': {
+      id: '/parts/transfers'
+      path: '/parts/transfers'
+      fullPath: '/parts/transfers'
+      preLoaderRoute: typeof PartsTransfersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parts/warehouses': {
+      id: '/parts/warehouses'
+      path: '/parts/warehouses'
+      fullPath: '/parts/warehouses'
+      preLoaderRoute: typeof PartsWarehousesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/service/deliveries': {
@@ -251,8 +404,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServiceReceptionsQueueRouteImport
       parentRoute: typeof ServiceReceptionsRoute
     }
+    '/vehicles/$vehicleId/history': {
+      id: '/vehicles/$vehicleId/history'
+      path: '/$vehicleId/history'
+      fullPath: '/vehicles/$vehicleId/history'
+      preLoaderRoute: typeof VehiclesVehicleIdHistoryRouteImport
+      parentRoute: typeof VehiclesRoute
+    }
   }
 }
+
+interface VehiclesRouteChildren {
+  VehiclesVehicleIdHistoryRoute: typeof VehiclesVehicleIdHistoryRoute
+}
+
+const VehiclesRouteChildren: VehiclesRouteChildren = {
+  VehiclesVehicleIdHistoryRoute: VehiclesVehicleIdHistoryRoute,
+}
+
+const VehiclesRouteWithChildren = VehiclesRoute._addFileChildren(
+  VehiclesRouteChildren,
+)
 
 interface ServiceReceptionsRouteChildren {
   ServiceReceptionsQueueRoute: typeof ServiceReceptionsQueueRoute
@@ -267,7 +439,14 @@ const ServiceReceptionsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CustomersRoute: CustomersRoute,
   LoginRoute: LoginRoute,
+  VehiclesRoute: VehiclesRouteWithChildren,
+  PartsItemsRoute: PartsItemsRoute,
+  PartsRestockRoute: PartsRestockRoute,
+  PartsStockTakeRoute: PartsStockTakeRoute,
+  PartsTransfersRoute: PartsTransfersRoute,
+  PartsWarehousesRoute: PartsWarehousesRoute,
   ServiceDeliveriesRoute: ServiceDeliveriesRoute,
   ServiceGuideRoute: ServiceGuideRoute,
   ServiceInspectionsRoute: ServiceInspectionsRoute,

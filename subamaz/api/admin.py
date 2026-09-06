@@ -4,6 +4,8 @@
 import frappe
 from frappe import _
 
+from subamaz.api.access_control import has_capability
+
 
 @frappe.whitelist()
 def global_search(query):
@@ -155,3 +157,209 @@ def global_search(query):
 		pass
 
 	return results[:20]
+
+
+def _require_capability(capability):
+	if frappe.session.user == "Guest":
+		frappe.throw(_("Not permitted"), frappe.PermissionError)
+	if not has_capability(frappe.session.user, capability):
+		frappe.throw(_("Not permitted — missing {0}").format(capability), frappe.PermissionError)
+
+
+@frappe.whitelist()
+def get_vehicle_history(vehicle):
+	"""Full history for a vehicle across receptions, inspections, orders, job cards, deliveries."""
+	_require_capability("module:customers_vehicles")
+	if not vehicle or not frappe.db.exists("Garage Vehicle", vehicle):
+		frappe.throw(_("Vehicle {0} not found").format(vehicle))
+	history = []
+	# Receptions
+	for r in frappe.get_all(
+		"Vehicle Reception",
+		filters={"vehicle": vehicle},
+		fields=["name", "creation", "reception_date", "customer", "status", "customer_complaint"],
+		order_by="creation asc",
+	):
+		history.append(
+			{
+				"doctype": "Vehicle Reception",
+				"name": r["name"],
+				"date": str(r.get("reception_date") or r.get("creation")),
+				"title": f"Reception {r['name']}",
+				"description": r.get("customer_complaint") or r.get("status") or "",
+				"visible_to_customer": 1,
+			}
+		)
+	# Inspections
+	for r in frappe.get_all(
+		"Vehicle Inspection",
+		filters={"vehicle": vehicle},
+		fields=["name", "creation", "inspection_date", "inspection_result", "recommendation"],
+		order_by="creation asc",
+	):
+		history.append(
+			{
+				"doctype": "Vehicle Inspection",
+				"name": r["name"],
+				"date": str(r.get("inspection_date") or r.get("creation")),
+				"title": f"Inspection {r['name']}",
+				"description": f"{r.get('inspection_result') or ''} — {r.get('recommendation') or ''}",
+				"visible_to_customer": 0,
+			}
+		)
+	# Service Orders
+	for r in frappe.get_all(
+		"Service Order",
+		filters={"vehicle": vehicle},
+		fields=["name", "creation", "opening_date", "status", "customer_complaint"],
+		order_by="creation asc",
+	):
+		history.append(
+			{
+				"doctype": "Service Order",
+				"name": r["name"],
+				"date": str(r.get("opening_date") or r.get("creation")),
+				"title": f"Service Order {r['name']}",
+				"description": r.get("status") or "",
+				"visible_to_customer": 1,
+			}
+		)
+		# Timeline entries for this SO (customer-visible vs internal)
+		try:
+			so = frappe.get_doc("Service Order", r["name"])
+			for tl in so.timeline or []:
+				history.append(
+					{
+						"doctype": "Service Timeline Entry",
+						"name": f"{r['name']}-{tl.timestamp}",
+						"date": str(tl.timestamp),
+						"title": f"Timeline {tl.event_type}",
+						"description": tl.description or "",
+						"visible_to_customer": 1 if tl.visible_to_customer else 0,
+						"parent": r["name"],
+					}
+				)
+		except Exception:
+			pass
+	# Job Cards via Service Orders
+	so_names = frappe.get_all("Service Order", filters={"vehicle": vehicle}, pluck="name")
+	if so_names:
+		for r in frappe.get_all(
+			"Garage Job Card",
+			filters={"service_order": ["in", so_names]},
+			fields=["name", "creation", "service_order", "status", "department"],
+			order_by="creation asc",
+		):
+			history.append(
+				{
+					"doctype": "Garage Job Card",
+					"name": r["name"],
+					"date": str(r["creation"]),
+					"title": f"Job Card {r['name']}",
+					"description": f"{r['department'] or ''} — {r['status']}",
+					"visible_to_customer": 0,
+				}
+			)
+	# Deliveries
+	for r in frappe.get_all(
+		"Vehicle Delivery",
+		filters={"vehicle": vehicle},
+		fields=["name", "creation", "delivery_date", "service_order"],
+		order_by="creation asc",
+	):
+		history.append(
+			{
+				"doctype": "Vehicle Delivery",
+				"name": r["name"],
+				"date": str(r.get("delivery_date") or r.get("creation")),
+				"title": f"Delivery {r['name']}",
+				"description": r.get("service_order") or "",
+				"visible_to_customer": 1,
+			}
+		)
+	# Sort by date
+	try:
+		history.sort(key=lambda x: x["date"] or "")
+	except Exception:
+		pass
+	return history
+
+
+@frappe.whitelist()
+def get_stock_status(warehouse=None):
+	"""Stock balances with valuation and reorder levels — for PARTS & STOCK."""
+	_require_capability("module:parts_stock")
+	filters = {}
+	if warehouse:
+		filters["warehouse"] = warehouse
+	bins = frappe.get_all("Bin", filters=filters, fields=["item_code", "warehouse", "actual_qty", "valuation_rate", "stock_value"], limit=500)
+	# Enrich with Item reorder levels
+	for b in bins:
+		try:
+			item = frappe.get_doc("Item", b["item_code"])
+			reorder = 0
+			for row in item.reorder_levels or []:
+				if not warehouse or row.warehouse == warehouse:
+					reorder = float(row.warehouse_reorder_level or 0)
+					break
+			b["reorder_level"] = reorder
+			b["item_name"] = item.item_name
+			b["is_stock_item"] = item.is_stock_item
+		except Exception:
+			b["reorder_level"] = 0
+	return bins
+
+
+@frappe.whitelist()
+def get_restock_preview(warehouse=None):
+	"""Preview low-stock grouped by supplier → draft POs.
+
+	Returns {groups: [{supplier, items: [{item_code, qty_needed, valuation_rate}]}], low_items: [...]}
+	"""
+	_require_capability("module:parts_stock")
+	bins = frappe.get_all("Bin", filters={"warehouse": warehouse} if warehouse else {}, fields=["item_code", "warehouse", "actual_qty"], limit=500)
+	low_items = []
+	for b in bins:
+		try:
+			item = frappe.get_doc("Item", b["item_code"])
+			if not item.is_stock_item:
+				continue
+			reorder_level = 0
+			reorder_qty = 0
+			for row in item.reorder_levels or []:
+				if not warehouse or row.warehouse == warehouse:
+					reorder_level = float(row.warehouse_reorder_level or 0)
+					reorder_qty = float(row.warehouse_reorder_qty or 0)
+					break
+			if reorder_level and float(b["actual_qty"] or 0) < reorder_level:
+				# Determine supplier (first Item Supplier)
+				supplier = None
+				if item.supplier_items:
+					supplier = item.supplier_items[0].supplier
+				# Fallback to Item's default supplier field if exists
+				if not supplier:
+					supplier = getattr(item, "supplier", None)
+				if not supplier:
+					supplier = "No Supplier"
+				needed = max(reorder_qty or (reorder_level - float(b["actual_qty"] or 0)), 1)
+				low_items.append(
+					{
+						"item_code": b["item_code"],
+						"item_name": item.item_name,
+						"warehouse": b["warehouse"],
+						"actual_qty": float(b["actual_qty"] or 0),
+						"reorder_level": reorder_level,
+						"reorder_qty": reorder_qty,
+						"qty_needed": needed,
+						"valuation_rate": frappe.db.get_value("Item", b["item_code"], "valuation_rate") or 0,
+						"supplier": supplier,
+					}
+				)
+		except Exception:
+			continue
+	# Group by supplier
+	groups = {}
+	for it in low_items:
+		groups.setdefault(it["supplier"], []).append(it)
+	grouped = [{"supplier": k, "items": v, "total_items": len(v)} for k, v in groups.items()]
+	return {"low_items": low_items, "groups": grouped, "count": len(low_items)}
