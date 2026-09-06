@@ -11,6 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ServiceDeliveriesRouteImport } from './routes/service/deliveries'
+import { Route as ServiceGuideRouteImport } from './routes/service/guide'
+import { Route as ServiceInspectionsRouteImport } from './routes/service/inspections'
+import { Route as ServiceJobCardsRouteImport } from './routes/service/job-cards'
+import { Route as ServiceOrdersRouteImport } from './routes/service/orders'
+import { Route as ServiceQualityChecksRouteImport } from './routes/service/quality-checks'
+import { Route as ServiceReceptionsRouteImport } from './routes/service/receptions'
+import { Route as ServiceReceptionNewRouteImport } from './routes/service/reception.new'
+import { Route as ServiceReceptionsQueueRouteImport } from './routes/service/receptions.queue'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +31,145 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiceDeliveriesRoute = ServiceDeliveriesRouteImport.update({
+  id: '/service/deliveries',
+  path: '/service/deliveries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceGuideRoute = ServiceGuideRouteImport.update({
+  id: '/service/guide',
+  path: '/service/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceInspectionsRoute = ServiceInspectionsRouteImport.update({
+  id: '/service/inspections',
+  path: '/service/inspections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceJobCardsRoute = ServiceJobCardsRouteImport.update({
+  id: '/service/job-cards',
+  path: '/service/job-cards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceOrdersRoute = ServiceOrdersRouteImport.update({
+  id: '/service/orders',
+  path: '/service/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceQualityChecksRoute = ServiceQualityChecksRouteImport.update({
+  id: '/service/quality-checks',
+  path: '/service/quality-checks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceReceptionsRoute = ServiceReceptionsRouteImport.update({
+  id: '/service/receptions',
+  path: '/service/receptions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceReceptionNewRoute = ServiceReceptionNewRouteImport.update({
+  id: '/service/reception/new',
+  path: '/service/reception/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceReceptionsQueueRoute = ServiceReceptionsQueueRouteImport.update({
+  id: '/queue',
+  path: '/queue',
+  getParentRoute: () => ServiceReceptionsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/service/deliveries': typeof ServiceDeliveriesRoute
+  '/service/guide': typeof ServiceGuideRoute
+  '/service/inspections': typeof ServiceInspectionsRoute
+  '/service/job-cards': typeof ServiceJobCardsRoute
+  '/service/orders': typeof ServiceOrdersRoute
+  '/service/quality-checks': typeof ServiceQualityChecksRoute
+  '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/service/reception/new': typeof ServiceReceptionNewRoute
+  '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/service/deliveries': typeof ServiceDeliveriesRoute
+  '/service/guide': typeof ServiceGuideRoute
+  '/service/inspections': typeof ServiceInspectionsRoute
+  '/service/job-cards': typeof ServiceJobCardsRoute
+  '/service/orders': typeof ServiceOrdersRoute
+  '/service/quality-checks': typeof ServiceQualityChecksRoute
+  '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/service/reception/new': typeof ServiceReceptionNewRoute
+  '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/service/deliveries': typeof ServiceDeliveriesRoute
+  '/service/guide': typeof ServiceGuideRoute
+  '/service/inspections': typeof ServiceInspectionsRoute
+  '/service/job-cards': typeof ServiceJobCardsRoute
+  '/service/orders': typeof ServiceOrdersRoute
+  '/service/quality-checks': typeof ServiceQualityChecksRoute
+  '/service/receptions': typeof ServiceReceptionsRouteWithChildren
+  '/service/reception/new': typeof ServiceReceptionNewRoute
+  '/service/receptions/queue': typeof ServiceReceptionsQueueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/service/deliveries'
+    | '/service/guide'
+    | '/service/inspections'
+    | '/service/job-cards'
+    | '/service/orders'
+    | '/service/quality-checks'
+    | '/service/receptions'
+    | '/service/reception/new'
+    | '/service/receptions/queue'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to:
+    | '/'
+    | '/login'
+    | '/service/deliveries'
+    | '/service/guide'
+    | '/service/inspections'
+    | '/service/job-cards'
+    | '/service/orders'
+    | '/service/quality-checks'
+    | '/service/receptions'
+    | '/service/reception/new'
+    | '/service/receptions/queue'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/service/deliveries'
+    | '/service/guide'
+    | '/service/inspections'
+    | '/service/job-cards'
+    | '/service/orders'
+    | '/service/quality-checks'
+    | '/service/receptions'
+    | '/service/reception/new'
+    | '/service/receptions/queue'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  ServiceDeliveriesRoute: typeof ServiceDeliveriesRoute
+  ServiceGuideRoute: typeof ServiceGuideRoute
+  ServiceInspectionsRoute: typeof ServiceInspectionsRoute
+  ServiceJobCardsRoute: typeof ServiceJobCardsRoute
+  ServiceOrdersRoute: typeof ServiceOrdersRoute
+  ServiceQualityChecksRoute: typeof ServiceQualityChecksRoute
+  ServiceReceptionsRoute: typeof ServiceReceptionsRouteWithChildren
+  ServiceReceptionNewRoute: typeof ServiceReceptionNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +188,94 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/service/deliveries': {
+      id: '/service/deliveries'
+      path: '/service/deliveries'
+      fullPath: '/service/deliveries'
+      preLoaderRoute: typeof ServiceDeliveriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/guide': {
+      id: '/service/guide'
+      path: '/service/guide'
+      fullPath: '/service/guide'
+      preLoaderRoute: typeof ServiceGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/inspections': {
+      id: '/service/inspections'
+      path: '/service/inspections'
+      fullPath: '/service/inspections'
+      preLoaderRoute: typeof ServiceInspectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/job-cards': {
+      id: '/service/job-cards'
+      path: '/service/job-cards'
+      fullPath: '/service/job-cards'
+      preLoaderRoute: typeof ServiceJobCardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/orders': {
+      id: '/service/orders'
+      path: '/service/orders'
+      fullPath: '/service/orders'
+      preLoaderRoute: typeof ServiceOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/quality-checks': {
+      id: '/service/quality-checks'
+      path: '/service/quality-checks'
+      fullPath: '/service/quality-checks'
+      preLoaderRoute: typeof ServiceQualityChecksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/receptions': {
+      id: '/service/receptions'
+      path: '/service/receptions'
+      fullPath: '/service/receptions'
+      preLoaderRoute: typeof ServiceReceptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/reception/new': {
+      id: '/service/reception/new'
+      path: '/service/reception/new'
+      fullPath: '/service/reception/new'
+      preLoaderRoute: typeof ServiceReceptionNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service/receptions/queue': {
+      id: '/service/receptions/queue'
+      path: '/queue'
+      fullPath: '/service/receptions/queue'
+      preLoaderRoute: typeof ServiceReceptionsQueueRouteImport
+      parentRoute: typeof ServiceReceptionsRoute
+    }
   }
 }
+
+interface ServiceReceptionsRouteChildren {
+  ServiceReceptionsQueueRoute: typeof ServiceReceptionsQueueRoute
+}
+
+const ServiceReceptionsRouteChildren: ServiceReceptionsRouteChildren = {
+  ServiceReceptionsQueueRoute: ServiceReceptionsQueueRoute,
+}
+
+const ServiceReceptionsRouteWithChildren =
+  ServiceReceptionsRoute._addFileChildren(ServiceReceptionsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  ServiceDeliveriesRoute: ServiceDeliveriesRoute,
+  ServiceGuideRoute: ServiceGuideRoute,
+  ServiceInspectionsRoute: ServiceInspectionsRoute,
+  ServiceJobCardsRoute: ServiceJobCardsRoute,
+  ServiceOrdersRoute: ServiceOrdersRoute,
+  ServiceQualityChecksRoute: ServiceQualityChecksRoute,
+  ServiceReceptionsRoute: ServiceReceptionsRouteWithChildren,
+  ServiceReceptionNewRoute: ServiceReceptionNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
