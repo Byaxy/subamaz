@@ -111,6 +111,7 @@ role_home_page = {
 	"Garage Supervisor": "garage",
 	"Garage Service Advisor": "garage",
 	"Garage Manager": "garage",
+	"Garage Accountant": "garage",
 }
 
 # Website routes

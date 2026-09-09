@@ -68,8 +68,6 @@ class TestFoundation(IntegrationTestCase):
 	def test_role_home_page_hooks(self):
 		home_pages = frappe.get_hooks("role_home_page")
 		for role in GARAGE_ROLES:
-			if role == "Garage Accountant":
-				continue
 			self.assertIn("garage", home_pages.get(role), f"{role} should map to garage")
 
 	def test_system_manager_home_page_is_desk(self):
