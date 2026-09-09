@@ -11,13 +11,13 @@
   "notes"
  ],
  "fields": [
-  {
-   "fieldname": "section",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Section",
-   "options": "Engine\nTransmission\nSuspension\nElectrical\nInterior\nExterior"
-  },
+   {
+    "fieldname": "section",
+    "fieldtype": "Select",
+    "in_list_view": 1,
+    "label": "Section",
+    "options": "Engine\nTransmission\nSuspension\nElectrical\nInterior\nExterior\nBrakes"
+   },
   {
    "fieldname": "checklist_item",
    "fieldtype": "Data",

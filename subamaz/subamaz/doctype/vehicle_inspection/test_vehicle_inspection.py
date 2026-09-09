@@ -123,7 +123,7 @@ class TestVehicleInspection(IntegrationTestCase):
 	def test_checklist_section_options(self):
 		meta = frappe.get_meta("Inspection Checklist Item")
 		options = meta.get_field("section").options.split("\n")
-		for val in ("Engine", "Transmission", "Suspension", "Electrical", "Interior", "Exterior"):
+		for val in ("Engine", "Transmission", "Suspension", "Electrical", "Interior", "Exterior", "Brakes"):
 			self.assertIn(val, options)
 
 	def test_checklist_result_options(self):

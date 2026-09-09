@@ -15,7 +15,7 @@ export const Route = createFileRoute("/service/inspections")({
   component: InspectionsPage,
 })
 
-const SECTIONS = ["Engine", "Transmission", "Suspension", "Electrical", "Interior", "Exterior"] as const
+const SECTIONS = ["Engine", "Transmission", "Suspension", "Electrical", "Interior", "Exterior", "Brakes"] as const
 const RESULTS = ["Pass", "Fail", "Advisory", "Not Checked"] as const
 
 function InspectionsPage() {
