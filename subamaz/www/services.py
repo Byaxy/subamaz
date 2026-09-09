@@ -20,7 +20,7 @@ def get_context(context):
 	for s in context.services:
 		try:
 			tmpl = frappe.get_doc("Service Checklist Template", s.template_name)
-			s["items"] = [row.checklist_item for row in tmpl.items[:6]]
+			s["items"] = [row.item_description for row in tmpl.items[:6]]
 		except Exception:
 			s["items"] = []
 	return context
