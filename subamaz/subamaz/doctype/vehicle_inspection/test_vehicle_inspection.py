@@ -102,6 +102,8 @@ class TestVehicleInspection(IntegrationTestCase):
 		options = meta.get_field("inspection_result").options.split("\n")
 		for val in ("Excellent", "Good", "Fair", "Poor", "Critical"):
 			self.assertIn(val, options)
+		for val in ("Pass", "Fail"):
+			self.assertNotIn(val, options)
 
 	def test_recommendation_select_options(self):
 		meta = frappe.get_meta("Vehicle Inspection")

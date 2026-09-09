@@ -94,12 +94,13 @@
    "fieldtype": "Section Break",
    "label": "Result & Recommendation"
   },
-  {
-   "fieldname": "inspection_result",
-   "fieldtype": "Select",
-   "label": "Inspection Result",
-   "options": "\nExcellent\nGood\nFair\nPoor\nCritical"
-  },
+   {
+    "description": "Overall grade — not per-item Pass/Fail. Use Inspection Checklist Item.result for per-item Pass/Fail/Advisory/Not Checked.",
+    "fieldname": "inspection_result",
+    "fieldtype": "Select",
+    "label": "Inspection Result",
+    "options": "\nExcellent\nGood\nFair\nPoor\nCritical"
+   },
   {
    "fieldname": "recommendation",
    "fieldtype": "Select",
