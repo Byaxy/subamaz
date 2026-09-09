@@ -101,12 +101,13 @@
     "label": "Inspection Result",
     "options": "\nExcellent\nGood\nFair\nPoor\nCritical"
    },
-  {
-   "fieldname": "recommendation",
-   "fieldtype": "Select",
-   "label": "Recommendation",
-   "options": "\nSafe to Drive\nNeeds Repairs\nUnsafe\nFurther Diagnosis"
-  },
+   {
+    "description": "Action required: Safe to Drive (no action), Needs Repairs (schedule service), Unsafe (do not drive), Further Diagnosis (investigate). Use Needs Repairs — not Service — for service needed.",
+    "fieldname": "recommendation",
+    "fieldtype": "Select",
+    "label": "Recommendation",
+    "options": "\nSafe to Drive\nNeeds Repairs\nUnsafe\nFurther Diagnosis"
+   },
   {
    "fieldname": "notes",
    "fieldtype": "Text Editor",

@@ -110,6 +110,8 @@ class TestVehicleInspection(IntegrationTestCase):
 		options = meta.get_field("recommendation").options.split("\n")
 		for val in ("Safe to Drive", "Needs Repairs", "Unsafe", "Further Diagnosis"):
 			self.assertIn(val, options)
+		for val in ("Service",):
+			self.assertNotIn(val, options)
 
 	def test_search_fields(self):
 		search_fields = [
