@@ -86,15 +86,15 @@
    "label": "Service Order",
    "read_only": 1
   },
-  {
-   "default": "Draft",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Status",
-   "options": "Draft\nDraft — Parked\nSubmitted"
-  },
+   {
+    "default": "Draft",
+    "fieldname": "status",
+    "fieldtype": "Select",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Status",
+    "options": "Draft\nDraft — Parked\nSubmitted\nCancelled"
+   },
   {
    "fieldname": "arrival_section",
    "fieldtype": "Section Break",

@@ -21,6 +21,7 @@ export const useReceptionQueue = () =>
       db.getDocList("Vehicle Reception", {
         fields: ["name", "customer", "vehicle", "reception_date", "status"],
         filters: [["Vehicle Reception", "status", "=", "Draft — Parked"]],
+        orderBy: { field: "creation", order: "desc" },
         limit: 100,
       }),
   })
