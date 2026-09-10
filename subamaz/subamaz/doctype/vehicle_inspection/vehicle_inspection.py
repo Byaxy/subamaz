@@ -38,6 +38,8 @@ class VehicleInspection(Document):
 			return None
 
 	def _send_inspection_email(self):
+		if frappe.are_emails_muted():
+			return
 		contact_name = frappe.db.get_value(
 			"Dynamic Link",
 			{
@@ -66,18 +68,21 @@ class VehicleInspection(Document):
 		attachments = None
 		if pdf_content:
 			attachments = [{"fname": f"{self.name}.pdf", "fcontent": pdf_content}]
-		frappe.sendmail(
-			recipients=[email],
-			subject=f"Inspection Report {self.name} — {self.vehicle}",
-			message=(
-				f"Inspection Result: {self.inspection_result or 'N/A'}<br>"
-				f"Recommendation: {self.recommendation or 'N/A'}<br>"
-				f"Notes: {self.notes or ''}"
-			),
-			attachments=attachments,
-			reference_doctype=self.doctype,
-			reference_name=self.name,
-		)
+		try:
+			frappe.sendmail(
+				recipients=[email],
+				subject=f"Inspection Report {self.name} — {self.vehicle}",
+				message=(
+					f"Inspection Result: {self.inspection_result or 'N/A'}<br>"
+					f"Recommendation: {self.recommendation or 'N/A'}<br>"
+					f"Notes: {self.notes or ''}"
+				),
+				attachments=attachments,
+				reference_doctype=self.doctype,
+				reference_name=self.name,
+			)
+		except Exception:
+			frappe.log_error(title="Vehicle Inspection email failed", message=frappe.get_traceback())
 
 	def _push_service_timeline(self):
 		if not self.vehicle:
