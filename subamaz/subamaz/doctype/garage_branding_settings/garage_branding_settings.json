@@ -13,10 +13,6 @@
   "motto",
   "logo",
   "favicon",
-  "column_break_branding",
-  "primary_color",
-  "secondary_color",
-  "accent_color",
   "contact_tab",
   "address",
   "phone",
@@ -56,28 +52,6 @@
    "fieldname": "favicon",
    "fieldtype": "Attach Image",
    "label": "Favicon"
-  },
-  {
-   "fieldname": "column_break_branding",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "#1A1A1A",
-   "fieldname": "primary_color",
-   "fieldtype": "Color",
-   "label": "Primary Color"
-  },
-  {
-   "default": "#3D3D3D",
-   "fieldname": "secondary_color",
-   "fieldtype": "Color",
-   "label": "Secondary Color"
-  },
-  {
-   "default": "#C9A227",
-   "fieldname": "accent_color",
-   "fieldtype": "Color",
-   "label": "Accent Color"
   },
   {
    "fieldname": "contact_tab",

@@ -3,27 +3,27 @@ import frappe
 CACHE_KEY = "app_desk_theme"
 
 DEFAULTS = {
-	"primary_color":                 "#1A1A1A",
-	"primary_hover":                 "#000000",
+	"primary_color":                 "#434868",
+	"primary_hover":                 "#343753",
 	"danger_color":                  "#DC2626",
 	"danger_hover":                  "#B91C1C",
 	"accent_color":                  "#C9A227",
-	"sidebar_background":            "#F4F4F4",
-	"sidebar_text_color":            "#3D3D3D",
-	"active_item_background":        "#1A1A1A",
-	"active_item_text":              "#C9A227",
-	"navbar_background":             "#1A1A1A",
+	"sidebar_background":            "#434868",
+	"sidebar_text_color":            "#FFFFFF",
+	"active_item_background":        "#FFFFFF",
+	"active_item_text":              "#434868",
+	"navbar_background":             "#434868",
 	"navbar_text_color":             "#FFFFFF",
 	"navbar_icon_color":             "#FFFFFF",
-	"page_head_bg":                  "#F4F4F4",
+	"page_head_bg":                  "#F0F0F3",
 	"page_head_text":                "#1A1A1A",
-	"table_header_bg":               "#1A1A1A",
+	"table_header_bg":               "#434868",
 	"table_header_text":             "#FFFFFF",
-	"even_row_bg":                   "#F7F7F7",
-	"table_row_hover_bg":            "#EFEFEF",
-	"selectdropdown_row_hover_bg":   "#EFEFEF",
-	"primary_button_bg":             "#1A1A1A",
-	"primary_button_hover":          "#000000",
+	"even_row_bg":                   "#F0F0F3",
+	"table_row_hover_bg":            "#E8E9ED",
+	"selectdropdown_row_hover_bg":   "#E8E9ED",
+	"primary_button_bg":             "#434868",
+	"primary_button_hover":          "#343753",
 	"primary_button_text":           "#FFFFFF",
 	"danger_button_bg":              "#DC2626",
 	"danger_button_hover":           "#B91C1C",
@@ -51,9 +51,35 @@ def _sanitize_color(value):
 	return value
 
 
+def _lighten(hex_color, pct):
+	"""Mix hex_color with white by pct (0-1). e.g. 0.92 = 92% white."""
+	try:
+		hex_color = hex_color.strip().lstrip("#")
+		if len(hex_color) == 3:
+			hex_color = "".join(c * 2 for c in hex_color)
+		r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+		nr = round(r + (255 - r) * pct)
+		ng = round(g + (255 - g) * pct)
+		nb = round(b + (255 - b) * pct)
+		return f"#{nr:02X}{ng:02X}{nb:02X}"
+	except Exception:
+		return hex_color
+
+
 def _build_config(saved):
+	# Resolve primary once for lighter fallbacks.
+	_primary_raw = saved.get("primary_color") or DEFAULTS.get("primary_color", "")
+	_primary = _sanitize_color(_primary_raw) or DEFAULTS["primary_color"]
+
 	def v(fieldname):
-		raw = saved.get(fieldname) or DEFAULTS.get(fieldname, "")
+		raw = saved.get(fieldname)
+		# Fallback to computed lighter for light surfaces when field is empty.
+		if not raw:
+			if fieldname in ("page_head_bg", "even_row_bg"):
+				return _lighten(_primary, 0.92)
+			if fieldname in ("table_row_hover_bg", "selectdropdown_row_hover_bg"):
+				return _lighten(_primary, 0.88)
+			raw = DEFAULTS.get(fieldname, "")
 		return _sanitize_color(raw)
 
 	return {

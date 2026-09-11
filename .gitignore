@@ -53,3 +53,5 @@ jspm_packages/
 
 # Aider AI Chat
 .aider*
+
+subamaz/public/node_modules

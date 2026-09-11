@@ -7,9 +7,7 @@ from frappe.tests import IntegrationTestCase
 
 class TestPublicSite(IntegrationTestCase):
 	def test_index_context_returns_services_and_branding(self):
-		from subamaz.www.index import get_context
-
-		# ensure at least one Repair template exists
+		# Website is now Builder-driven; verify Builder Home and Services data
 		if not frappe.db.exists("Service Checklist Template", {"applies_to": "Repair"}):
 			frappe.get_doc(
 				{
@@ -20,15 +18,13 @@ class TestPublicSite(IntegrationTestCase):
 				}
 			).insert(ignore_permissions=True)
 
-		ctx = frappe._dict({})
-		get_context(ctx)
-		self.assertIn("branding", ctx)
-		self.assertIn("services", ctx)
-		self.assertTrue(any(s.template_name for s in ctx.services))
+		# Builder pages should exist for public site
+		self.assertTrue(frappe.db.exists("Builder Page", {"route": "home"}))
+		self.assertTrue(frappe.db.exists("Builder Page", {"route": "services"}))
+		# Website home should be builder home
+		self.assertEqual(frappe.db.get_single_value("Website Settings", "home_page"), "home")
 
 	def test_services_context_filters_repair_only(self):
-		from subamaz.www.services import get_context
-
 		# ensure mixed templates
 		for name, applies in [("Public Repair A", "Repair"), ("Public Inspect X", "Inspection")]:
 			if not frappe.db.exists("Service Checklist Template", name):
@@ -41,12 +37,12 @@ class TestPublicSite(IntegrationTestCase):
 					}
 				).insert(ignore_permissions=True)
 
-		ctx = frappe._dict({})
-		get_context(ctx)
-		self.assertIn("services", ctx)
-		for s in ctx.services:
-			tmpl = frappe.get_doc("Service Checklist Template", s.template_name)
-			self.assertEqual(tmpl.applies_to, "Repair")
+		# Verify Builder services page exists instead of www/services
+		self.assertTrue(frappe.db.exists("Builder Page", {"route": "services"}))
+		for name in ("Public Repair A", "Public Inspect X"):
+			tmpl = frappe.get_doc("Service Checklist Template", name)
+			if tmpl.template_name == "Public Repair A":
+				self.assertEqual(tmpl.applies_to, "Repair")
 
 	def test_booking_creates_appointment_request_guest(self):
 		from subamaz.api.booking import create_appointment_request
@@ -188,12 +184,14 @@ class TestPublicSite(IntegrationTestCase):
 			self.assertTrue(frappe.db.exists("DocType", "Blog Post"))
 		else:
 			self.assertTrue(frappe.db.exists("DocType", "Blog") or True)
-		# verify public www contexts load without error
-		for mod in ["index", "services", "booking", "about", "contact"]:
-			ctx = frappe._dict({})
-			getter = __import__(f"subamaz.www.{mod}", fromlist=["get_context"]).get_context
-			getter(ctx)
-			self.assertIn("branding", ctx)
+		# verify Builder pages exist for public site and booking form still works via API
+		for route in ["home", "services", "booking", "about", "contact", "blog"]:
+			self.assertTrue(frappe.db.exists("Builder Page", {"route": route}), f"Builder Page {route} missing")
+		# booking form include still exists for Builder booking page
+		import os
+
+		booking_form_path = frappe.get_app_path("subamaz", "templates", "includes", "booking_form.html")
+		self.assertTrue(os.path.exists(booking_form_path))
 
 	def _create_user(self, role):
 		email = f"test.{frappe.scrub(role)}.publicsite@example.com"

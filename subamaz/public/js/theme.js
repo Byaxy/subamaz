@@ -105,7 +105,7 @@ class Theme {
 		var value = getComputedStyle(document.documentElement)
 			.getPropertyValue("--app-primary")
 			.trim();
-		return value || "#1A1A1A";
+		return value || "#434868";
 	}
 
 	accentColor() {

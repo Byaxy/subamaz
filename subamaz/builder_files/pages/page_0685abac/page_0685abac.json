@@ -1,0 +1,85 @@
+{
+ "app": "subamaz",
+ "authenticated_access": 0,
+ "blocks": [
+  {
+   "baseStyles": {
+    "display": "flex",
+    "height": "738px",
+    "padding": "0px",
+    "position": "static",
+    "width": "100%"
+   },
+   "blockId": "qjf8nmxct",
+   "children": [
+    {
+     "baseStyles": {
+      "alignItems": "center",
+      "backgroundColor": "#ededed",
+      "display": "flex",
+      "flexDirection": "column",
+      "flexShrink": 0,
+      "height": "200px",
+      "justifyContent": "flex-start",
+      "left": "auto",
+      "overflow": "hidden",
+      "padding": "40px",
+      "position": "static",
+      "top": "auto",
+      "width": "100%"
+     },
+     "blockId": "3rnr4tiyk",
+     "blockName": "container",
+     "children": [
+      {
+       "baseStyles": {
+        "color": "#940000",
+        "fontSize": "28px",
+        "fontWeight": "700",
+        "height": "fit-content",
+        "lineHeight": "1.4",
+        "minWidth": "10px",
+        "position": "static",
+        "width": "fit-content"
+       },
+       "blockId": "hh8hfcvxp",
+       "element": "p",
+       "innerHTML": "Blog Posts"
+      }
+     ],
+     "element": "div",
+     "tabletStyles": {
+      "__last_display": "flex",
+      "display": "none"
+     }
+    }
+   ],
+   "element": "div",
+   "tabletStyles": {
+    "height": "801px"
+   }
+  }
+ ],
+ "client_scripts": [],
+ "creation": "2026-09-11 00:30:51.145218",
+ "disable_indexing": 0,
+ "docstatus": 0,
+ "doctype": "Builder Page",
+ "draft_blocks": null,
+ "dynamic_route": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "is_template": 0,
+ "modified": "2026-09-11 15:29:09.462326",
+ "modified_by": "Administrator",
+ "name": "page-0685abac",
+ "owner": "Administrator",
+ "page_data_script": "",
+ "page_name": "page-0685abac",
+ "page_title": "Blog — SubaMaz",
+ "preview": "/files/page-0685abac-preview.webp?v=20525",
+ "project_folder": "subamaz",
+ "published": 1,
+ "published_at": "2026-09-11 15:29:09.461866",
+ "route": "blog"
+}

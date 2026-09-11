@@ -3,7 +3,7 @@ from unittest.mock import patch
 import frappe
 from frappe.tests import IntegrationTestCase
 
-from subamaz.api import CACHE_KEY, DEFAULTS, get_theme
+from subamaz.api import CACHE_KEY, DEFAULTS, _lighten, get_theme
 
 # snake_case fieldname -> camelCase token exposed by get_theme()
 EXPECTED_TOKENS = {
@@ -49,12 +49,20 @@ class TestTheme(IntegrationTestCase):
 			self.assertEqual(config[token], DEFAULTS[fieldname], f"{token} should carry the default")
 
 	def test_get_theme_merges_saved_over_defaults(self):
+		self._empty_theme_single()
 		frappe.db.set_single_value("Theme", "primary_color", "1A1A1A")
 		frappe.db.set_single_value("Theme", "accent_color", "FFFFFF")
 		config = get_theme()
 		self.assertEqual(config["primaryColor"], "#1A1A1A")
 		self.assertEqual(config["accentColor"], "#FFFFFF")
-		self.assertEqual(config["tableEvenBg"], DEFAULTS["even_row_bg"])
+		# light surfaces now fallback to lightened primary when empty
+		self.assertEqual(config["tableEvenBg"], _lighten("#1A1A1A", 0.92))
+		self.assertEqual(config["tableRowHoverBg"], _lighten("#1A1A1A", 0.88))
+		# explicit value still wins over fallback
+		frappe.db.set_single_value("Theme", "even_row_bg", "#ABCDEF")
+		frappe.cache().delete_value(CACHE_KEY)
+		config2 = get_theme()
+		self.assertEqual(config2["tableEvenBg"], "#ABCDEF")
 
 	def test_on_update_invalidates_cache_and_publishes(self):
 		self._empty_theme_single()
@@ -74,6 +82,27 @@ class TestTheme(IntegrationTestCase):
 		for fieldname, value in DEFAULTS.items():
 			self.assertEqual(theme.get(fieldname), value, f"{fieldname} should be reset")
 		self.assertIsNone(frappe.cache().get_value(CACHE_KEY))
+
+	def test_lighten_helper(self):
+		self.assertEqual(_lighten("#434868", 0.92), "#F0F0F3")
+		self.assertEqual(_lighten("#434868", 0.88), "#E8E9ED")
+		self.assertEqual(_lighten("#000000", 1.0), "#FFFFFF")
+		self.assertEqual(_lighten("#FFFFFF", 0.5), "#FFFFFF")
+
+	def test_lighter_fallback_tracks_primary(self):
+		self._empty_theme_single()
+		frappe.db.set_single_value("Theme", "primary_color", "#FF0000")
+		frappe.cache().delete_value(CACHE_KEY)
+		config = get_theme()
+		self.assertEqual(config["pageHeadBg"], _lighten("#FF0000", 0.92))
+		self.assertEqual(config["selectRowHoverBg"], _lighten("#FF0000", 0.88))
+
+	def test_sidebar_defaults_are_primary_driven(self):
+		self.assertEqual(DEFAULTS["sidebar_background"], DEFAULTS["primary_color"])
+		self.assertEqual(DEFAULTS["sidebar_text_color"], "#FFFFFF")
+		self.assertEqual(DEFAULTS["active_item_background"], "#FFFFFF")
+		self.assertEqual(DEFAULTS["active_item_text"], DEFAULTS["primary_color"])
+		self.assertEqual(DEFAULTS["page_head_bg"], DEFAULTS["even_row_bg"])
 
 	def test_permissions_system_manager(self):
 		meta = frappe.get_meta("Theme")

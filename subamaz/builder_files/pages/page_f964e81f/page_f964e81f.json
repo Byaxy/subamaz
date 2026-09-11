@@ -1,0 +1,56 @@
+{
+ "app": "subamaz",
+ "authenticated_access": 0,
+ "blocks": [
+  {
+   "baseStyles": {
+    "alignItems": "flex-start",
+    "display": "flex",
+    "justifyContent": "center",
+    "padding": "40px",
+    "position": "static",
+    "width": "100%"
+   },
+   "blockId": "qu30qdnm5",
+   "children": [
+    {
+     "baseStyles": {
+      "color": "#700707",
+      "fontSize": "28px",
+      "fontWeight": "700",
+      "height": "fit-content",
+      "lineHeight": "1.4",
+      "minWidth": "10px",
+      "position": "static",
+      "width": "fit-content"
+     },
+     "blockId": "d3eh4xp3x",
+     "element": "p",
+     "innerHTML": "Home Page"
+    }
+   ],
+   "element": "div"
+  }
+ ],
+ "client_scripts": [],
+ "creation": "2026-09-11 00:34:50.663233",
+ "disable_indexing": 0,
+ "docstatus": 0,
+ "doctype": "Builder Page",
+ "draft_blocks": null,
+ "dynamic_route": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "is_template": 0,
+ "modified": "2026-09-11 15:36:48.985661",
+ "modified_by": "Administrator",
+ "name": "page-f964e81f",
+ "owner": "Administrator",
+ "page_name": "page-f964e81f",
+ "page_title": "SubaMaz — Home",
+ "preview": "/files/page-f964e81f-preview.webp?v=5ca1a",
+ "project_folder": "subamaz",
+ "published": 1,
+ "published_at": "2026-09-11 15:32:58.911495",
+ "route": "home"
+}

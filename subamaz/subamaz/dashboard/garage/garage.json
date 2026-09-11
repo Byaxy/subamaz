@@ -1,0 +1,34 @@
+{
+ "cards": [
+  {
+   "card": "Active Job Cards"
+  },
+  {
+   "card": "Outstanding Invoices"
+  },
+  {
+   "card": "Jobs Completed This Month"
+  },
+  {
+   "card": "Revenue This Month"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Revenue Trend",
+   "width": "Full"
+  }
+ ],
+ "creation": "2026-09-11 18:05:59.921843",
+ "dashboard_name": "Garage",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-09-11 18:05:59.921843",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Garage",
+ "owner": "Administrator"
+}

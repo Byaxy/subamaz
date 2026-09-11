@@ -1,0 +1,442 @@
+{
+ "app": "subamaz",
+ "charts": [
+  {
+   "chart_name": "Revenue Trend",
+   "label": "Revenue Trend"
+  }
+ ],
+ "content": "[{\"id\": \"head_garage\", \"type\": \"header\", \"data\": {\"text\": \"Garage\", \"col\": 12}}, {\"id\": \"chart_rev\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Revenue Trend\", \"col\": 12}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"nc_active\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Job Cards\", \"col\": 3}}, {\"id\": \"nc_outstand\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Outstanding Invoices\", \"col\": 3}}, {\"id\": \"nc_jobs\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Jobs Completed This Month\", \"col\": 3}}, {\"id\": \"nc_rev\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Revenue This Month\", \"col\": 3}}, {\"id\": \"header_masters\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Reports & Masters</b></span>\", \"col\": 12}}, {\"id\": \"card_ops\", \"type\": \"card\", \"data\": {\"card_name\": \"Garage Operations\", \"col\": 4}}, {\"id\": \"card_sales\", \"type\": \"card\", \"data\": {\"card_name\": \"Sales\", \"col\": 4}}, {\"id\": \"card_purch\", \"type\": \"card\", \"data\": {\"card_name\": \"Purchases\", \"col\": 4}}, {\"id\": \"card_acc\", \"type\": \"card\", \"data\": {\"card_name\": \"Accounting\", \"col\": 4}}, {\"id\": \"card_proj\", \"type\": \"card\", \"data\": {\"card_name\": \"Projects\", \"col\": 4}}, {\"id\": \"card_stock\", \"type\": \"card\", \"data\": {\"card_name\": \"Stock & Parts\", \"col\": 4}}, {\"id\": \"card_setup\", \"type\": \"card\", \"data\": {\"card_name\": \"Setup\", \"col\": 4}}, {\"id\": \"card_reports\", \"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+ "creation": "2026-09-05 13:37:52.875206",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "wrench",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Garage",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Garage Operations",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Garage Vehicle",
+   "link_count": 0,
+   "link_to": "Garage Vehicle",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vehicle Reception",
+   "link_count": 0,
+   "link_to": "Vehicle Reception",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Service Order",
+   "link_count": 0,
+   "link_to": "Service Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Garage Job Card",
+   "link_count": 0,
+   "link_to": "Garage Job Card",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vehicle Inspection",
+   "link_count": 0,
+   "link_to": "Vehicle Inspection",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vehicle Delivery",
+   "link_count": 0,
+   "link_to": "Vehicle Delivery",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Appointment Request",
+   "link_count": 0,
+   "link_to": "Appointment Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Repair Task",
+   "link_count": 0,
+   "link_to": "Repair Task",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quotation",
+   "link_count": 0,
+   "link_to": "Quotation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Order",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchases",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounting",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Entry",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Journal Entry",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Projects",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Project",
+   "link_count": 0,
+   "link_to": "Project",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Task",
+   "link_count": 0,
+   "link_to": "Task",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Timesheet",
+   "link_count": 0,
+   "link_to": "Timesheet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock & Parts",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Entry",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Garage Department",
+   "link_count": 0,
+   "link_to": "Garage Department",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Capability",
+   "link_count": 0,
+   "link_to": "Capability",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Service Checklist Template",
+   "link_count": 0,
+   "link_to": "Service Checklist Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Revenue by Month",
+   "link_count": 0,
+   "link_to": "Revenue by Month",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Sales Invoice",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Jobs Completed",
+   "link_count": 0,
+   "link_to": "Jobs Completed",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Garage Job Card",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Technician Productivity",
+   "link_count": 0,
+   "link_to": "Technician Productivity",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Time Log Entry",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Turnaround Time",
+   "link_count": 0,
+   "link_to": "Job Turnaround Time",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Garage Job Card",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Parts Usage",
+   "link_count": 0,
+   "link_to": "Parts Usage",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Consumed Part Entry",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Repairs by Type",
+   "link_count": 0,
+   "link_to": "Repairs by Type",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Vehicle Inspection",
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-11 19:37:02.071316",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Garage",
+ "number_cards": [
+  {
+   "label": "Active Job Cards",
+   "number_card_name": "Active Job Cards"
+  },
+  {
+   "label": "Outstanding Invoices",
+   "number_card_name": "Outstanding Invoices"
+  },
+  {
+   "label": "Jobs Completed This Month",
+   "number_card_name": "Jobs Completed This Month"
+  },
+  {
+   "label": "Revenue This Month",
+   "number_card_name": "Revenue This Month"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 7.0,
+ "shortcuts": [],
+ "title": "Garage",
+ "type": "Workspace"
+}
