@@ -88,7 +88,10 @@ web_include_css = ["/assets/subamaz/css/theme.css"]
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Sales Order": "public/js/sales_order.js",
+	"Sales Invoice": "public/js/sales_invoice.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -241,6 +244,10 @@ doc_events = {
 # Overriding Methods
 # ------------------------------
 #
+override_whitelisted_methods = {
+	"frappe.desk.query_report.run": "subamaz.report_customizer.run",
+	"frappe.desk.query_report.export_query": "subamaz.report_customizer.export_query",
+}
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "subamaz.event.get_events"
 # }
