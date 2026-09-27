@@ -6,7 +6,7 @@
 Reuses the nbs_customization.report_customizer pattern: hooks.py routes
 frappe.desk.query_report.run / export_query here, rows are enriched
 post-execution so both the on-screen view and Excel/CSV export carry the
-vehicle columns (registration number, make, type, model).
+vehicle columns (registration number, make, type, model, year).
 
 Only row-level reports (one row per order/invoice) are covered. Aggregated
 trend reports (Sales Order Trends, Sales Invoice Trends, Sales Analytics)
@@ -54,6 +54,7 @@ def _vehicle_columns():
 		{"label": _("Vehicle Make"), "fieldname": "vehicle_make", "fieldtype": "Data", "width": 110},
 		{"label": _("Vehicle Type"), "fieldname": "vehicle_type", "fieldtype": "Data", "width": 110},
 		{"label": _("Vehicle Model"), "fieldname": "vehicle_model", "fieldtype": "Data", "width": 110},
+		{"label": _("Vehicle Year"), "fieldname": "vehicle_year", "fieldtype": "Int", "width": 80},
 	]
 
 
@@ -165,7 +166,7 @@ def _enrich_rows_with_vehicle(data: list, config: dict) -> None:
 		for v in frappe.get_all(
 			"Garage Vehicle",
 			filters={"name": ["in", names]},
-			fields=["name", "registration_number", "make", "type", "model"],
+			fields=["name", "registration_number", "make", "type", "model", "year"],
 		):
 			vehicles[v["name"]] = v
 
@@ -179,6 +180,7 @@ def _enrich_rows_with_vehicle(data: list, config: dict) -> None:
 		row["vehicle_make"] = vehicle.get("make") or ""
 		row["vehicle_type"] = vehicle.get("type") or ""
 		row["vehicle_model"] = vehicle.get("model") or ""
+		row["vehicle_year"] = vehicle.get("year") or None
 
 
 def _insert_block_after(columns: list[dict], block: list[dict], anchors: list[str]) -> list[dict]:

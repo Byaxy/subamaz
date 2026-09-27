@@ -118,7 +118,14 @@ class TestVehicleSales(IntegrationTestCase):
 		}
 		invoice_rows = [{"name": "SI-001", "garage_vehicle": "GV-001"}]
 		vehicle_rows = [
-			{"name": "GV-001", "registration_number": "REG-001", "make": "Toyota", "type": "SUV", "model": "RAV4"}
+			{
+				"name": "GV-001",
+				"registration_number": "REG-001",
+				"make": "Toyota",
+				"type": "SUV",
+				"model": "RAV4",
+				"year": 2021,
+			}
 		]
 
 		def fake_get_all(doctype, filters=None, fields=None, pluck=None):
@@ -143,6 +150,7 @@ class TestVehicleSales(IntegrationTestCase):
 				"vehicle_make",
 				"vehicle_type",
 				"vehicle_model",
+				"vehicle_year",
 			],
 		)
 		row = out["result"][0]
@@ -150,6 +158,7 @@ class TestVehicleSales(IntegrationTestCase):
 		self.assertEqual(row["vehicle_make"], "Toyota")
 		self.assertEqual(row["vehicle_type"], "SUV")
 		self.assertEqual(row["vehicle_model"], "RAV4")
+		self.assertEqual(row["vehicle_year"], 2021)
 		# Non-invoice rows (payments, totals) are left untouched.
 		self.assertNotIn("vehicle_registration", out["result"][1])
 
