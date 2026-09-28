@@ -2,9 +2,8 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
@@ -25,7 +24,7 @@ PAYLOAD = {
 }
 
 
-class TestReceptionAPI(IntegrationTestCase):
+class TestReceptionAPI(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.customer = frappe.get_doc(

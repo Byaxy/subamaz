@@ -2,9 +2,8 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
@@ -24,7 +23,7 @@ def _ensure_caps():
 	_ensure_capabilities()
 
 
-class TestAccessControlAPI(IntegrationTestCase):
+class TestAccessControlAPI(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		_ensure_caps()

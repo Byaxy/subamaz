@@ -32,6 +32,8 @@ fixtures = [
 	{"doctype": "Workflow State", "filters": {"name": ["in", ["Draft", "Open", "Waiting Customer", "Waiting Parts", "In Progress", "Quality Check", "Completed", "Closed", "Cancelled", "On Hold"]]}},
 	{"doctype": "Workflow", "filters": {"name": ["in", ["Service Order Workflow"]]}},
 	{"doctype": "Capability"},
+	{"doctype": "Vehicle Make"},
+	{"doctype": "Vehicle Model"},
 	{
 		"doctype": "Role Capability",
 		"filters": {

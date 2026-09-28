@@ -1,9 +1,9 @@
 from unittest.mock import patch
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
 from subamaz.api import CACHE_KEY, DEFAULTS, _lighten, get_theme
+from subamaz.testing import SubamazTestCase
 
 # snake_case fieldname -> camelCase token exposed by get_theme()
 EXPECTED_TOKENS = {
@@ -34,7 +34,7 @@ EXPECTED_TOKENS = {
 }
 
 
-class TestTheme(IntegrationTestCase):
+class TestTheme(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		frappe.cache().delete_value(CACHE_KEY)

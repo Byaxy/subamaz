@@ -2,14 +2,13 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestCapability(IntegrationTestCase):
+class TestCapability(SubamazTestCase):
 	def test_capability_create_and_unique(self):
 		key = f"module:test_{frappe.generate_hash(length=4)}"
 		frappe.get_doc(

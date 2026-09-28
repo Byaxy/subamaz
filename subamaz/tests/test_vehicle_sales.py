@@ -4,15 +4,14 @@
 from unittest import mock
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
 from subamaz import report_customizer
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestVehicleSales(IntegrationTestCase):
+class TestVehicleSales(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.company = frappe.db.get_value("Company", {}, "name")
@@ -36,7 +35,18 @@ class TestVehicleSales(IntegrationTestCase):
 			}
 		).insert().name
 
+	def _ensure_make_model(self, make="Toyota", model="RAV4"):
+		if not frappe.db.exists("Vehicle Make", make):
+			frappe.get_doc({"doctype": "Vehicle Make", "make_name": make}).insert()
+		name = frappe.db.get_value("Vehicle Model", {"make": make, "model_name": model}, "name")
+		if not name:
+			name = frappe.get_doc(
+				{"doctype": "Vehicle Model", "model_name": model, "make": make}
+			).insert().name
+		return make, name
+
 	def _make_vehicle(self, customer, registration_number=None, make="Toyota", type="SUV", model="RAV4"):
+		make, model = self._ensure_make_model(make, model)
 		return frappe.get_doc(
 			{
 				"doctype": "Garage Vehicle",
@@ -123,16 +133,19 @@ class TestVehicleSales(IntegrationTestCase):
 				"registration_number": "REG-001",
 				"make": "Toyota",
 				"type": "SUV",
-				"model": "RAV4",
+				"model": "VM-00004",
 				"year": 2021,
 			}
 		]
+		model_rows = [{"name": "VM-00004", "model_name": "RAV4"}]
 
 		def fake_get_all(doctype, filters=None, fields=None, pluck=None):
 			if doctype == "Sales Invoice":
 				return invoice_rows
 			if doctype == "Garage Vehicle":
 				return vehicle_rows
+			if doctype == "Vehicle Model":
+				return model_rows
 			return []
 
 		with mock.patch.object(frappe, "get_all", side_effect=fake_get_all):

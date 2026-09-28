@@ -1,7 +1,7 @@
 {
  "actions": [],
- "autoname": "GV-.#####",
- "creation": "2026-08-21 00:00:00.000000",
+ "autoname": "field:registration_number",
+ "creation": "2026-08-21 00:00:00",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -9,19 +9,23 @@
   "identity_section",
   "registration_number",
   "vin",
-  "make",
   "model",
-  "year",
   "color",
+  "column_break_mfda",
+  "make",
+  "type",
+  "year",
   "specifications_section",
   "fuel_type",
+  "column_break_hrau",
   "transmission",
   "ownership_section",
   "customer",
   "mileage_status_section",
   "current_mileage",
-  "current_status",
   "current_service_order",
+  "column_break_zxsz",
+  "current_status",
   "current_technician",
   "photos_section",
   "photos"
@@ -46,17 +50,22 @@
    "label": "VIN",
    "unique": 1
   },
-  {
-   "fieldname": "make",
-   "fieldtype": "Data",
-   "label": "Make"
-  },
-  {
-   "fieldname": "model",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Model"
-  },
+   {
+    "fieldname": "make",
+    "fieldtype": "Link",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Make",
+    "options": "Vehicle Make"
+   },
+   {
+    "fieldname": "model",
+    "fieldtype": "Link",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Model",
+    "options": "Vehicle Model"
+   },
   {
    "fieldname": "year",
    "fieldtype": "Int",
@@ -146,15 +155,35 @@
    "fieldtype": "Table",
    "label": "Photos",
    "options": "Garage Photo"
+  },
+  {
+   "fieldname": "column_break_mfda",
+   "fieldtype": "Column Break"
+  },
+   {
+    "fieldname": "type",
+    "fieldtype": "Select",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Type",
+    "options": "SUV\nSedan\nHatchback\nVan\nTruck\nPick up\nCoupe\nWagon\nConvertible\nBus\nMini Bus\nMini Van\nMachinery\nForklift\nTractor\nMotorcycle"
+   },
+  {
+   "fieldname": "column_break_hrau",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zxsz",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-21 00:00:00.000000",
+ "modified": "2026-09-27 22:13:03.760808",
  "modified_by": "Administrator",
  "module": "Subamaz",
  "name": "Garage Vehicle",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -228,6 +257,7 @@
    "role": "Garage Inspector"
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "registration_number,vin,customer",
  "sort_field": "modified",
  "sort_order": "DESC",

@@ -1,7 +1,7 @@
 import frappe
-from frappe.tests import IntegrationTestCase
 
 from subamaz import auth
+from subamaz.testing import SubamazTestCase
 
 GARAGE_ROLES = [
 	"Garage Reception",
@@ -14,7 +14,7 @@ GARAGE_ROLES = [
 ]
 
 
-class TestFoundation(IntegrationTestCase):
+class TestFoundation(SubamazTestCase):
 	def test_garage_roles_exist(self):
 		for role in GARAGE_ROLES:
 			self.assertTrue(frappe.db.exists("Role", role), f"Role {role} missing")

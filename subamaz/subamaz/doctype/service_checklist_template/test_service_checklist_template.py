@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestServiceChecklistTemplate(IntegrationTestCase):
+class TestServiceChecklistTemplate(SubamazTestCase):
 	def test_items_round_trip(self):
 		doc = frappe.get_doc(
 			{

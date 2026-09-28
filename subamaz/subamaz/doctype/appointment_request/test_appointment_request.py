@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestAppointmentRequest(IntegrationTestCase):
+class TestAppointmentRequest(SubamazTestCase):
 	def test_create_appointment_request(self):
 		doc = frappe.get_doc(
 			{

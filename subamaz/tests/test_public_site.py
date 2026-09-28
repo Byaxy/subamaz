@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestPublicSite(IntegrationTestCase):
+class TestPublicSite(SubamazTestCase):
 	def test_index_context_returns_services_and_branding(self):
 		# Website is now Builder-driven; verify Builder Home and Services data
 		if not frappe.db.exists("Service Checklist Template", {"applies_to": "Repair"}):

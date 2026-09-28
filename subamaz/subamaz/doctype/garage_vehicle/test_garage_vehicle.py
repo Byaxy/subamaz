@@ -2,9 +2,9 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+from frappe.utils import getdate
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
@@ -13,14 +13,14 @@ ignore_missing_dependency_doctypes()
 IGNORE_TEST_RECORD_DEPENDENCIES = ["Customer", "Employee"]
 
 
-class TestGarageVehicle(IntegrationTestCase):
+class TestGarageVehicle(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.customer = frappe.get_doc(
 			{"doctype": "Customer", "customer_name": f"Veh Cust {frappe.generate_hash(length=4)}"}
 		).insert()
 
-	def _make_vehicle(self, registration_number=None, vin=None, mileage=10000):
+	def _make_vehicle(self, registration_number=None, vin=None, mileage=10000, make=None, model=None):
 		suffix = frappe.generate_hash(length=5)
 		return frappe.get_doc(
 			{
@@ -29,12 +29,14 @@ class TestGarageVehicle(IntegrationTestCase):
 				"vin": vin or frappe.generate_hash(length=17),
 				"customer": self.customer.name,
 				"current_mileage": mileage,
+				"make": make,
+				"model": model,
 			}
 		)
 
 	def test_naming_series(self):
 		doc = self._make_vehicle().insert()
-		self.assertTrue(doc.name.startswith("GV-"))
+		self.assertEqual(doc.name, doc.registration_number)
 
 	def test_registration_uniqueness(self):
 		self._make_vehicle(registration_number="DUP-001").insert()
@@ -84,6 +86,47 @@ class TestGarageVehicle(IntegrationTestCase):
 			self.assertEqual(frappe.db.get_value("Garage Vehicle", doc.name, "current_mileage"), 9000)
 		finally:
 			frappe.set_user("Administrator")
+
+	def test_make_model_type_field_shapes(self):
+		meta = frappe.get_meta("Garage Vehicle")
+		self.assertEqual(meta.get_field("make").fieldtype, "Link")
+		self.assertEqual(meta.get_field("make").options, "Vehicle Make")
+		self.assertEqual(meta.get_field("model").fieldtype, "Link")
+		self.assertEqual(meta.get_field("model").options, "Vehicle Model")
+		self.assertEqual(meta.get_field("type").fieldtype, "Select")
+		self.assertIn("SUV", meta.get_field("type").options.split("\n"))
+
+	def test_year_validation(self):
+		doc = self._make_vehicle()
+		doc.year = 1800
+		self.assertRaises(frappe.ValidationError, doc.insert)
+		doc.year = getdate().year + 2
+		self.assertRaises(frappe.ValidationError, doc.insert)
+		doc.year = getdate().year
+		doc.insert()
+
+	def test_model_make_mismatch_blocked(self):
+		toyota = self._ensure_make_model("Toyota", "Corolla")
+		nissan = self._ensure_make_model("Nissan", "Note")[0]
+		doc = self._make_vehicle(make=nissan, model=toyota[1])
+		self.assertRaises(frappe.ValidationError, doc.insert)
+
+	def test_make_autofilled_from_model(self):
+		make, model = self._ensure_make_model("Toyota", "Corolla")
+		doc = self._make_vehicle(model=model)
+		doc.make = None
+		doc.insert()
+		self.assertEqual(doc.make, make)
+
+	def _ensure_make_model(self, make="Toyota", model="Corolla"):
+		if not frappe.db.exists("Vehicle Make", make):
+			frappe.get_doc({"doctype": "Vehicle Make", "make_name": make}).insert()
+		name = frappe.db.get_value("Vehicle Model", {"make": make, "model_name": model}, "name")
+		if not name:
+			name = frappe.get_doc(
+				{"doctype": "Vehicle Model", "model_name": model, "make": make}
+			).insert().name
+		return make, name
 
 	def test_current_status_select_options(self):
 		expected = [

@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestGarageDepartment(IntegrationTestCase):
+class TestGarageDepartment(SubamazTestCase):
 	def test_rate_persists_and_is_active_defaults_on(self):
 		doc = frappe.get_doc(
 			{

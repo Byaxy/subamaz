@@ -2,14 +2,13 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestJobCardAPI(IntegrationTestCase):
+class TestJobCardAPI(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.customer = frappe.get_doc(
@@ -161,7 +160,9 @@ class TestJobCardAPI(IntegrationTestCase):
 			frappe.set_user("Administrator")
 
 	def _ensure_stock_item(self):
-		item_code = frappe.db.get_value("Item", {"is_stock_item": 1}, "item_code")
+		item_code = frappe.db.get_value(
+			"Item", {"is_stock_item": 1, "is_fixed_asset": 0, "has_serial_no": 0, "has_batch_no": 0}, "item_code"
+		)
 		if not item_code:
 			item = frappe.get_doc(
 				{

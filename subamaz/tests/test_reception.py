@@ -2,16 +2,15 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 PHOTO_TYPES = ("Front", "Rear", "Interior", "Dashboard")
 
 
-class TestReceptionWorkflow(IntegrationTestCase):
+class TestReceptionWorkflow(SubamazTestCase):
 	"""Cross-doctype reception workflow: intake flips the vehicle into the shop flow."""
 
 	def test_full_intake_flips_vehicle_status_and_keeps_complaint(self):

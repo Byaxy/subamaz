@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestUOMFallback(IntegrationTestCase):
+class TestUOMFallback(SubamazTestCase):
 	def test_ltr_is_invalid_litre_is_canonical(self):
 		self.assertFalse(frappe.db.exists("UOM", "Ltr"), "Ltr should not exist; canonical is Litre")
 		self.assertTrue(

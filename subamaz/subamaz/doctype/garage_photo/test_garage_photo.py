@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestGaragePhoto(IntegrationTestCase):
+class TestGaragePhoto(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.customer = frappe.get_doc(

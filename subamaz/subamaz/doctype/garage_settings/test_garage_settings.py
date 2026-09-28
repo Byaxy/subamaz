@@ -1,8 +1,9 @@
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestGarageSettings(IntegrationTestCase):
+class TestGarageSettings(SubamazTestCase):
 	def test_is_singleton(self):
 		meta = frappe.get_meta("Garage Settings")
 		self.assertEqual(meta.issingle, 1)

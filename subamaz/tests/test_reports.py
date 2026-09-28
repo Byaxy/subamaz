@@ -2,15 +2,14 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, getdate, nowdate
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestReportsCross(IntegrationTestCase):
+class TestReportsCross(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		from subamaz.api.reports import ensure_garage_reports, ensure_garage_workspace
@@ -43,7 +42,7 @@ class TestReportsCross(IntegrationTestCase):
 		self.item = self._get_item()
 
 	def _get_item(self):
-		code = frappe.db.get_value("Item", {}, "item_code")
+		code = frappe.db.get_value("Item", {"is_stock_item": 0, "is_fixed_asset": 0}, "item_code")
 		if code:
 			return code
 		item = frappe.get_doc(

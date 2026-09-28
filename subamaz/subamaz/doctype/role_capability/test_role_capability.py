@@ -2,14 +2,13 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestRoleCapability(IntegrationTestCase):
+class TestRoleCapability(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		# ensure capability exists

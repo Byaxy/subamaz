@@ -1,0 +1,1244 @@
+[
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Corolla",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00001"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Corolla Cross",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00002"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "RAV4",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00003"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Hilux",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00004"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Land Cruiser Prado",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00005"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Land Cruiser",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00006"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Hiace",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00007"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Premio",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00008"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Allion",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00009"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Noah",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00010"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Voxy",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00011"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Alphard",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00012"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Harrier",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00013"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Crown",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00014"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Mark X",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00015"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Vitz",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00016"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Passo",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00017"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Sienta",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00018"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Wish",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00019"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Camry",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00020"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Dyna",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00021"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Coaster",
+  "make": "Toyota",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00022"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "X-Trail",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00023"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Navara",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00024"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Patrol",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00025"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Tiida",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00026"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Note",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00027"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Serena",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00028"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Elgrand",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00029"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Caravan",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00030"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Atlas",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00031"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Bluebird Sylphy",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00032"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Dualis",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00033"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Juke",
+  "make": "Nissan",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00034"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "CR-V",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00035"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Accord",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00036"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Civic",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00037"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Fit",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00038"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Vezel",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00039"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Freed",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00040"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Stepwgn",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00041"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Odyssey",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00042"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "HR-V",
+  "make": "Honda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00043"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "CX-5",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00044"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "CX-3",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00045"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Atenza",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00046"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Demio",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00047"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Axela",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00048"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Premacy",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00049"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Bongo",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00050"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Titan",
+  "make": "Mazda",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00051"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Outlander",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00052"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Pajero",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00053"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Triton",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00054"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Delica",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00055"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Mirage",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00056"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "RVR",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00057"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Canter",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00058"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Rosa",
+  "make": "Mitsubishi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00059"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Forester",
+  "make": "Subaru",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00060"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Legacy",
+  "make": "Subaru",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00061"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Impreza",
+  "make": "Subaru",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00062"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "XV",
+  "make": "Subaru",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00063"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Outback",
+  "make": "Subaru",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00064"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Swift",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00065"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Escudo",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00066"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Alto",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00067"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Wagon R",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00068"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Every",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00069"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Carry",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00070"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Jimny",
+  "make": "Suzuki",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00071"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "D-Max",
+  "make": "Isuzu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00072"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Forward",
+  "make": "Isuzu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00073"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Elf",
+  "make": "Isuzu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00074"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Mu-X",
+  "make": "Isuzu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00075"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Mira",
+  "make": "Daihatsu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00076"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Move",
+  "make": "Daihatsu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00077"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Tanto",
+  "make": "Daihatsu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00078"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Terios",
+  "make": "Daihatsu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00079"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Hijet",
+  "make": "Daihatsu",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00080"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Dutro",
+  "make": "Hino",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00081"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Ranger",
+  "make": "Hino",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00082"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Profia",
+  "make": "Hino",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00083"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "RX",
+  "make": "Lexus",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00084"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "NX",
+  "make": "Lexus",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00085"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "LX",
+  "make": "Lexus",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00086"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "ES",
+  "make": "Lexus",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00087"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "IS",
+  "make": "Lexus",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00088"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "C-Class",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00089"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "E-Class",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00090"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "S-Class",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00091"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "GLC",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00092"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "GLE",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00093"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Sprinter",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00094"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Actros",
+  "make": "Mercedes-Benz",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00095"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "3 Series",
+  "make": "BMW",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00096"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "5 Series",
+  "make": "BMW",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00097"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "X3",
+  "make": "BMW",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00098"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "X5",
+  "make": "BMW",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00099"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Golf",
+  "make": "Volkswagen",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00100"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Passat",
+  "make": "Volkswagen",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00101"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Tiguan",
+  "make": "Volkswagen",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00102"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Polo",
+  "make": "Volkswagen",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00103"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "A4",
+  "make": "Audi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00104"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "A6",
+  "make": "Audi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00105"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Q5",
+  "make": "Audi",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00106"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "3008",
+  "make": "Peugeot",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00107"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "5008",
+  "make": "Peugeot",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00108"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "2008",
+  "make": "Peugeot",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00109"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Boxer",
+  "make": "Peugeot",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00110"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Ranger",
+  "make": "Ford",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00111"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Everest",
+  "make": "Ford",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00112"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Escape",
+  "make": "Ford",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00113"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Transit",
+  "make": "Ford",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00114"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "XC60",
+  "make": "Volvo",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00115"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "XC90",
+  "make": "Volvo",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00116"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "FH",
+  "make": "Volvo",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00117"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Defender",
+  "make": "Land Rover",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00118"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Discovery",
+  "make": "Land Rover",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00119"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Range Rover",
+  "make": "Land Rover",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00120"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "XF",
+  "make": "Jaguar",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00121"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "F-Pace",
+  "make": "Jaguar",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00122"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Wrangler",
+  "make": "Jeep",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00123"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Grand Cherokee",
+  "make": "Jeep",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00124"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Cruze",
+  "make": "Chevrolet",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00125"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Trailblazer",
+  "make": "Chevrolet",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00126"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Tucson",
+  "make": "Hyundai",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00127"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Santa Fe",
+  "make": "Hyundai",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00128"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Elantra",
+  "make": "Hyundai",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00129"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Accent",
+  "make": "Hyundai",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00130"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "H-1",
+  "make": "Hyundai",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00131"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Sportage",
+  "make": "Kia",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00132"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Sorento",
+  "make": "Kia",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00133"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Rio",
+  "make": "Kia",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00134"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Rexton",
+  "make": "Ssangyong",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00135"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "Actyon",
+  "make": "Ssangyong",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00136"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "SM5",
+  "make": "Renault Samsung",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00137"
+ },
+ {
+  "doctype": "Vehicle Model",
+  "model_name": "QM5",
+  "make": "Renault Samsung",
+  "docstatus": 0,
+  "module": "Subamaz",
+  "modified": "2026-09-28 00:00:00",
+  "name": "VM-00138"
+ }
+]

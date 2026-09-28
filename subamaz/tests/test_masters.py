@@ -2,7 +2,8 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 FULL = {"read": 1, "write": 1, "create": 1, "delete": 1}
 READ = {"read": 1}
@@ -48,7 +49,7 @@ MATRIX = {
 }
 
 
-class TestMasters(IntegrationTestCase):
+class TestMasters(SubamazTestCase):
 	def test_permission_matrix_rows_exist(self):
 		for doctype, expected in MATRIX.items():
 			meta = frappe.get_meta(doctype)

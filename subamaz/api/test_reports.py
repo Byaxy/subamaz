@@ -2,10 +2,9 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, getdate, nowdate
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
@@ -18,7 +17,7 @@ from subamaz.api.reports import (
 )
 
 
-class TestReportsAPI(IntegrationTestCase):
+class TestReportsAPI(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		# ensure reports/workspace exist (seeded in previous phase)

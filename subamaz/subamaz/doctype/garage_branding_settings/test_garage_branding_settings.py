@@ -1,12 +1,12 @@
 from unittest.mock import patch
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
 from subamaz.api.branding import get_garage_abbr
+from subamaz.testing import SubamazTestCase
 
 
-class TestGarageBrandingSettings(IntegrationTestCase):
+class TestGarageBrandingSettings(SubamazTestCase):
 	def test_login_context_injects_branding_and_abbr(self):
 		from subamaz.www.login import get_context
 

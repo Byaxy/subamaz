@@ -2,10 +2,11 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
+
+from subamaz.testing import SubamazTestCase
 
 
-class TestPrintFormatSandbox(IntegrationTestCase):
+class TestPrintFormatSandbox(SubamazTestCase):
 	def test_print_format_sandbox_allows_get_single_value(self):
 		from frappe.utils.jinja import render_template
 

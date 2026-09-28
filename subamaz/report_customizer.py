@@ -170,6 +170,17 @@ def _enrich_rows_with_vehicle(data: list, config: dict) -> None:
 		):
 			vehicles[v["name"]] = v
 
+	# Model is a Link; resolve display names for the report.
+	_model_labels = {}
+	model_names = sorted({v.get("model") for v in vehicles.values() if v.get("model")})
+	for i in range(0, len(model_names), CHUNK_SIZE):
+		for m in frappe.get_all(
+			"Vehicle Model",
+			filters={"name": ["in", model_names[i : i + CHUNK_SIZE]]},
+			fields=["name", "model_name"],
+		):
+			_model_labels[m["name"]] = m.get("model_name") or m["name"]
+
 	for row in data:
 		if not isinstance(row, dict):
 			continue
@@ -179,7 +190,7 @@ def _enrich_rows_with_vehicle(data: list, config: dict) -> None:
 		row["vehicle_registration"] = vehicle.get("registration_number") or vehicle.get("name")
 		row["vehicle_make"] = vehicle.get("make") or ""
 		row["vehicle_type"] = vehicle.get("type") or ""
-		row["vehicle_model"] = vehicle.get("model") or ""
+		row["vehicle_model"] = _model_labels.get(vehicle.get("model") or "") or vehicle.get("model") or ""
 		row["vehicle_year"] = vehicle.get("year") or None
 
 

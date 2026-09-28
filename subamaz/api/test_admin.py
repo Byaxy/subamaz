@@ -2,14 +2,13 @@
 # See license.txt
 
 import frappe
-from frappe.tests import IntegrationTestCase
 
-from subamaz.testing import ignore_missing_dependency_doctypes
+from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
 ignore_missing_dependency_doctypes()
 
 
-class TestAdminSearch(IntegrationTestCase):
+class TestAdminSearch(SubamazTestCase):
 	def setUp(self):
 		super().setUp()
 		self.customer = frappe.get_doc(
@@ -240,7 +239,7 @@ class TestAdminSearch(IntegrationTestCase):
 		company = frappe.db.get_value("Company", {}, "name")
 		currency = frappe.db.get_value("Company", company, "default_currency") or "USD"
 		customer = frappe.db.get_value("Customer", {}, "name")
-		item = frappe.db.get_value("Item", {}, "item_code")
+		item = frappe.db.get_value("Item", {"is_stock_item": 0, "is_fixed_asset": 0}, "item_code")
 		inv = frappe.get_doc(
 			{
 				"doctype": "Sales Invoice",
