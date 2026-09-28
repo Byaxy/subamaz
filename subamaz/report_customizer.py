@@ -122,7 +122,9 @@ def _apply_vehicle_columns(result: dict, config: dict) -> dict:
 
 	columns = [frappe.desk.query_report.get_column_as_dict(c) for c in columns]
 	_enrich_rows_with_vehicle(data, config)
-	columns = _insert_block_after(columns, _vehicle_columns(), config["anchors"])
+	block = _vehicle_columns()
+	columns, insert_at = _insert_block_after(columns, block, config["anchors"])
+	_pad_list_rows(data, insert_at, len(block), len(columns))
 	result["columns"] = columns
 	result["result"] = data
 	return result
@@ -194,17 +196,48 @@ def _enrich_rows_with_vehicle(data: list, config: dict) -> None:
 		row["vehicle_year"] = vehicle.get("year") or None
 
 
-def _insert_block_after(columns: list[dict], block: list[dict], anchors: list[str]) -> list[dict]:
-	"""Insert block after the first anchor present; fallback to index 1."""
+def _insert_block_after(
+	columns: list[dict], block: list[dict], anchors: list[str]
+) -> tuple[list[dict], int]:
+	"""Insert block after the first anchor present; fallback to index 1.
+
+	Returns the new column list and the index the block was inserted at, so
+	list rows (e.g. the total row) can be padded at the same position.
+	"""
 	present = {c.get("fieldname") for c in columns}
 	if any(c.get("fieldname") == block[0].get("fieldname") for c in columns):
-		return columns
+		return columns, -1
 	anchor = next((a for a in anchors if a in present), None)
 	if anchor is None:
-		return columns[:1] + block + columns[1:]
+		return columns[:1] + block + columns[1:], 1
 	out = []
+	insert_at = len(columns)
 	for col in columns:
 		out.append(col)
 		if col.get("fieldname") == anchor:
+			insert_at = len(out)
 			out.extend(block)
-	return out
+	return out, insert_at
+
+
+def _pad_list_rows(data: list, insert_at: int, width: int, total_width: int) -> None:
+	"""Keep positional list rows aligned with the widened column list.
+
+	Server export (`format_fields`, `build_xlsx_data`) indexes list rows
+	positionally, so a short row (e.g. the total row built before our columns
+	were injected) crashes or misaligns once columns shift. Insert blanks at
+	the same index the column block went in; `""` matches the framework's
+	total-row convention (falsy, renders blank).
+	"""
+	if insert_at < 0 or width <= 0:
+		return
+	for idx, row in enumerate(data):
+		if isinstance(row, tuple):
+			row = list(row)
+			data[idx] = row
+		if not isinstance(row, list) or len(row) >= total_width:
+			continue
+		if len(row) > insert_at:
+			row[insert_at:insert_at] = [""] * width
+		else:
+			row.extend([""] * (total_width - len(row)))

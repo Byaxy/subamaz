@@ -181,3 +181,77 @@ class TestVehicleSales(SubamazTestCase):
 			report_customizer._apply_vehicle_columns(result, report_customizer.REPORT_CONFIG["Sales Register"]),
 			result,
 		)
+
+	def test_report_customizer_pads_list_total_row_for_export(self):
+		# Regression: server export indexes list rows positionally, so the
+		# total row (built before our columns are injected) crashed
+		# format_fields with IndexError once later columns shifted right.
+		result = {
+			"columns": [
+				{"label": "Voucher", "fieldname": "voucher_no", "fieldtype": "Link", "options": "Sales Invoice", "width": 120},
+				{"label": "Customer Name", "fieldname": "customer_name", "fieldtype": "Data", "width": 120},
+				{"label": "Outstanding", "fieldname": "outstanding", "fieldtype": "Currency", "precision": 1, "width": 120},
+			],
+			"result": [
+				{"voucher_no": "SI-001", "voucher_type": "Sales Invoice", "customer_name": "C1", "outstanding": 100.0},
+				["Total", "", 100.0],
+			],
+		}
+		with mock.patch.object(frappe, "get_all", return_value=[]):
+			out = report_customizer._apply_vehicle_columns(
+				result, report_customizer.REPORT_CONFIG["Accounts Receivable"]
+			)
+
+		fieldnames = [c["fieldname"] for c in out["columns"]]
+		self.assertEqual(
+			fieldnames,
+			[
+				"voucher_no",
+				"customer_name",
+				"vehicle_registration",
+				"vehicle_make",
+				"vehicle_type",
+				"vehicle_model",
+				"vehicle_year",
+				"outstanding",
+			],
+		)
+		total = out["result"][1]
+		self.assertIsInstance(total, list)
+		self.assertEqual(len(total), len(out["columns"]))
+		# Original values stay under their original columns; vehicle cells blank.
+		self.assertEqual(total[0], "Total")
+		self.assertEqual(total[7], 100.0)
+		self.assertEqual(total[2:7], [""] * 5)
+
+		# Exact replay of the export crash (Link/Currency branches index lists).
+		from frappe.desk.query_report import format_fields
+
+		data = frappe._dict({"columns": out["columns"], "result": out["result"]})
+		format_fields(data, "Excel")
+		format_fields(data, "CSV")
+
+	def test_report_customizer_converts_tuple_rows(self):
+		result = {
+			"columns": [
+				{"label": "Voucher", "fieldname": "voucher_no", "fieldtype": "Data", "width": 120},
+				{"label": "Customer Name", "fieldname": "customer_name", "fieldtype": "Data", "width": 120},
+			],
+			"result": [
+				{"voucher_no": "SI-001", "voucher_type": "Sales Invoice", "customer_name": "C1"},
+				("Total", ""),
+			],
+		}
+		with mock.patch.object(frappe, "get_all", return_value=[]):
+			out = report_customizer._apply_vehicle_columns(
+				result, report_customizer.REPORT_CONFIG["Sales Register"]
+			)
+		self.assertIsInstance(out["result"][1], list)
+		self.assertEqual(len(out["result"][1]), len(out["columns"]))
+
+	def test_report_customizer_run_leaves_unconfigured_reports_alone(self):
+		sentinel = {"columns": [], "result": []}
+		with mock.patch.object(report_customizer, "_ORIGINAL_RUN", return_value=sentinel) as original:
+			out = report_customizer.run("Accounts Payable", filters={})
+		original.assert_called_once()
+		self.assertIs(out, sentinel)
