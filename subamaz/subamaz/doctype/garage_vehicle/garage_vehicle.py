@@ -9,6 +9,25 @@ class GarageVehicle(Document):
 		self.validate_mileage()
 		self.validate_year()
 		self.validate_model_make()
+		self.validate_registration_uniqueness()
+
+	def validate_registration_uniqueness(self):
+		# Complements the field-level unique flag: autoname assigns the name
+		# from registration_number before validate runs, so a framework-level
+		# self-exclusion would hide the conflicting row and the DB would raise
+		# a raw DuplicateEntryError instead of UniqueValidationError.
+		if not self.registration_number:
+			return
+		filters = {"registration_number": self.registration_number}
+		if not self.is_new():
+			filters["name"] = ["!=", self.name]
+		if frappe.db.exists("Garage Vehicle", filters):
+			frappe.throw(
+				_("Registration Number {0} already exists").format(
+					frappe.bold(self.registration_number)
+				),
+				frappe.UniqueValidationError,
+			)
 
 	def validate_year(self):
 		if self.year in (None, ""):
