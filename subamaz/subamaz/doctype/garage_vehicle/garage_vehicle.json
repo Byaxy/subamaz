@@ -8,11 +8,11 @@
  "field_order": [
   "identity_section",
   "registration_number",
-  "vin",
+  "make",
   "model",
   "color",
   "column_break_mfda",
-  "make",
+  "vin",
   "type",
   "year",
   "specifications_section",
@@ -50,22 +50,22 @@
    "label": "VIN",
    "unique": 1
   },
-   {
-    "fieldname": "make",
-    "fieldtype": "Link",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
-    "label": "Make",
-    "options": "Vehicle Make"
-   },
-   {
-    "fieldname": "model",
-    "fieldtype": "Link",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
-    "label": "Model",
-    "options": "Vehicle Model"
-   },
+  {
+   "fieldname": "make",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Make",
+   "options": "Vehicle Make"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Model",
+   "options": "Vehicle Model"
+  },
   {
    "fieldname": "year",
    "fieldtype": "Int",
@@ -160,14 +160,14 @@
    "fieldname": "column_break_mfda",
    "fieldtype": "Column Break"
   },
-   {
-    "fieldname": "type",
-    "fieldtype": "Select",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
-    "label": "Type",
-    "options": "SUV\nSedan\nHatchback\nVan\nTruck\nPick up\nCoupe\nWagon\nConvertible\nBus\nMini Bus\nMini Van\nMachinery\nForklift\nTractor\nMotorcycle"
-   },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Type",
+   "options": "SUV\nSedan\nHatchback\nVan\nTruck\nPick up\nCoupe\nWagon\nConvertible\nBus\nMini Bus\nMini Van\nMachinery\nForklift\nTractor\nMotorcycle"
+  },
   {
    "fieldname": "column_break_hrau",
    "fieldtype": "Column Break"
@@ -179,7 +179,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-27 22:13:03.760808",
+ "modified": "2026-09-28 22:17:21.256678",
  "modified_by": "Administrator",
  "module": "Subamaz",
  "name": "Garage Vehicle",

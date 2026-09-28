@@ -1,209 +1,183 @@
 [
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Toyota",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Toyota"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Nissan",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Nissan"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Honda",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Honda"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Mazda",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Mazda"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Mitsubishi",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Mitsubishi"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Subaru",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Subaru"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Suzuki",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Suzuki"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Isuzu",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Isuzu"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Daihatsu",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Daihatsu"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Hino",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Hino"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Lexus",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Lexus"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Mercedes-Benz",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Mercedes-Benz"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "BMW",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "BMW"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Volkswagen",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Volkswagen"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Audi",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Audi"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Peugeot",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Peugeot"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Ford",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Ford"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Volvo",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Volvo"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Land Rover",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Land Rover"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Jaguar",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Jaguar"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Jeep",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Jeep"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Chevrolet",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Chevrolet"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Hyundai",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Hyundai"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Kia",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Kia"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Ssangyong",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Ssangyong"
  },
  {
+  "docstatus": 0,
   "doctype": "Vehicle Make",
   "make_name": "Renault Samsung",
-  "docstatus": 0,
-  "module": "Subamaz",
   "modified": "2026-09-28 00:00:00",
   "name": "Renault Samsung"
  }
