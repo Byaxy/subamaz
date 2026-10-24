@@ -27,6 +27,10 @@ fixtures = [
 			]
 		},
 	},
+	{
+		"doctype": "Translation",
+		"filters": {"language": "en", "source_text": ["in", ["Selling", "Buying"]]},
+	},
 	{"doctype": "Custom Field", "filters": {"module": "Subamaz"}},
 	{"doctype": "Print Format", "filters": {"module": "Subamaz"}},
 	{"doctype": "Workflow State", "filters": {"name": ["in", ["Draft", "Open", "Waiting Customer", "Waiting Parts", "In Progress", "Quality Check", "Completed", "Closed", "Cancelled", "On Hold"]]}},
@@ -148,6 +152,7 @@ website_route_rules = [
 
 # before_install = "subamaz.install.before_install"
 # after_install = "subamaz.install.after_install"
+after_migrate = ["subamaz.navigation.after_migrate"]
 
 # Uninstallation
 # ------------

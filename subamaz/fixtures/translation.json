@@ -1,0 +1,28 @@
+[
+ {
+  "context": null,
+  "contributed": 0,
+  "contribution_docname": null,
+  "contribution_status": "",
+  "docstatus": 0,
+  "doctype": "Translation",
+  "language": "en",
+  "modified": "2026-10-24 12:39:06.334270",
+  "name": "vtnlntqobc",
+  "source_text": "Selling",
+  "translated_text": "Sales"
+ },
+ {
+  "context": null,
+  "contributed": 0,
+  "contribution_docname": null,
+  "contribution_status": "",
+  "docstatus": 0,
+  "doctype": "Translation",
+  "language": "en",
+  "modified": "2026-10-24 12:39:43.231305",
+  "name": "098cjhgl3n",
+  "source_text": "Buying",
+  "translated_text": "Purchase"
+ }
+]

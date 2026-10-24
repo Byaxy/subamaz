@@ -20,9 +20,19 @@
 		img.src = getLogoSrc();
 		img.style.cssText = "width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 20px;";
 	}
+	function swapSplashLogo() {
+		if (!(window.frappe && frappe.boot && frappe.boot.app_logo_url)) return;
+		document.querySelectorAll(".splash img").forEach(function (img) {
+			img.src = frappe.boot.app_logo_url;
+		});
+	}
 	swapLogo();
+	swapSplashLogo();
 	if (document.readyState === "loading")
-		document.addEventListener("DOMContentLoaded", swapLogo);
+		document.addEventListener("DOMContentLoaded", function () {
+			swapLogo();
+			swapSplashLogo();
+		});
 })();
 
 class Theme {
@@ -245,23 +255,23 @@ class Theme {
 						img.src = logoSrc;
 						img.style.cssText = "width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 20px;";
 					}
-				if (
-					(node.classList &&
-						(node.classList.contains("desktop-icon") ||
-							node.classList.contains("desktop-container") ||
-							node.classList.contains("sidebar-header") ||
-							node.classList.contains("sidebar-header-menu") ||
-							node.classList.contains("frappe-menu") ||
-							node.classList.contains("dropdown-menu-item"))) ||
-					(node.querySelector &&
-						(node.querySelector(".desktop-icon") ||
-							node.querySelector(".sidebar-header") ||
-							node.querySelector(".sidebar-header-menu") ||
-							node.querySelector(".frappe-menu img[src*='icons/desktop_icons/']")))
-				) {
-					self.recolorDeskIcons();
-					self.recolorAppSwitcher();
-				}
+					if (
+						(node.classList &&
+							(node.classList.contains("desktop-icon") ||
+								node.classList.contains("desktop-container") ||
+								node.classList.contains("sidebar-header") ||
+								node.classList.contains("sidebar-header-menu") ||
+								node.classList.contains("frappe-menu") ||
+								node.classList.contains("dropdown-menu-item"))) ||
+						(node.querySelector &&
+							(node.querySelector(".desktop-icon") ||
+								node.querySelector(".sidebar-header") ||
+								node.querySelector(".sidebar-header-menu") ||
+								node.querySelector(".frappe-menu img[src*='icons/desktop_icons/']")))
+					) {
+						self.recolorDeskIcons();
+						self.recolorAppSwitcher();
+					}
 				});
 			});
 		});

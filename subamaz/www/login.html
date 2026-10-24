@@ -1,4 +1,5 @@
 {% extends "templates/web.html" %}
+{% from "templates/includes/login/macros.html" import alert_banner %}
 {% block navbar %}
 {% if show_language_picker %}
 	{{ super() }}
@@ -7,12 +8,7 @@
 {% macro email_login_body() -%}
 {% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
 <div class="page-card-body">
-	<div class="login-error-banner">
-		<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<use href="#es-line-alert-triangle"></use>
-		</svg>
-		<span></span>
-	</div>
+	{{ alert_banner("error") }}
 	<div class="form-group">
 		<label class="form-label" for="login_email">{{ login_label or _("Email")}}</label>
 		<div class="email-field">
@@ -53,16 +49,17 @@
 {% endif %}
 <div class="page-card-actions">
 	{% if not disable_user_pass_login %}
-	<button class="btn btn-sm btn-default btn-block btn-login" type="submit">
+	<button class="es-button w-full btn-login" data-variant="solid" type="submit">
 		{{ _("Continue") }}</button>
 	{% endif %}
 	{% if ldap_settings and ldap_settings.enabled %}
-	<button class="btn btn-sm {{ "btn-primary" if disable_user_pass_login else "btn-default" }} btn-block btn-login btn-ldap-login">
+	<button class="es-button w-full btn-login btn-ldap-login"
+		data-variant="{{ 'solid' if disable_user_pass_login else 'subtle' }}">
 		{{ _("Login with LDAP") }}</button>
 	{% endif %}
 	{% if login_with_email_link %}
 	<a href="#login-with-email-link"
-		class="btn btn-block btn-default btn-sm btn-login-option btn-login-with-email-link">
+		class="es-button w-full btn-login-option btn-login-with-email-link" data-variant="subtle">
 		{{ _("Login with Email Link") }}</a>
 	{% endif %}
 	{% if social_login %}
@@ -71,7 +68,7 @@
 			{% for provider in provider_logins %}
 			<div class="login-button-wrapper">
 				<a href="{{ provider.auth_url }}"
-					class="btn btn-block btn-default btn-sm btn-login-option btn-{{ provider.name }}">
+					class="es-button w-full btn-login-option btn-{{ provider.name }}" data-variant="subtle">
 					{% if provider.icon %}
 						{{ provider.icon }}
 					{% endif %}
@@ -140,31 +137,31 @@
 	}
 	.subamaz-login-form .form-control:focus { border-color: {{ theme.accent_color or '#C9A227' }}; box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18); outline: none; }
 	.subamaz-login-form .field-icon { color: #b3b3b3; }
-	.subamaz-login-form .page-card .page-card-actions .btn-login,
-	.subamaz-login-form .page-card .page-card-actions .btn-ldap-login,
-	.subamaz-login-form .page-card .page-card-actions .btn-primary,
-	.subamaz-login-form .page-card .page-card-actions .btn-forgot {
-		background: {{ theme.primary_color or '#434868' }} !important; border: none; border-radius: 999px; height: 48px;
-		font-weight: 600; color: #fff !important; box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
+	.subamaz-login-form .page-card-actions .es-button[data-variant="solid"] {
+		--bt-solid-bg: {{ theme.primary_color or '#434868' }};
+		--bt-solid-bg-hover: {{ theme.primary_hover or '#343753' }};
+		--bt-solid-bg-active: {{ theme.primary_hover or '#343753' }};
+		--bt-solid-fg: #fff;
+		border-radius: 999px; height: 48px; font-weight: 600;
+		box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
 		transition: background .2s ease, transform .15s ease;
 	}
-	.subamaz-login-form .page-card .page-card-actions .btn-login:hover,
-	.subamaz-login-form .page-card .page-card-actions .btn-primary:hover,
-	.subamaz-login-form .page-card .page-card-actions .btn-login:focus,
-	.subamaz-login-form .page-card .page-card-actions .btn-login:active {
-		background: {{ theme.primary_hover or '#343753' }} !important; transform: translateY(-1px); cursor: pointer;
+	.subamaz-login-form .page-card-actions .es-button[data-variant="solid"]:hover,
+	.subamaz-login-form .page-card-actions .es-button[data-variant="solid"]:focus {
+		transform: translateY(-1px); cursor: pointer;
 	}
-	.subamaz-login-form .page-card .page-card-actions .btn-login:disabled,
-	.subamaz-login-form .page-card .page-card-actions .btn-forgot:disabled {
-		background: #6b6b6b !important; opacity: 1;
+	.subamaz-login-form .page-card-actions .es-button[data-variant="solid"]:disabled {
+		--bt-solid-bg: #6b6b6b; --bt-solid-bg-hover: #6b6b6b; --bt-solid-fg: #fff;
+		--bt-disabled-bg: #6b6b6b; --bt-disabled-fg: #fff;
+		opacity: 1;
 	}
-	.subamaz-login-form .page-card .page-card-actions .btn-login-option,
-	.subamaz-login-form .page-card .page-card-actions .btn-default {
-		background: #fff; border: 1px solid #dcdcdc; border-radius: 999px; color: #3d3d3d; font-weight: 500;
+	.subamaz-login-form .page-card-actions .es-button[data-variant="subtle"] {
+		--bt-fill-bg: #fff; --bt-fill-bg-hover: #fff; --bt-fill-bg-active: #f7f7fa;
+		--bt-fg: #3d3d3d;
+		background: #fff; border: 1px solid #dcdcdc; border-radius: 999px; font-weight: 500;
 	}
-	.subamaz-login-form .page-card .page-card-actions .btn-login-option:hover,
-	.subamaz-login-form .page-card .page-card-actions .btn-default:hover {
-		border-color: {{ theme.accent_color or '#C9A227' }}; color: #1a1a1a; background: #fff;
+	.subamaz-login-form .page-card-actions .es-button[data-variant="subtle"]:hover {
+		border-color: {{ theme.accent_color or '#C9A227' }}; --bt-fg: #1a1a1a;
 	}
 	.subamaz-login-form .forgot-password-message a, .subamaz-login-form .sign-up-message a {
 		color: {{ theme.primary_color or '#434868' }}; font-weight: 600; text-decoration: none;
@@ -274,7 +271,7 @@
 					<div class="signup-disabled-message">
 						<span class='indicator gray'>{{_("Signup Disabled")}}</span>
 						<p class="text-muted text-normal sign-up-message mt-1 mb-8">{{_("Signups have been disabled for this website.")}}</p>
-						<div><a href='/' class='btn btn-primary btn-md'>{{ _("Home") }}</a></div>
+						<div><a href='/' class='es-button' data-variant="solid">{{ _("Home") }}</a></div>
 					</div>
 					{%- endif -%}
 				</div>
@@ -285,6 +282,8 @@
 					{{ logo_section(_('Forgot Password?'), _("Please enter your email, we'll send you password reset link")) }}
 					<form class="form-signin form-forgot hide" role="form" novalidate>
 						<div class="page-card-body">
+							{{ alert_banner("error") }}
+							{{ alert_banner("success", _("Please check your email.")) }}
 							<div class="form-group">
 								<label class="form-label" for="forgot_email">{{ _("Email") }}</label>
 								<div class="email-field">
@@ -299,8 +298,8 @@
 							</div>
 						</div>
 						<div class="page-card-actions">
-							<button class="btn btn-sm btn-primary btn-block btn-signup btn-forgot"
-								type="submit" disabled>{{ _("Send Link") }}</button>
+							<button class="es-button w-full btn-signup btn-forgot"
+								data-variant="solid" type="submit" disabled>{{ _("Send Link") }}</button>
 						</div>
 					</form>
 					<div class="text-center sign-up-message">
@@ -314,12 +313,8 @@
 					{{ logo_section(_('Sign In'), _('Welcome! Please sign in to continue.')) }}
 					<form class="form-signin form-login-with-email-link hide" role="form" novalidate>
 						<div class="page-card-body">
-							<div class="login-success-banner">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<use href="#es-line-alert-circle"></use>
-								</svg>
-								<span>{{ _("Please check your email.") }}</span>
-							</div>
+							{{ alert_banner("error") }}
+							{{ alert_banner("success", _("Please check your email.")) }}
 							<div class="form-group">
 								<label class="form-label" for="login_with_email_link_email">{{ _("Email") }}</label>
 								<div class="email-field">
@@ -337,9 +332,9 @@
 							<p class="resend-link">
 								{{ _("Didn't receive the link?") }} <a href="#" class="btn-resend-link">{{ _("Resend") }}</a>
 							</p>
-							<button class="btn btn-sm btn-primary btn-block btn-login btn-login-with-email-link"
-								type="submit">{{ _("Send login link") }}</button>
-							<a href="#login" class="btn btn-sm btn-default btn-block btn-login-option">
+							<button class="es-button w-full btn-login btn-login-with-email-link"
+								data-variant="solid" type="submit">{{ _("Send login link") }}</button>
+							<a href="#login" class="es-button w-full btn-login-option" data-variant="subtle">
 								{{ _("Login with password") }}</a>
 						</div>
 					</form>

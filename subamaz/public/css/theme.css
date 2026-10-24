@@ -5,6 +5,8 @@
 	--app-danger: #DC2626;
 	--app-danger-hover: #B91C1C;
 	--app-accent-color: #C9A227;
+	--app-accent-soft: color-mix(in srgb, var(--app-accent-color) 55%, transparent);
+	--app-dock-rule: rgba(255, 255, 255, 0.14);
 
 	/* Sidebar — primary bg with white text, active white bg + primary text */
 	--app-sidebar-bg: #434868;
@@ -80,9 +82,84 @@
 	opacity: 0.8;
 }
 
+/* ============================================================
+   3B. DESKTOP NAVBAR (v16.51 apps page)
+   The header is header.desktop-navbar.navbar-container — its class
+   token is "desktop-navbar", not "navbar", so the .navbar rules above
+   never match and the bar renders transparent. It also sits inside the
+   page's gutters, so a fixed ::before bleeds the primary fill across
+   the viewport without moving content. Scope to body.desktop-page.
+   ============================================================ */
+
+body.desktop-page .navbar-container {
+	background-color: var(--app-navbar-bg) !important;
+	border-bottom-color: var(--app-navbar-bg) !important;
+}
+
+body.desktop-page .navbar-container::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--desktop-navbar-height);
+	background-color: var(--app-navbar-bg);
+	z-index: -1;
+}
+
+/* Notification bell — white disc so the icon reads on the navy bar */
+body.desktop-page .desktop-notification-icon {
+	background-color: #ffffff !important;
+	border-radius: 50%;
+	transition: background-color 0.15s ease;
+}
+
+body.desktop-page .desktop-notification-icon:hover {
+	background-color: #f1f5f9 !important;
+}
+
+body.desktop-page .desktop-notification-icon svg,
+body.desktop-page .desktop-notification-icon svg use {
+	color: var(--app-primary) !important;
+	stroke: var(--app-primary) !important;
+}
+
+/* Search — white pill to match the bell */
+body.desktop-page .search-widget-button {
+	background-color: #ffffff !important;
+	border-color: #ffffff !important;
+	color: var(--app-primary) !important;
+	border-radius: 6px !important;
+}
+
+body.desktop-page .search-widget-button:hover {
+	background-color: #f1f5f9 !important;
+	border-color: #f1f5f9 !important;
+}
+
+body.desktop-page .search-widget-button svg,
+body.desktop-page .search-widget-button svg use {
+	stroke: var(--app-primary) !important;
+	color: var(--app-primary) !important;
+}
+
+body.desktop-page .search-widget-shortcut {
+	color: color-mix(in srgb, var(--app-primary) 60%, transparent) !important;
+}
+
+/* Avatar — hairline ring so it separates from the navy bar */
+body.desktop-page .desktop-avatar .avatar-frame {
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
 /* Page header */
 .page-head {
 	background: var(--app-page-head-bg) !important;
+	margin-left: -24px !important;
+	padding-left: 24px !important;
+}
+.navbar-breadcrumbs li:last-child > a {
+	color: var(--app-page-head-text) !important;
 }
 .page-head .page-title h1,
 .page-head .page-title .title-text {
@@ -130,6 +207,26 @@
 	box-shadow: none !important;
 }
 
+/* Page header secondary actions are Espresso buttons now (v16.50+).
+   Keep the white-on-grey header treatment; solid/red actions keep
+   their own contract. */
+.page-head .es-button:not([data-variant]):not([data-theme="red"]):not([data-label="Cancel"]):not(.btn-modal-secondary),
+.page-head .es-button[data-variant="subtle"]:not([data-theme="red"]):not([data-label="Cancel"]):not(.btn-modal-secondary) {
+	--bt-fill-bg: #ffffff;
+	--bt-fill-bg-hover: #ffffff;
+	--bt-fill-bg-active: #f7f7fa;
+	--bt-fg: #3d3d3d;
+	border-color: #e5e7eb !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+	font-weight: 500;
+}
+
+.page-head .es-button:not([data-variant]):not([data-theme="red"]):not([data-label="Cancel"]):not(.btn-modal-secondary):hover,
+.page-head .es-button[data-variant="subtle"]:not([data-theme="red"]):not([data-label="Cancel"]):not(.btn-modal-secondary):hover {
+	border-color: var(--app-accent-color) !important;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
 /* Right detail sidebar (Form / Settings) — lighter primary bg matching page-head (right/two-column only) */
 .layout-main.layout-two-column .layout-side-section.right,
 body[data-route^="Form"] .layout-side-section,
@@ -148,6 +245,11 @@ body[data-route^="Form"] .layout-side-section,
 	border-bottom-color: var(--app-primary);
 	opacity: 1;
 }
+.form-tabs .nav-item .nav-link:not(.active):hover {
+	color: var(--app-primary);
+	border-bottom-color: var(--app-primary);
+	opacity: 1;
+}
 
 /* Left workspace sidebar — primary bg with white text, active white bg + primary text */
 .body-sidebar {
@@ -155,7 +257,16 @@ body[data-route^="Form"] .layout-side-section,
 	border-right-color: rgba(255, 255, 255, 0.12) !important;
 }
 
-.body-sidebar .standard-sidebar-item .item-anchor,
+.body-sidebar .standard-sidebar-item .item-anchor {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border-radius: 6px;
+	color: var(--app-sidebar-text) !important;
+	fill: var(--app-sidebar-text) !important;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
 .body-sidebar .standard-sidebar-item .sidebar-item-label {
 	color: var(--app-sidebar-text) !important;
 	fill: var(--app-sidebar-text) !important;
@@ -165,6 +276,8 @@ body[data-route^="Form"] .layout-side-section,
 .body-sidebar .standard-sidebar-item .sidebar-item-icon svg {
 	color: var(--app-sidebar-text) !important;
 	stroke: var(--app-sidebar-text) !important;
+	opacity: 0.75;
+	transition: opacity 0.15s ease;
 }
 
 .body-sidebar .standard-sidebar-item .sidebar-item-suffix {
@@ -177,8 +290,16 @@ body[data-route^="Form"] .layout-side-section,
 	border-radius: 6px;
 }
 .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
+.body-sidebar .standard-sidebar-item.selected .item-anchor {
+	background: var(--app-sidebar-active-bg) !important;
+	color: var(--app-sidebar-active-text) !important;
+	border-radius: 6px;
+	font-weight: 600;
+}
 .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-label,
-.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-suffix {
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-suffix,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-suffix {
 	color: var(--app-sidebar-active-text) !important;
 	fill: var(--app-sidebar-active-text) !important;
 }
@@ -188,10 +309,24 @@ body[data-route^="Form"] .layout-side-section,
 .body-sidebar .standard-sidebar-item.selected .sidebar-item-icon svg {
 	color: var(--app-sidebar-active-text) !important;
 	stroke: var(--app-sidebar-active-text) !important;
+	opacity: 1;
 }
 
+/* Hover is drawn on the anchor now (v16.50+ row markup), keeping the
+   item itself transparent so the fill does not double up. */
 .body-sidebar .standard-sidebar-item:not(.active-sidebar):has(a:not(.section-break)):hover {
+	background: transparent !important;
+}
+.body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover {
 	background: rgba(255, 255, 255, 0.12) !important;
+	color: var(--app-sidebar-text) !important;
+	border-radius: 6px;
+}
+.body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover .sidebar-item-icon svg {
+	color: var(--app-sidebar-text) !important;
+	stroke: var(--app-sidebar-text) !important;
+	opacity: 1;
 }
 
 .body-sidebar .sidebar-toggle-btn {
@@ -226,6 +361,33 @@ body[data-route^="Form"] .layout-side-section,
 .body-sidebar .sidebar-user-button {
 	color: var(--app-sidebar-text) !important;
 	fill: var(--app-sidebar-text) !important;
+}
+
+/* Group labels (v16.50 sidebar markup) */
+.body-sidebar .sidebar-label,
+.body-sidebar .list-sidebar-label {
+	color: var(--app-sidebar-text) !important;
+	opacity: 0.65;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	padding: 14px 12px 6px;
+}
+
+/* Bottom area must escape the sidebar stacking context so the user
+   popup can paint above page content. */
+.body-sidebar-bottom {
+	position: relative;
+	z-index: 1060;
+}
+.body-sidebar-bottom .dropdown-menu {
+	z-index: 1061 !important;
+	bottom: 100%;
+	top: auto !important;
+	margin-bottom: 4px;
+}
+.body-sidebar-bottom .standard-sidebar-item .item-anchor:hover {
+	background: transparent !important;
 }
 
 /* Body sidebar bottom — Getting Started onboarding link: same as sidebar item text, no hover */
@@ -299,6 +461,62 @@ body[data-route^="Form"] .layout-side-section,
 .body-sidebar .sidebar-header:hover,
 .body-sidebar .sidebar-header.hover {
 	background: var(--app-sidebar-active-bg) !important;
+}
+
+/* v16.50 shell header: white card is the "current place" indicator;
+   hover/menu-open only deepen the shadow, never swap the surface. */
+.body-sidebar .sidebar-header.shell-header {
+	box-shadow: var(--elevation-sm);
+	transition: box-shadow 0.18s ease;
+}
+.body-sidebar .sidebar-header.shell-header:hover,
+.body-sidebar .sidebar-header.shell-header.hover,
+.body-sidebar .sidebar-header.shell-header.active-sidebar {
+	background: var(--app-sidebar-active-bg) !important;
+	box-shadow: var(--elevation-base);
+}
+
+/* ============================================================
+   4B. DOCK (module rail, v16.50+)
+   The tray rides over the navy sidebar, so it keeps the sidebar
+   surface; active/hover mirror the sidebar's white active row.
+   ============================================================ */
+
+.dock {
+	--dock-bg: var(--app-sidebar-bg);
+	--dock-ink: var(--app-sidebar-text);
+	--dock-ink-strong: var(--app-sidebar-text);
+	--dock-rule: var(--app-dock-rule);
+}
+
+body.dock-pinned .dock {
+	border-right: 1px solid var(--app-dock-rule);
+}
+
+.dock .dock-item:hover,
+.dock .dock-item.active,
+.dock .dock-logo .shell-header:hover {
+	background-color: var(--app-sidebar-active-bg) !important;
+	color: var(--app-sidebar-active-text) !important;
+}
+
+/* Duotone fills come from --duotone-light/--duotone-dark, the only
+   properties that reach inside <use>; tint them accent on hover/active. */
+.dock .dock-item:hover,
+.dock .dock-item--duotone.active {
+	--duotone-light: var(--app-accent-soft);
+	--duotone-dark: var(--app-accent-color);
+}
+
+.dock .dock-item:focus-visible {
+	outline: 2px solid var(--app-sidebar-active-text);
+	outline-offset: 2px;
+}
+
+/* Dock tooltip bubble */
+.es-tooltip.es-tooltip--plain {
+	background-color: var(--app-btn-primary-bg);
+	color: #ffffff;
 }
 
 /* Primary buttons */
@@ -381,9 +599,62 @@ body[data-route^="Form"] .layout-side-section,
 	box-shadow: none !important;
 }
 
+/* ============================================================
+   6B. ESPRESSO BUTTON CONTRACT (Frappe v16.50+)
+   frappe.ui.button emits <button class="es-button" data-variant
+   data-theme data-size> styled via --bt-* local vars. Override the
+   vars (specificity wins, no !important needed) instead of
+   background/color directly. Legacy .btn-* rules above stay as
+   fallback for dressed buttons that keep old classes.
+   ============================================================ */
+
+/* Solid (primary) buttons: Save, Submit, Continue, dialog primaries */
+.es-button[data-variant="solid"] {
+	--bt-solid-bg: var(--app-btn-primary-bg);
+	--bt-solid-bg-hover: var(--app-btn-primary-hover);
+	--bt-solid-bg-active: var(--app-primary-hover);
+	--bt-solid-fg: var(--app-btn-primary-text);
+}
+
+/* Subtle (default) buttons */
+.es-button:not([data-variant]),
+.es-button[data-variant="subtle"] {
+	--bt-fg: var(--app-primary);
+}
+
+/* Red-theme buttons (cancel / delete / reject). .btn-modal-secondary is
+   the dialog Cancel button; the document Cancel is a subtle button whose
+   only red signal is data-label="Cancel". */
+.es-button[data-theme="red"],
+.es-button.btn-modal-secondary,
+.es-button[data-label="Cancel"] {
+	--bt-solid-bg: var(--app-btn-danger-bg);
+	--bt-solid-bg-hover: var(--app-btn-danger-hover);
+	--bt-solid-bg-active: #991b1b;
+	--bt-solid-fg: #ffffff;
+	--bt-fill-bg: var(--app-btn-danger-bg);
+	--bt-fill-bg-hover: var(--app-btn-danger-hover);
+	--bt-fill-bg-active: #991b1b;
+	--bt-fg: #ffffff;
+	--bt-border: var(--app-btn-danger-bg);
+	--bt-border-hover: var(--app-btn-danger-hover);
+}
+
+/* Child-table footer actions: brand-filled like the old Add Row */
+.es-button.grid-add-row,
+.es-button.grid-add-multiple-rows {
+	--bt-fill-bg: var(--app-btn-primary-bg);
+	--bt-fill-bg-hover: var(--app-btn-primary-hover);
+	--bt-fill-bg-active: var(--app-primary-hover);
+	--bt-fg: var(--app-btn-primary-text);
+}
+
 /* List view — table header */
 .list-view .list-row-head {
 	background: var(--app-table-header-bg) !important;
+	position: sticky !important;
+	top: 0 !important;
+	z-index: 10 !important;
 }
 header.level.list-row-head.text-muted > div.level-right {
 	background-color: var(--app-table-header-bg) !important;
@@ -591,6 +862,123 @@ select.form-control option:checked {
 	border-color: var(--app-table-row-hover-bg) !important;
 }
 
+/* Login page — stock v16.50 login uses Espresso buttons, but
+   login.bundle.css does not ship the es-button primitives (website.bundle
+   does). Re-declare the base here so the controls are not raw UA buttons. */
+.login-content .es-button,
+.page-card .es-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	flex-shrink: 0;
+	white-space: nowrap;
+	user-select: none;
+	cursor: pointer;
+	height: 28px;
+	padding-inline: 8px;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	text-decoration: none;
+	background: var(--bt-fill-bg, #f4f4f4);
+	color: var(--bt-fg, #3d3d3d);
+	transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.login-content a.es-button,
+.page-card a.es-button {
+	text-decoration: none;
+}
+
+.login-content .es-button[data-variant="solid"],
+.page-card .es-button[data-variant="solid"] {
+	--bt-solid-bg: var(--app-btn-primary-bg);
+	--bt-solid-bg-hover: var(--app-btn-primary-hover);
+	--bt-solid-bg-active: var(--app-primary-hover);
+	--bt-solid-fg: var(--app-btn-primary-text);
+	background: var(--bt-solid-bg);
+	color: var(--bt-solid-fg);
+}
+
+@media (hover: hover) {
+	.login-content .es-button[data-variant="solid"]:hover,
+	.page-card .es-button[data-variant="solid"]:hover {
+		background: var(--bt-solid-bg-hover);
+	}
+}
+
+.login-content .es-button:not([data-variant]),
+.login-content .es-button[data-variant="subtle"],
+.page-card .es-button:not([data-variant]),
+.page-card .es-button[data-variant="subtle"] {
+	--bt-fg: var(--app-primary);
+}
+
+.login-content .es-button:disabled,
+.page-card .es-button:disabled {
+	background: var(--bt-disabled-bg, #efefef);
+	color: var(--bt-disabled-fg, #9a9a9a);
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.page-card-actions .es-button {
+	width: 100%;
+}
+
+/* Login alerts — same missing-primitives problem as buttons. */
+.login-content .es-alert,
+.page-card .es-alert {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: start;
+	gap: 12px;
+	padding: 14px 16px;
+	border-radius: 12px;
+	font-size: 14px;
+	background: #f4f4f4;
+}
+
+.login-content .es-alert[data-theme="red"],
+.page-card .es-alert[data-theme="red"] {
+	--es-al-icon: #dc2626;
+	background: #fef2f2;
+}
+
+.login-content .es-alert[data-theme="green"],
+.page-card .es-alert[data-theme="green"] {
+	--es-al-icon: #059669;
+	background: #ecfdf5;
+}
+
+.login-content .es-alert > svg,
+.page-card .es-alert > svg {
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	color: var(--es-al-icon, #6b7280);
+	flex-shrink: 0;
+}
+
+.login-content .es-alert__content,
+.page-card .es-alert__content {
+	display: grid;
+	gap: 8px;
+}
+
+.login-content .es-alert__title,
+.page-card .es-alert__title {
+	color: #1a1a1a;
+}
+
+.login-content .es-alert.hidden,
+.page-card .es-alert.hidden {
+	display: none !important;
+}
+
 /* Page loader */
 #freeze,
 .page-loading-indicator {
@@ -646,8 +1034,19 @@ select.form-control option:checked {
 @media (prefers-contrast: high) {
 	.btn-primary,
 	.btn-danger,
-	.btn-cancel {
+	.btn-cancel,
+	.es-button[data-variant="solid"] {
 		border: 2px solid #000 !important;
+	}
+
+	.es-button[data-theme="red"],
+	.es-button.btn-modal-secondary,
+	.es-button[data-label="Cancel"] {
+		border: 2px solid #000 !important;
+	}
+
+	.body-sidebar .standard-sidebar-item.active-sidebar .item-anchor {
+		outline: 2px solid #ffffff;
 	}
 }
 
@@ -655,15 +1054,20 @@ select.form-control option:checked {
 @media (prefers-reduced-motion: reduce) {
 	.btn-primary,
 	.btn-danger,
+	.btn-cancel,
+	.es-button,
+	.dock .dock-item,
 	.table tbody tr,
-	.sidebar-item a {
+	.body-sidebar .standard-sidebar-item .item-anchor {
 		transition: none !important;
 	}
 	.btn-primary:hover,
 	.btn-danger:hover {
 		transform: none !important;
 	}
-	#freeze img {
+	#freeze img,
+	.page-loading-indicator img {
 		animation: none !important;
+		opacity: 1 !important;
 	}
 }
