@@ -1,0 +1,133 @@
+{%- from "subamaz/templates/print_formats/macros.html" import
+	subamaz_address, subamaz_signature, subamaz_money, subamaz_num, subamaz_date, subamaz_payment_lanes -%}
+{%- set currency = doc.paid_from_account_currency or doc.paid_to_account_currency or "UGX" -%}
+{%- set contact_name = frappe.db.get_value(
+	"Contact",
+	{"link_doctype": doc.party_type, "link_name": doc.party},
+	"name"
+) if doc.party else None -%}
+{%- set address_name = frappe.db.get_value(
+	"Dynamic Link",
+	{"parent": contact_name, "parenttype": "Contact", "link_doctype": "Address"},
+	"link_name"
+) if contact_name else None -%}
+{%- if not address_name and doc.party_type == "Customer" and doc.party -%}
+{%- set address_name = frappe.db.get_value("Customer", doc.party, "customer_primary_address") -%}
+{%- endif -%}
+{%- set totals = namespace(due=0.0, balance=0.0) -%}
+{%- for ref in doc.get("references") or [] -%}
+{%- set totals.due = totals.due + (ref.total_amount or 0) -%}
+{%- set totals.balance = totals.balance + ((ref.outstanding_amount or 0) - (ref.allocated_amount or 0)) -%}
+{%- endfor -%}
+{%- set has_references = (doc.get("references") or []) | length > 0 -%}
+{%- if not has_references -%}
+{%- set totals.due = doc.paid_amount or 0 -%}
+{%- endif -%}
+<div class="suba-body">
+	<div class="suba-title-row">
+		<div class="suba-title">PAYMENT RECEIPT</div>
+		<div class="suba-meta-grid">
+			<div class="suba-meta-label">DATE</div>
+			<div class="suba-meta-label">RECEIPT #</div>
+			<div class="suba-meta-value">{{ subamaz_date(doc.posting_date) }}</div>
+			<div class="suba-meta-value">{{ doc.name }}</div>
+		</div>
+	</div>
+
+	<div class="suba-two-col">
+		{{ subamaz_address(
+			"Received From",
+			doc.party_name,
+			address_name,
+			{"email": doc.contact_email}
+		) }}
+	</div>
+
+	<div class="suba-particulars">
+		<div class="suba-particulars-head">
+			<span>PARTICULARS</span>
+			<span>AMOUNT IN FIGURES</span>
+		</div>
+		<div class="suba-particulars-body">
+			<div class="suba-particulars-text">
+				An amount of <strong>{{ doc.in_words or "—" }}</strong> Being payment for the invoice(s) listed below.
+			</div>
+			<div class="suba-particulars-amount">{{ subamaz_money(doc.paid_amount, currency) }}</div>
+		</div>
+	</div>
+
+	<table class="suba-table">
+		<thead>
+			<tr>
+				<th style="width: 8%; text-align: center">S/N</th>
+				<th style="width: 17%">INVOICE DATE</th>
+				<th>INVOICE #</th>
+				<th style="width: 19%; text-align: right">TOTAL INVOICED</th>
+				<th style="width: 19%; text-align: right">AMOUNT PAID</th>
+				<th style="width: 19%; text-align: right">BALANCE DUE</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if has_references %}
+			{% for ref in doc.get("references") or [] %}
+			{%- set invoice_date = frappe.db.get_value(
+				ref.reference_doctype,
+				ref.reference_name,
+				"posting_date"
+			) if ref.reference_doctype and ref.reference_name else None -%}
+			{%- set balance = (ref.outstanding_amount or 0) - (ref.allocated_amount or 0) -%}
+			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
+				<td class="suba-cell-center suba-cell-muted">{{ "%02d"|format(loop.index) }}</td>
+				<td>{{ subamaz_date(invoice_date) }}</td>
+				<td class="suba-desc suba-invoice-no">{{ ref.reference_name }}</td>
+				<td class="suba-cell-right">{{ subamaz_num(ref.total_amount) }}</td>
+				<td class="suba-cell-right suba-cell-strong">{{ subamaz_num(ref.allocated_amount) }}</td>
+				<td class="suba-cell-right suba-cell-navy">{{ subamaz_num(balance) }}</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<tr>
+				<td class="suba-cell-center suba-cell-muted">01</td>
+				<td>{{ subamaz_date(doc.posting_date) }}</td>
+				<td class="suba-desc">Advance payment</td>
+				<td class="suba-cell-right">{{ subamaz_num(doc.paid_amount) }}</td>
+				<td class="suba-cell-right suba-cell-strong">{{ subamaz_num(doc.paid_amount) }}</td>
+				<td class="suba-cell-right suba-cell-navy">0</td>
+			</tr>
+			{% endif %}
+		</tbody>
+		<tfoot>
+			<tr class="suba-total-row">
+				<td colspan="6"></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	{{ subamaz_payment_lanes(doc) }}
+
+	<div class="suba-totals-wrap">
+		<div class="suba-totals">
+			<div class="suba-total-line"><span>Total Amount Due</span><span>{{ subamaz_num(totals.due) }}</span></div>
+			{% if doc.unallocated_amount and doc.unallocated_amount > 0 %}
+			<div class="suba-total-line"><span>Unallocated / Advance</span><span>{{ subamaz_num(doc.unallocated_amount) }}</span></div>
+			{% endif %}
+			<div class="suba-grand-total"><span>TOTAL RECEIVED</span><span>{{ subamaz_money(doc.paid_amount, currency) }}</span></div>
+			<div class="suba-balance-due"><span>BALANCE DUE</span><span>{{ subamaz_money(totals.balance, currency) }}</span></div>
+		</div>
+	</div>
+
+	<div class="suba-bottom">
+		<div class="suba-signatures">
+			{{ subamaz_signature("Received by (Cashier) — Stamp & Signature") }}
+			{{ subamaz_signature("Customer — Signature") }}
+		</div>
+		<div class="suba-terms">
+			<div class="suba-terms-title">TERMS &amp; CONDITIONS</div>
+			<div class="suba-terms-body">
+				<div>This receipt covers only the invoice(s) listed above.</div>
+				<div>Cheque payments are subject to clearance; the payer is responsible for any bounced cheque.</div>
+				<div>This receipt is valid only when signed and stamped by authorized personnel.</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -32,7 +32,14 @@ fixtures = [
 		"filters": {"language": "en", "source_text": ["in", ["Selling", "Buying"]]},
 	},
 	{"doctype": "Custom Field", "filters": {"module": "Subamaz"}},
-	{"doctype": "Print Format", "filters": {"module": "Subamaz"}},
+	{
+		"doctype": "Print Format",
+		"filters": {
+			"module": "Subamaz",
+			"name": ["not in", ["SubaMaz Sales Invoice", "SubaMaz Payment Receipt"]],
+		},
+	},
+	{"doctype": "Mode of Payment", "filters": {"name": ["in", ["Mobile Money"]]}},
 	{"doctype": "Workflow State", "filters": {"name": ["in", ["Draft", "Open", "Waiting Customer", "Waiting Parts", "In Progress", "Quality Check", "Completed", "Closed", "Cancelled", "On Hold"]]}},
 	{"doctype": "Workflow", "filters": {"name": ["in", ["Service Order Workflow"]]}},
 	{"doctype": "Capability"},

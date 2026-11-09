@@ -1,0 +1,113 @@
+{%- from "subamaz/templates/print_formats/macros.html" import
+	subamaz_address, subamaz_signature, subamaz_money, subamaz_num, subamaz_qty, subamaz_date -%}
+{%- set currency = doc.currency or "UGX" -%}
+{%- set vehicle = frappe.db.get_value(
+	"Garage Vehicle",
+	doc.garage_vehicle,
+	["registration_number", "make", "model", "year", "current_mileage", "vin"],
+	as_dict=True
+) if doc.garage_vehicle else None -%}
+{%- set vehicle_name = ((vehicle.make or "") ~ " " ~ (vehicle.model or "")).strip() if vehicle else "" -%}
+{%- set amount_paid = doc.paid_amount or ((doc.grand_total or 0) - (doc.outstanding_amount or 0)) -%}
+<div class="suba-body">
+	<div class="suba-title-row">
+		<div class="suba-title">INVOICE</div>
+		<div class="suba-meta-grid">
+			<div class="suba-meta-label">DATE</div>
+			<div class="suba-meta-label">INVOICE #</div>
+			<div class="suba-meta-value">{{ subamaz_date(doc.posting_date) }}</div>
+			<div class="suba-meta-value">{{ doc.name }}</div>
+		</div>
+	</div>
+
+	<div class="suba-two-col">
+		{{ subamaz_address(
+			"Billed To",
+			doc.customer_name,
+			doc.customer_address,
+			{"mobile": doc.contact_mobile, "email": doc.contact_email}
+		) }}
+		<div>
+			<div class="suba-section-title">Vehicle Details</div>
+			<div class="suba-vehicle-badge">
+				{{ vehicle.registration_number if vehicle and vehicle.registration_number else (doc.garage_vehicle or "—") }}
+			</div>
+			<div class="suba-vehicle-model">{{ vehicle_name or "—" }}</div>
+			<div class="suba-vehicle-meta">
+				<span>Year</span>
+				<span>{{ vehicle.year if vehicle and vehicle.year else "—" }}</span>
+			</div>
+			<div class="suba-vehicle-meta">
+				<span>Mileage</span>
+				<span>{% if vehicle and vehicle.current_mileage %}{{ subamaz_num(vehicle.current_mileage) }} km{% else %}—{% endif %}</span>
+			</div>
+			<div class="suba-vehicle-meta">
+				<span>VIN</span>
+				<span>{{ vehicle.vin if vehicle and vehicle.vin else "—" }}</span>
+			</div>
+		</div>
+	</div>
+
+	<table class="suba-table">
+		<thead>
+			<tr>
+				<th style="width: 9%">#</th>
+				<th>DESCRIPTION</th>
+				<th style="width: 13%; text-align: center">QTY</th>
+				<th style="width: 23%; text-align: right">UNIT PRICE</th>
+				<th style="width: 25%; text-align: right">AMOUNT</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in doc.get("items") or [] %}
+			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
+				<td class="suba-cell-center suba-cell-muted">{{ item.idx or loop.index }}</td>
+				<td class="suba-desc">{{ item.item_name or item.description or item.item_code }}</td>
+				<td class="suba-cell-center">{{ subamaz_qty(item.qty) }} {{ item.uom or "" }}</td>
+				<td class="suba-cell-right">{{ subamaz_num(item.rate) }}</td>
+				<td class="suba-cell-right suba-cell-strong">{{ subamaz_num(item.amount) }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr class="suba-total-row">
+				<td colspan="5"></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<div class="suba-totals-wrap">
+		<div class="suba-totals">
+			<div class="suba-total-line"><span>Subtotal</span><span>{{ subamaz_num(doc.total) }}</span></div>
+			{% if doc.discount_amount %}
+			<div class="suba-total-line"><span>Discount</span><span>-{{ subamaz_num(doc.discount_amount) }}</span></div>
+			{% endif %}
+			{% for tax in doc.get("taxes") or [] %}
+			<div class="suba-total-line"><span>{{ tax.description or "Tax" }}</span><span>{{ subamaz_num(tax.tax_amount) }}</span></div>
+			{% endfor %}
+			<div class="suba-grand-total"><span>TOTAL</span><span>{{ subamaz_money(doc.grand_total, currency) }}</span></div>
+			<div class="suba-total-line"><span>Amount Paid</span><span>{{ subamaz_num(amount_paid) }}</span></div>
+			<div class="suba-balance-due"><span>BALANCE DUE</span><span>{{ subamaz_money(doc.outstanding_amount, currency) }}</span></div>
+		</div>
+	</div>
+
+	<div class="suba-words"><strong>Amount in words:</strong> {{ doc.in_words or "—" }}</div>
+
+	<div class="suba-bottom">
+		<div class="suba-signatures">
+			{{ subamaz_signature("Prepared by (Service Advisor) — Signature & Stamp") }}
+			{{ subamaz_signature("Customer, Signature & Date") }}
+		</div>
+		<div class="suba-terms">
+			<div class="suba-terms-title">TERMS &amp; CONDITIONS</div>
+			<div class="suba-terms-body">
+				{% if doc.terms %}
+				{{ doc.terms }}
+				{% else %}
+				<div>Payment is due within 7 days of the invoice date.</div>
+				<div>Spare parts carry the supplier's warranty; workmanship is guaranteed for 30 days.</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
