@@ -3,27 +3,27 @@ import frappe
 CACHE_KEY = "app_desk_theme"
 
 DEFAULTS = {
-	"primary_color":                 "#434868",
-	"primary_hover":                 "#343753",
+	"primary_color":                 "#1A2E72",
+	"primary_hover":                 "#14245C",
 	"danger_color":                  "#DC2626",
 	"danger_hover":                  "#B91C1C",
-	"accent_color":                  "#C9A227",
-	"sidebar_background":            "#434868",
+	"accent_color":                  "#FFFFFF",
+	"sidebar_background":            "#1A2E72",
 	"sidebar_text_color":            "#FFFFFF",
 	"active_item_background":        "#FFFFFF",
-	"active_item_text":              "#434868",
-	"navbar_background":             "#434868",
+	"active_item_text":              "#1A2E72",
+	"navbar_background":             "#1A2E72",
 	"navbar_text_color":             "#FFFFFF",
 	"navbar_icon_color":             "#FFFFFF",
-	"page_head_bg":                  "#F0F0F3",
-	"page_head_text":                "#1A1A1A",
-	"table_header_bg":               "#434868",
+	"page_head_bg":                  "#E8EEF8",
+	"page_head_text":                "#0F172A",
+	"table_header_bg":               "#1A2E72",
 	"table_header_text":             "#FFFFFF",
-	"even_row_bg":                   "#F0F0F3",
-	"table_row_hover_bg":            "#E8E9ED",
-	"selectdropdown_row_hover_bg":   "#E8E9ED",
-	"primary_button_bg":             "#434868",
-	"primary_button_hover":          "#343753",
+	"even_row_bg":                   "#E8EEF8",
+	"table_row_hover_bg":            "#D9E4F5",
+	"selectdropdown_row_hover_bg":   "#D9E4F5",
+	"primary_button_bg":             "#1A2E72",
+	"primary_button_hover":          "#14245C",
 	"primary_button_text":           "#FFFFFF",
 	"danger_button_bg":              "#DC2626",
 	"danger_button_hover":           "#B91C1C",
@@ -73,12 +73,13 @@ def _build_config(saved):
 
 	def v(fieldname):
 		raw = saved.get(fieldname)
-		# Fallback to computed lighter for light surfaces when field is empty.
+		# A saved primary implies custom surfaces; otherwise use the palette defaults.
 		if not raw:
-			if fieldname in ("page_head_bg", "even_row_bg"):
-				return _lighten(_primary, 0.92)
-			if fieldname in ("table_row_hover_bg", "selectdropdown_row_hover_bg"):
-				return _lighten(_primary, 0.88)
+			if saved.get("primary_color"):
+				if fieldname in ("page_head_bg", "even_row_bg"):
+					return _lighten(_primary, 0.92)
+				if fieldname in ("table_row_hover_bg", "selectdropdown_row_hover_bg"):
+					return _lighten(_primary, 0.88)
 			raw = DEFAULTS.get(fieldname, "")
 		return _sanitize_color(raw)
 

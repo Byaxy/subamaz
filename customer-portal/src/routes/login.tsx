@@ -32,7 +32,7 @@ export function LoginPage() {
     <div className="min-h-screen flex" data-testid="portal-login">
       <div className="hidden md:flex w-1/2 flex-col justify-between p-10 text-white" style={{ background: "linear-gradient(135deg, #1A1A1A 0%, #000 100%)" }}>
         <div>
-          <div className="size-12 rounded bg-[#C9A227] text-black flex items-center justify-center font-bold">GM</div>
+          <div className="size-12 rounded bg-[var(--app-primary)] text-[var(--app-btn-primary-text)] flex items-center justify-center font-bold">GM</div>
           <h1 className="text-3xl font-bold mt-6">Customer Portal</h1>
           <p className="text-white/70 mt-2">Track your vehicle service</p>
         </div>

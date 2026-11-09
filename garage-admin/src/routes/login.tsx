@@ -38,7 +38,7 @@ export function LoginPage() {
         }}
       >
         <div>
-          <div className="size-12 rounded bg-[#C9A227] text-black flex items-center justify-center font-bold">GM</div>
+          <div className="size-12 rounded bg-[var(--app-primary)] text-[var(--app-btn-primary-text)] flex items-center justify-center font-bold">GM</div>
           <h1 className="text-3xl font-bold mt-6" style={{ fontFamily: "Fraunces, serif" }}>
             SubaMaz Garage
           </h1>

@@ -37,7 +37,7 @@
 
 class Theme {
 	constructor() {
-		this.CACHE_KEY = "app_theme_v1";
+		this.CACHE_KEY = "app_theme_v2";
 		this.CSS_VAR_MAP = {
 			"--app-primary":             "primaryColor",
 			"--app-primary-hover":       "primaryHover",
@@ -115,14 +115,14 @@ class Theme {
 		var value = getComputedStyle(document.documentElement)
 			.getPropertyValue("--app-primary")
 			.trim();
-		return value || "#434868";
+		return value || "#1A2E72";
 	}
 
 	accentColor() {
 		var value = getComputedStyle(document.documentElement)
 			.getPropertyValue("--app-accent-color")
 			.trim();
-		return value || "#C9A227";
+		return value || "#FFFFFF";
 	}
 
 	recolorDeskIcons() {
@@ -136,8 +136,8 @@ class Theme {
 		targets.forEach(function (img) {
 			if (img.closest && img.closest(".dropdown-menu-item")) return;
 			var src = img.getAttribute("src") || img.src || "";
-			if (src.indexOf("data:") === 0) return;
-			if (src.indexOf(".svg") === -1 && src.indexOf("icons/desktop_icons") === -1) return;
+			var is_svg_data = src.indexOf("data:image/svg+xml") === 0;
+			if (src.indexOf(".svg") === -1 && src.indexOf("icons/desktop_icons") === -1 && !is_svg_data) return;
 			self.recolorImg(img, src, primary, accent);
 		});
 	}
@@ -204,7 +204,7 @@ class Theme {
 	}
 
 	rewriteFillsWhite(svg, primary) {
-		var primaryMap = ["#0289F7", "#004880", "#0E7159", "#06B58B", "#7B808A"];
+		var primaryMap = ["#0289F7", "#0089FF", "#2490EF", "#004880", "#0E7159", "#06B58B", "#7B808A"];
 		var out = svg;
 		primaryMap.forEach(function (hex) {
 			out = out.split(hex).join(primary);
@@ -214,7 +214,7 @@ class Theme {
 	}
 
 	rewriteFills(svg, primary, accent) {
-		var primaryMap = ["#0289F7", "#004880", "#0E7159", "#06B58B", "#7B808A"];
+		var primaryMap = ["#0289F7", "#0089FF", "#2490EF", "#004880", "#0E7159", "#06B58B", "#7B808A"];
 		var out = svg;
 		primaryMap.forEach(function (hex) {
 			out = out.split(hex).join(primary);

@@ -1,3 +1,4 @@
+import pathlib
 from unittest.mock import patch
 
 import frappe
@@ -103,6 +104,26 @@ class TestTheme(SubamazTestCase):
 		self.assertEqual(DEFAULTS["active_item_background"], "#FFFFFF")
 		self.assertEqual(DEFAULTS["active_item_text"], DEFAULTS["primary_color"])
 		self.assertEqual(DEFAULTS["page_head_bg"], DEFAULTS["even_row_bg"])
+
+	def test_defaults_are_navy_white(self):
+		self.assertEqual(DEFAULTS["primary_color"], "#1A2E72")
+		self.assertEqual(DEFAULTS["primary_hover"], "#14245C")
+		self.assertEqual(DEFAULTS["accent_color"], "#FFFFFF")
+		self.assertEqual(DEFAULTS["page_head_bg"], "#E8EEF8")
+		self.assertEqual(DEFAULTS["even_row_bg"], "#E8EEF8")
+		self.assertEqual(DEFAULTS["table_row_hover_bg"], "#D9E4F5")
+		self.assertEqual(DEFAULTS["selectdropdown_row_hover_bg"], "#D9E4F5")
+
+	def test_theme_sources_have_no_legacy_gold(self):
+		root = pathlib.Path(frappe.get_app_path("subamaz"))
+		for relative in (
+			"public/css/theme.css",
+			"public/js/theme.js",
+			"www/login.html",
+			"templates/includes/booking_form.html",
+		):
+			source = (root / relative).read_text()
+			self.assertNotIn("#C9A227", source, f"{relative} should not contain legacy gold")
 
 	def test_permissions_system_manager(self):
 		meta = frappe.get_meta("Theme")
