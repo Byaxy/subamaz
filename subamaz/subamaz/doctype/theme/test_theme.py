@@ -114,6 +114,13 @@ class TestTheme(SubamazTestCase):
 		self.assertEqual(DEFAULTS["table_row_hover_bg"], "#D9E4F5")
 		self.assertEqual(DEFAULTS["selectdropdown_row_hover_bg"], "#D9E4F5")
 
+	def test_theme_sources_darken_workspace_and_light_dock_icons(self):
+		source = (pathlib.Path(frappe.get_app_path("subamaz")) / "public/css/theme.css").read_text()
+		self.assertIn("--app-workspace-sidebar-bg:", source)
+		self.assertIn("background: var(--app-workspace-sidebar-bg)", source)
+		self.assertIn(".dock .navbar-modal-search-mobile", source)
+		self.assertIn(".dock .sidebar-notification", source)
+
 	def test_theme_sources_have_no_legacy_gold(self):
 		root = pathlib.Path(frappe.get_app_path("subamaz"))
 		for relative in (

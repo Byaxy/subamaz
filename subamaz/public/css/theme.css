@@ -11,6 +11,7 @@
 
 	/* Sidebar — primary bg with white text, active white bg + primary text */
 	--app-sidebar-bg: #1A2E72;
+	--app-workspace-sidebar-bg: color-mix(in srgb, var(--app-sidebar-bg) 90%, #000);
 	--app-sidebar-text: #FFFFFF;
 	--app-sidebar-active-bg: #FFFFFF;
 	--app-sidebar-active-text: #1A2E72;
@@ -73,13 +74,12 @@
 }
 
 /* Desktop navbar notifications icon */
-.desktop-navbar .desktop-notifications .dropdown-notifications .btn-reset,
-.desktop-navbar .desktop-notifications .dropdown-notifications .btn-reset svg {
+.desktop-navbar .desktop-notifications .desktop-notification-icon,
+.desktop-navbar .desktop-notifications .desktop-notification-icon svg {
 	color: var(--app-navbar-icon) !important;
 	stroke: var(--app-navbar-icon) !important;
-	fill: var(--app-navbar-icon) !important;
 }
-.desktop-navbar .desktop-notifications .dropdown-notifications .btn-reset:hover svg {
+.desktop-navbar .desktop-notifications .desktop-notification-icon:hover svg {
 	opacity: 0.8;
 }
 
@@ -252,9 +252,9 @@ body[data-route^="Form"] .layout-side-section,
 	opacity: 1;
 }
 
-/* Left workspace sidebar — primary bg with white text, active white bg + primary text */
+/* Left workspace sidebar — slightly darker than primary, white text, active white bg + primary text */
 .body-sidebar {
-	background: var(--app-sidebar-bg) !important;
+	background: var(--app-workspace-sidebar-bg) !important;
 	border-right-color: rgba(255, 255, 255, 0.12) !important;
 }
 
@@ -492,6 +492,20 @@ body[data-route^="Form"] .layout-side-section,
 
 body.dock-pinned .dock {
 	border-right: 1px solid var(--app-dock-rule);
+}
+
+.dock .navbar-modal-search-mobile,
+.dock .navbar-modal-search-mobile svg,
+.dock .sidebar-notification,
+.dock .sidebar-notification svg {
+	color: var(--app-sidebar-text) !important;
+	stroke: var(--app-sidebar-text) !important;
+}
+
+.dock .navbar-modal-search-mobile:hover svg,
+.dock .sidebar-notification:hover svg {
+	color: var(--app-sidebar-active-text) !important;
+	stroke: var(--app-sidebar-active-text) !important;
 }
 
 .dock .dock-item:hover,
