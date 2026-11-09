@@ -8,3 +8,4 @@ subamaz.patches.v1.reset_theme_palette
 subamaz.patches.v1.ensure_subamaz_letter_head
 subamaz.patches.v1.update_subamaz_branding
 subamaz.patches.v1.set_subamaz_print_format_defaults
+subamaz.patches.v1.refresh_subamaz_print_format_defaults

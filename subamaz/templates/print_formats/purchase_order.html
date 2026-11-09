@@ -1,0 +1,102 @@
+{%- from "subamaz/templates/print_formats/macros.html" import
+	subamaz_address, subamaz_signature, subamaz_money, subamaz_num, subamaz_qty, subamaz_date, subamaz_detail_list -%}
+{%- set currency = doc.currency or "UGX" -%}
+{%- set supplier_address = doc.supplier_address -%}
+{%- if not supplier_address and doc.supplier -%}
+{%- set supplier_address = frappe.db.get_value("Supplier", doc.supplier, "supplier_primary_address") -%}
+{%- endif -%}
+{%- set required_by = subamaz_date(doc.schedule_date) -%}
+{%- set order_details = [
+	("Required By", required_by),
+	("Supplier Ref", doc.order_confirmation_no),
+	("Currency", currency),
+] -%}
+{%- set balance = (doc.grand_total or 0) - (doc.advance_paid or 0) -%}
+<div class="suba-body">
+	<div class="suba-title-row">
+		<div class="suba-title">PURCHASE ORDER</div>
+		<div class="suba-meta-grid">
+			<div class="suba-meta-label">DATE</div>
+			<div class="suba-meta-label">PO #</div>
+			<div class="suba-meta-value">{{ subamaz_date(doc.transaction_date) }}</div>
+			<div class="suba-meta-value">{{ doc.name }}</div>
+		</div>
+	</div>
+
+	<div class="suba-two-col">
+		{{ subamaz_address(
+			"Supplier",
+			doc.supplier_name or doc.supplier,
+			supplier_address,
+			{"mobile": doc.contact_mobile, "email": doc.contact_email}
+		) }}
+		<div>
+			<div class="suba-section-title">Order Details</div>
+			{{ subamaz_detail_list(order_details) }}
+		</div>
+	</div>
+
+	<table class="suba-table">
+		<thead>
+			<tr>
+				<th style="width: 9%">#</th>
+				<th>DESCRIPTION</th>
+				<th style="width: 13%; text-align: center">QTY</th>
+				<th style="width: 23%; text-align: right">UNIT PRICE</th>
+				<th style="width: 25%; text-align: right">AMOUNT</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in doc.get("items") or [] %}
+			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
+				<td class="suba-cell-center suba-cell-muted">{{ item.idx or loop.index }}</td>
+				<td class="suba-desc">{{ item.item_name or item.description or item.item_code }}</td>
+				<td class="suba-cell-center">{{ subamaz_qty(item.qty) }} {{ item.uom or "" }}</td>
+				<td class="suba-cell-right">{{ subamaz_num(item.rate) }}</td>
+				<td class="suba-cell-right suba-cell-strong">{{ subamaz_num(item.amount) }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr class="suba-total-row">
+				<td colspan="5"></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<div class="suba-totals-wrap">
+		<div class="suba-totals">
+			<div class="suba-total-line"><span>Subtotal</span><span>{{ subamaz_num(doc.total) }}</span></div>
+			{% if doc.discount_amount %}
+			<div class="suba-total-line"><span>Discount</span><span>-{{ subamaz_num(doc.discount_amount) }}</span></div>
+			{% endif %}
+			{% for tax in doc.get("taxes") or [] %}
+			<div class="suba-total-line"><span>{{ tax.description or "Tax" }}</span><span>{{ subamaz_num(tax.tax_amount) }}</span></div>
+			{% endfor %}
+			<div class="suba-grand-total"><span>TOTAL</span><span>{{ subamaz_money(doc.grand_total, currency) }}</span></div>
+			{% if doc.advance_paid and doc.advance_paid > 0 %}
+			<div class="suba-total-line"><span>Advance Paid</span><span>{{ subamaz_num(doc.advance_paid) }}</span></div>
+			<div class="suba-balance-due"><span>BALANCE PAYABLE</span><span>{{ subamaz_money(balance, currency) }}</span></div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="suba-bottom">
+		<div class="suba-signatures">
+			{{ subamaz_signature("Authorized by (Purchasing) — Signature & Stamp") }}
+			{{ subamaz_signature("Supplier Acknowledgement — Signature & Date") }}
+		</div>
+		<div class="suba-terms">
+			<div class="suba-terms-title">TERMS &amp; CONDITIONS</div>
+			<div class="suba-terms-body">
+				{% if doc.terms %}
+				{{ doc.terms }}
+				{% else %}
+				<div>Please supply the items above in accordance with the agreed prices and delivery schedule.</div>
+				<div>Delivery is required by {{ required_by }}.</div>
+				<div>Goods remain subject to inspection and acceptance on delivery.</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

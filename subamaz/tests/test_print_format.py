@@ -42,8 +42,11 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		import json
 
 		for name, doctype, body_template in (
-			("SubaMaz Sales Invoice", "Sales Invoice", "sales_invoice_body.html"),
-			("SubaMaz Payment Receipt", "Payment Entry", "receipt_body.html"),
+			("SubaMaz Sales Invoice", "Sales Invoice", "sales_invoice.html"),
+			("SubaMaz Payment Receipt", "Payment Entry", "payment_receipt.html"),
+			("SubaMaz Pro-Forma Invoice", "Quotation", "proforma_invoice.html"),
+			("SubaMaz Purchase Order", "Purchase Order", "purchase_order.html"),
+			("SubaMaz Request for Quotation", "Request for Quotation", "request_for_quotation.html"),
 		):
 			with self.subTest(print_format=name):
 				doc = frappe.get_doc("Print Format", name)
@@ -57,11 +60,11 @@ class TestPrintFormatSandbox(SubamazTestCase):
 				self.assertEqual(format_data["page"], {"size": "A4", "orientation": "Portrait"})
 				self.assertIn(body_template, format_data["sections"][0]["columns"][0]["fields"][0]["html"])
 
-	def test_letter_head_is_not_default(self):
+	def test_letter_head_is_default(self):
 		doc = frappe.get_doc("Letter Head", "SubaMaz Letter Head")
 		self.assertEqual(doc.source, "HTML")
 		self.assertEqual(doc.footer_source, "HTML")
-		self.assertEqual(doc.is_default, 0)
+		self.assertEqual(doc.is_default, 1)
 		self.assertIn("subamaz_header", doc.content)
 		self.assertIn("subamaz_footer", doc.footer)
 		self.assertIn("/assets/subamaz/css/print_formats.css", doc.custom_css)
@@ -70,6 +73,9 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		expected = {
 			"Sales Invoice": "SubaMaz Sales Invoice",
 			"Payment Entry": "SubaMaz Payment Receipt",
+			"Quotation": "SubaMaz Pro-Forma Invoice",
+			"Purchase Order": "SubaMaz Purchase Order",
+			"Request for Quotation": "SubaMaz Request for Quotation",
 		}
 		for doctype, print_format in expected.items():
 			with self.subTest(doctype=doctype):
@@ -89,6 +95,7 @@ class TestPrintFormatSandbox(SubamazTestCase):
 
 		root = pathlib.Path(__file__).parents[1]
 		template_dir = root / "templates" / "print_formats"
+		self.assertFalse((template_dir / "partials").exists())
 		for path in template_dir.rglob("*.html"):
 			html = path.read_text()
 			self.assertNotIn("frappe.get_single(", html, f"{path.name} uses frappe.get_single")
@@ -129,8 +136,8 @@ class TestPrintFormatSandbox(SubamazTestCase):
 			in_words="One Hundred Thirty Thousand Uganda Shillings Only",
 		)
 		html = render_template(
-			"subamaz/templates/print_formats/partials/sales_invoice_body.html",
-			{"doc": doc},
+			"subamaz/templates/print_formats/sales_invoice.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
 			is_path=True,
 		)
 		self.assertIn("INVOICE", html)
@@ -138,6 +145,152 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("Test Customer", html)
 		self.assertIn("130,000", html)
 		self.assertIn("BALANCE DUE", html)
+
+	def test_proforma_invoice_body_renders_without_vehicle(self):
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			currency="UGX",
+			transaction_date="2026-11-09",
+			valid_till="2026-12-09",
+			name="SAL-QTN-2026-00001",
+			quotation_to="Customer",
+			party_name="Test Customer",
+			customer_name="Test Customer",
+			customer_address=None,
+			contact_mobile="0700000000",
+			contact_email="customer@example.com",
+			items=[
+				frappe._dict(
+					idx=1,
+					item_name="Engine Oil",
+					description="Engine Oil",
+					item_code="OIL-001",
+					qty=4,
+					uom="Litre",
+					rate=25000,
+					amount=100000,
+				)
+			],
+			taxes=[],
+			total=100000,
+			discount_amount=0,
+			grand_total=130000,
+			terms="",
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/proforma_invoice.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+		self.assertIn("PRO-FORMA INVOICE", html)
+		self.assertIn(doc.name, html)
+		self.assertIn("Test Customer", html)
+		self.assertIn("09-12-2026", html)
+		self.assertIn("Valid Until", html)
+		self.assertIn("130,000", html)
+		self.assertIn("not a tax invoice", html)
+		self.assertNotIn("BALANCE DUE", html)
+
+	def test_purchase_order_body_renders_with_advance(self):
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			currency="UGX",
+			transaction_date="2026-11-09",
+			schedule_date="2026-11-20",
+			name="PUR-ORD-2026-00001",
+			supplier="Test Supplier",
+			supplier_name="Test Supplier",
+			supplier_address=None,
+			contact_mobile=None,
+			contact_email="supplier@example.com",
+			order_confirmation_no="SUP-REF-1",
+			items=[
+				frappe._dict(
+					idx=1,
+					item_name="Brake Pad",
+					description="Brake Pad",
+					item_code="BRK-001",
+					qty=2,
+					uom="Nos",
+					rate=50000,
+					amount=100000,
+				)
+			],
+			taxes=[],
+			total=100000,
+			discount_amount=0,
+			grand_total=130000,
+			advance_paid=50000,
+			terms="",
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/purchase_order.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+		self.assertIn("PURCHASE ORDER", html)
+		self.assertIn(doc.name, html)
+		self.assertIn("Test Supplier", html)
+		self.assertIn("20-11-2026", html)
+		self.assertIn("SUP-REF-1", html)
+		self.assertIn("130,000", html)
+		self.assertIn("Advance Paid", html)
+		self.assertIn("BALANCE PAYABLE", html)
+		self.assertIn("80,000", html)
+
+	def test_request_for_quotation_uses_first_supplier_only(self):
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			name="PUR-RFQ-2026-00001",
+			transaction_date="2026-11-09",
+			schedule_date="2026-11-20",
+			company="SubaMaz Auto",
+			incoterm=None,
+			message_for_supplier="",
+			terms="",
+			suppliers=[
+				frappe._dict(
+					supplier="SUP-1",
+					supplier_name="First Supplier",
+					contact=None,
+					email_id="first@example.com",
+				),
+				frappe._dict(
+					supplier="SUP-2",
+					supplier_name="Second Supplier",
+					contact=None,
+					email_id="second@example.com",
+				),
+			],
+			items=[
+				frappe._dict(
+					idx=1,
+					item_name="Oil Filter",
+					description="Oil Filter",
+					item_code="FLT-001",
+					qty=10,
+					uom="Nos",
+				)
+			],
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/request_for_quotation.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+		self.assertIn("REQUEST FOR QUOTATION", html)
+		self.assertIn(doc.name, html)
+		self.assertIn("First Supplier", html)
+		self.assertIn("first@example.com", html)
+		self.assertNotIn("Second Supplier", html)
+		self.assertNotIn("second@example.com", html)
+		self.assertIn("20-11-2026", html)
+		self.assertIn("Please supply", html)
+		self.assertNotIn("UNIT PRICE", html)
+		self.assertNotIn("AMOUNT", html)
 
 	def test_payment_receipt_body_renders_without_references(self):
 		from frappe.utils.jinja import render_template
@@ -160,8 +313,8 @@ class TestPrintFormatSandbox(SubamazTestCase):
 			in_words="One Hundred Thirty Thousand Uganda Shillings Only",
 		)
 		html = render_template(
-			"subamaz/templates/print_formats/partials/receipt_body.html",
-			{"doc": doc},
+			"subamaz/templates/print_formats/payment_receipt.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
 			is_path=True,
 		)
 		self.assertIn("PAYMENT RECEIPT", html)
@@ -176,8 +329,7 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		paths = [
 			*(root / "templates" / "print_formats").rglob("*.html"),
 			root / "public" / "css" / "print_formats.css",
-			root / "subamaz" / "print_format" / "suba_sales_invoice" / "suba_sales_invoice.json",
-			root / "subamaz" / "print_format" / "suba_payment_receipt" / "suba_payment_receipt.json",
+			*(root / "subamaz" / "print_format").rglob("*.json"),
 		]
 		for path in paths:
 			self.assertNotIn("#C9A227", path.read_text().upper(), f"{path.name} uses legacy gold")

@@ -53,8 +53,11 @@
 }
 
 .suba-body {
+	--suba-page-body-height: 209mm;
 	position: relative;
 	z-index: 1;
+	display: flex;
+	flex-direction: column;
 	font-size: 10pt;
 	line-height: 1.45;
 }
@@ -262,9 +265,16 @@
 	color: #475569;
 }
 
+.suba-vehicle-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 3mm;
+	margin-top: 2mm;
+}
 .suba-vehicle-badge {
 	display: inline-block;
-	margin-top: 2mm;
+	flex: none;
 	border: 0.4mm solid #1a2e72;
 	border-radius: 99mm;
 	background: #ffffff;
@@ -275,10 +285,10 @@
 	letter-spacing: 0.09em;
 }
 .suba-vehicle-model {
-	margin-top: 1mm;
 	font-size: 9.5pt;
 	font-weight: 600;
 	line-height: 1.4;
+	text-align: right;
 }
 .suba-vehicle-meta {
 	display: flex;
@@ -291,6 +301,29 @@
 }
 .suba-vehicle-meta span {
 	flex: none;
+}
+
+.suba-detail-list {
+	margin-top: 2mm;
+}
+.suba-detail-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 3mm;
+	border-bottom: 0.2mm solid #e2e8f0;
+	padding: 1mm 0;
+	font-size: 9pt;
+	line-height: 1.4;
+}
+.suba-detail-row:last-child {
+	border-bottom: 0;
+}
+.suba-detail-row span:first-child {
+	color: #475569;
+}
+.suba-detail-row span:last-child {
+	font-weight: 700;
+	text-align: right;
 }
 
 /* Tables */
@@ -358,10 +391,10 @@
 	border-bottom: 0;
 }
 .suba-table .suba-total-row td {
-	background: #1a2e72;
-	color: #ffffff;
-	font-weight: 800;
-	font-size: 10pt;
+	border-top: 0.5mm solid #1a2e72;
+	background: transparent;
+	padding: 0;
+	line-height: 0;
 }
 
 .suba-line-total {
@@ -425,18 +458,7 @@
 	font-size: 12pt;
 }
 
-/* Amount in words, terms, signatures */
-.suba-words {
-	margin-top: 3mm;
-	border: 0.25mm solid #cbd5e1;
-	border-radius: 1.5mm;
-	padding: 2.2mm 3mm;
-	font-size: 9pt;
-	line-height: 1.45;
-}
-.suba-words strong {
-	color: #1a2e72;
-}
+/* Terms and signatures */
 .suba-bottom {
 	display: flex;
 	flex-direction: column;
@@ -478,6 +500,27 @@
 }
 .suba-terms-body div + div {
 	margin-top: 0.6mm;
+}
+
+/* Request note */
+.suba-note {
+	border-left: 1mm solid #1a2e72;
+	border-radius: 0 1.5mm 1.5mm 0;
+	background: #f8fafc;
+	padding: 2.5mm 3mm;
+	margin-top: 3mm;
+}
+.suba-note-label {
+	color: #1a2e72;
+	font-size: 8pt;
+	font-weight: 800;
+	letter-spacing: 0.07em;
+}
+.suba-note-text {
+	margin-top: 1mm;
+	color: #1e293b;
+	font-size: 9pt;
+	line-height: 1.5;
 }
 
 /* Payment receipt */
@@ -584,10 +627,14 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		min-height: 100vh;
+		min-height: 297mm;
 	}
 	body.print-format-doc .column.col {
 		position: static;
+	}
+	body.print-format-doc .suba-body {
+		flex: 1 0 auto;
+		min-height: var(--suba-page-body-height);
 	}
 	body.print-format-doc .suba-watermark {
 		position: absolute !important;
@@ -599,7 +646,7 @@
 		flex: 1 0 auto;
 		display: flex;
 		flex-direction: column;
-		min-height: 100vh;
+		min-height: 277mm;
 	}
 	body.print-format-doc .print-repeating-frame > thead,
 	body.print-format-doc .print-repeating-frame > tbody,
@@ -630,6 +677,21 @@
 	* {
 		-webkit-print-color-adjust: exact !important;
 		print-color-adjust: exact !important;
+	}
+	.suba-body {
+		--suba-page-body-height: 205mm;
+		display: flex;
+		flex-direction: column;
+		min-height: var(--suba-page-body-height);
+	}
+	.suba-bottom.suba-bottom--new-page {
+		page-break-before: always;
+		break-before: page;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		min-height: var(--suba-page-body-height);
+		margin-top: 0;
 	}
 	.suba-section,
 	.suba-bottom,

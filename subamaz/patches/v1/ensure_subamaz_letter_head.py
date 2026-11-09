@@ -21,7 +21,7 @@ def execute():
 			"footer_source": "HTML",
 			"footer": footer,
 			"custom_css": CUSTOM_CSS,
-			"is_default": 0,
+			"is_default": 1,
 			"disabled": 0,
 		}
 	).insert(ignore_permissions=True)
@@ -35,6 +35,8 @@ def _update(content, footer):
 	doc.footer_source = "HTML"
 	doc.footer = footer
 	doc.custom_css = CUSTOM_CSS
+	doc.is_default = 1
+	doc.disabled = 0
 	doc.save(ignore_permissions=True)
 	frappe.clear_cache(doctype="Letter Head")
 

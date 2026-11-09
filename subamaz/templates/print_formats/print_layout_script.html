@@ -1,0 +1,49 @@
+<script>
+	(() => {
+		const layout = () => {
+			const body = document.querySelector(".suba-body");
+			const bottom = body?.querySelector(".suba-bottom");
+			if (!body || !bottom) return;
+
+			const bodyHeight = getComputedStyle(body).getPropertyValue("--suba-page-body-height").trim();
+			if (!bodyHeight) return;
+
+			bottom.classList.remove("suba-bottom--new-page");
+			for (const prop of ["display", "flex-direction", "justify-content", "margin-top", "min-height"]) {
+				bottom.style.removeProperty(prop);
+			}
+			body.style.minHeight = "0";
+
+			bottom.style.display = "none";
+			const contentHeight = body.getBoundingClientRect().height;
+			body.style.removeProperty("min-height");
+
+			const ruler = document.createElement("div");
+			ruler.style.cssText = `position:absolute;left:-10000px;top:0;visibility:hidden;height:${bodyHeight};`;
+			document.body.appendChild(ruler);
+			const pageHeight = ruler.getBoundingClientRect().height;
+			ruler.remove();
+
+			bottom.style.display = "";
+			const bottomHeight = bottom.getBoundingClientRect().height;
+			if (!pageHeight || !bottomHeight) return;
+
+			const pages = Math.max(1, Math.ceil(contentHeight / pageHeight));
+			let used = contentHeight - (pages - 1) * pageHeight;
+			if (used < 1) used = pageHeight;
+
+			const remaining = pageHeight - used;
+			if (bottomHeight + 2 <= remaining) {
+				bottom.style.marginTop = `${remaining - bottomHeight}px`;
+			} else {
+				bottom.classList.add("suba-bottom--new-page");
+			}
+		};
+
+		if (document.readyState === "complete") layout();
+		else window.addEventListener("load", layout, { once: true });
+		document.fonts?.ready.then(layout);
+		window.addEventListener("beforeprint", layout);
+	})();
+</script>
+

@@ -29,10 +29,12 @@
 		) }}
 		<div>
 			<div class="suba-section-title">Vehicle Details</div>
-			<div class="suba-vehicle-badge">
-				{{ vehicle.registration_number if vehicle and vehicle.registration_number else (doc.garage_vehicle or "—") }}
+			<div class="suba-vehicle-top">
+				<div class="suba-vehicle-badge">
+					{{ vehicle.registration_number if vehicle and vehicle.registration_number else (doc.garage_vehicle or "—") }}
+				</div>
+				<div class="suba-vehicle-model">{{ vehicle_name or "—" }}</div>
 			</div>
-			<div class="suba-vehicle-model">{{ vehicle_name or "—" }}</div>
 			<div class="suba-vehicle-meta">
 				<span>Year</span>
 				<span>{{ vehicle.year if vehicle and vehicle.year else "—" }}</span>
@@ -40,10 +42,6 @@
 			<div class="suba-vehicle-meta">
 				<span>Mileage</span>
 				<span>{% if vehicle and vehicle.current_mileage %}{{ subamaz_num(vehicle.current_mileage) }} km{% else %}—{% endif %}</span>
-			</div>
-			<div class="suba-vehicle-meta">
-				<span>VIN</span>
-				<span>{{ vehicle.vin if vehicle and vehicle.vin else "—" }}</span>
 			</div>
 		</div>
 	</div>
@@ -90,8 +88,6 @@
 			<div class="suba-balance-due"><span>BALANCE DUE</span><span>{{ subamaz_money(doc.outstanding_amount, currency) }}</span></div>
 		</div>
 	</div>
-
-	<div class="suba-words"><strong>Amount in words:</strong> {{ doc.in_words or "—" }}</div>
 
 	<div class="suba-bottom">
 		<div class="suba-signatures">

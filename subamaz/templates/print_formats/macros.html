@@ -81,7 +81,7 @@
 </footer>
 {% endmacro %}
 
-{% macro subamaz_address(title, party_name, address_name, contact=None) %}
+{% macro subamaz_address(title, party_name, address_name, contact=None, contact_after=False) %}
 <div>
 	<div class="suba-section-title">{{ title }}</div>
 	<div class="suba-party-name">{{ party_name or "N/A" }}</div>
@@ -100,6 +100,10 @@
 		{% endif %}
 		{% if address.phone %}<div>{{ address.phone }}</div>{% endif %}
 		{% if address.email_id %}<div>{{ address.email_id }}</div>{% endif %}
+		{% if contact_after and contact %}
+		{% if contact.mobile and contact.mobile != address.phone %}<div>{{ contact.mobile }}</div>{% endif %}
+		{% if contact.email and contact.email != address.email_id %}<div>{{ contact.email }}</div>{% endif %}
+		{% endif %}
 	</div>
 	{% elif contact and (contact.mobile or contact.email) %}
 	<div class="suba-party-line">
@@ -109,6 +113,17 @@
 	{% else %}
 	<div class="suba-party-line suba-muted">N/A</div>
 	{% endif %}
+</div>
+{% endmacro %}
+
+{% macro subamaz_detail_list(rows) %}
+<div class="suba-detail-list">
+	{% for label, value in rows %}
+	<div class="suba-detail-row">
+		<span>{{ label }}</span>
+		<span>{{ value if value not in (None, "") else "—" }}</span>
+	</div>
+	{% endfor %}
 </div>
 {% endmacro %}
 

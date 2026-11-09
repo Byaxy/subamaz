@@ -1,0 +1,108 @@
+{%- from "subamaz/templates/print_formats/macros.html" import
+	subamaz_address, subamaz_signature, subamaz_qty, subamaz_date, subamaz_detail_list -%}
+{%- set suppliers = doc.get("suppliers") or [] -%}
+{%- set first_supplier = suppliers[0] if suppliers else None -%}
+{%- set supplier_name = (first_supplier.supplier_name or first_supplier.supplier) if first_supplier else None -%}
+{%- set supplier_address = frappe.db.get_value(
+	"Supplier",
+	first_supplier.supplier,
+	"supplier_primary_address"
+) if first_supplier and first_supplier.supplier else None -%}
+{%- set supplier_contact = frappe.db.get_value(
+	"Contact",
+	first_supplier.contact,
+	["full_name", "email_id", "mobile_no"],
+	as_dict=True
+) if first_supplier and first_supplier.contact else None -%}
+{%- set supplier_email = first_supplier.email_id if first_supplier and first_supplier.email_id else (supplier_contact.email_id if supplier_contact else None) -%}
+{%- set required_by = subamaz_date(doc.schedule_date) -%}
+{%- set rfq_details = [
+	("Required By", required_by),
+	("Company", doc.company),
+	("Incoterm", doc.incoterm),
+] -%}
+<div class="suba-body">
+	<div class="suba-title-row">
+		<div class="suba-title">REQUEST FOR QUOTATION</div>
+		<div class="suba-meta-grid">
+			<div class="suba-meta-label">DATE</div>
+			<div class="suba-meta-label">RFQ #</div>
+			<div class="suba-meta-value">{{ subamaz_date(doc.transaction_date) }}</div>
+			<div class="suba-meta-value">{{ doc.name }}</div>
+		</div>
+	</div>
+
+	<div class="suba-two-col">
+		<div>
+			{{ subamaz_address(
+				"Supplier",
+				supplier_name,
+				supplier_address,
+				{
+					"mobile": supplier_contact.mobile_no if supplier_contact else None,
+					"email": supplier_email
+				},
+				contact_after=True
+			) }}
+			{% if supplier_contact and supplier_contact.full_name %}
+			<div class="suba-party-line">{{ supplier_contact.full_name }}</div>
+			{% endif %}
+		</div>
+		<div>
+			<div class="suba-section-title">RFQ Details</div>
+			{{ subamaz_detail_list(rfq_details) }}
+		</div>
+	</div>
+
+	<table class="suba-table">
+		<thead>
+			<tr>
+				<th style="width: 9%">#</th>
+				<th>DESCRIPTION</th>
+				<th style="width: 18%; text-align: center">QTY</th>
+				<th style="width: 14%; text-align: center">UOM</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in doc.get("items") or [] %}
+			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
+				<td class="suba-cell-center suba-cell-muted">{{ item.idx or loop.index }}</td>
+				<td class="suba-desc">{{ item.item_name or item.description or item.item_code }}</td>
+				<td class="suba-cell-center">{{ subamaz_qty(item.qty) }}</td>
+				<td class="suba-cell-center">{{ item.uom or "—" }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr class="suba-total-row">
+				<td colspan="4"></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<div class="suba-note">
+		<div class="suba-note-label">REQUEST</div>
+		<div class="suba-note-text">
+			{{ doc.message_for_supplier or "Please supply the items above at your best price and delivery lead time." }}
+		</div>
+	</div>
+
+	<div class="suba-bottom">
+		<div class="suba-signatures">
+			{{ subamaz_signature("Requested by (Purchasing) — Signature & Date") }}
+			{{ subamaz_signature("Supplier — Signature & Date") }}
+		</div>
+		<div class="suba-terms">
+			<div class="suba-terms-title">TERMS &amp; CONDITIONS</div>
+			<div class="suba-terms-body">
+				{% if doc.terms %}
+				{{ doc.terms }}
+				{% else %}
+				<div>Please quote your best price, delivery lead time, and quotation validity.</div>
+				<div>Prices should include all applicable taxes and delivery charges.</div>
+				<div>Submit your quotation on or before {{ required_by }}.</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

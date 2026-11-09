@@ -36,7 +36,16 @@ fixtures = [
 		"doctype": "Print Format",
 		"filters": {
 			"module": "Subamaz",
-			"name": ["not in", ["SubaMaz Sales Invoice", "SubaMaz Payment Receipt"]],
+			"name": [
+				"not in",
+				[
+					"SubaMaz Sales Invoice",
+					"SubaMaz Payment Receipt",
+					"SubaMaz Pro-Forma Invoice",
+					"SubaMaz Purchase Order",
+					"SubaMaz Request for Quotation",
+				],
+			],
 		},
 	},
 	{"doctype": "Mode of Payment", "filters": {"name": ["in", ["Mobile Money"]]}},

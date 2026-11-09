@@ -1,35 +1,19 @@
 import frappe
 
 DEFAULTS = {
-	"Sales Invoice": ("SubaMaz Sales Invoice", ("Garage Invoice",)),
-	"Payment Entry": ("SubaMaz Payment Receipt", ("Payment Receipt", "Payment Entry")),
+	"Sales Invoice": "SubaMaz Sales Invoice",
+	"Payment Entry": "SubaMaz Payment Receipt",
+	"Quotation": "SubaMaz Pro-Forma Invoice",
+	"Purchase Order": "SubaMaz Purchase Order",
+	"Request for Quotation": "SubaMaz Request for Quotation",
 }
 
 
 def execute():
-	for doctype, (new_format, old_formats) in DEFAULTS.items():
+	for doctype, new_format in DEFAULTS.items():
 		if not frappe.db.exists("Print Format", new_format):
 			continue
-
-		current = _current_default(doctype)
-		if current not in (None, "", new_format, *old_formats):
-			continue
-		if current != new_format:
-			_set_default(doctype, new_format)
-
-
-def _current_default(doctype):
-	rows = frappe.get_all(
-		"Property Setter",
-		filters={
-			"doc_type": doctype,
-			"property": "default_print_format",
-			"doctype_or_field": "DocType",
-		},
-		fields=["name", "value"],
-		limit=1,
-	)
-	return rows[0].value if rows else None
+		_set_default(doctype, new_format)
 
 
 def _set_default(doctype, value):

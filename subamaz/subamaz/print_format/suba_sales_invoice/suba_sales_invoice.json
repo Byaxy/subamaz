@@ -8,7 +8,7 @@
 	"doctype": "Print Format",
 	"font": "",
 	"font_size": 10,
-	"format_data": "{\"sections\": [{\"label\": \"\", \"margin\": {\"top\": 0, \"right\": 0, \"bottom\": 0, \"left\": 0}, \"columns\": [{\"label\": \"\", \"fields\": [{\"label\": \"Document Body\", \"fieldname\": \"html_document_body\", \"fieldtype\": \"HTML\", \"html\": \"{% set subamaz_body_template = \\\"subamaz/templates/print_formats/partials/sales_invoice_body.html\\\" %}\\n{% include \\\"subamaz/templates/print_formats/partials/subamaz_beta_wrapper.html\\\" %}\", \"custom_style\": \"margin:0;padding:0;\", \"custom\": 1}]}]}], \"header\": {\"columns\": [{\"label\": \"\", \"fields\": []}]}, \"footer\": {\"columns\": [{\"label\": \"\", \"fields\": []}]}, \"letter_head\": \"SubaMaz Letter Head\", \"page\": {\"size\": \"A4\", \"orientation\": \"Portrait\"}}",
+	"format_data": "{\"sections\": [{\"label\": \"\", \"margin\": {\"top\": 0, \"right\": 0, \"bottom\": 0, \"left\": 0}, \"columns\": [{\"label\": \"\", \"fields\": [{\"label\": \"Document Body\", \"fieldname\": \"html_document_body\", \"fieldtype\": \"HTML\", \"html\": \"{% set subamaz_body_template = \\\"subamaz/templates/print_formats/sales_invoice.html\\\" %}\\n{% include \\\"subamaz/templates/print_formats/subamaz_beta_wrapper.html\\\" %}\", \"custom_style\": \"margin:0;padding:0;\", \"custom\": 1}]}]}], \"header\": {\"columns\": [{\"label\": \"\", \"fields\": []}]}, \"footer\": {\"columns\": [{\"label\": \"\", \"fields\": []}]}, \"letter_head\": \"SubaMaz Letter Head\", \"page\": {\"size\": \"A4\", \"orientation\": \"Portrait\"}}",
 	"html": "",
 	"letter_head": null,
 	"line_breaks": 0,
