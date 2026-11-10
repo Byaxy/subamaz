@@ -1,6 +1,8 @@
 import frappe
 
 ACCOUNTS = "Accounts"
+GARAGE = "Garage"
+GARAGE_REMOVED_GROUPS = {"Sales", "Purchases", "Accounting", "Stock & Parts"}
 
 # Expense belongs beside Payment Entry in the Accounts shell. Expense Category is a master,
 # so it sits in the Accounts Setup section next to the other accounting masters.
@@ -61,6 +63,42 @@ def sync_accounts_sidebar():
 
 	if changed:
 		_save_customization(ACCOUNTS, rows, user=None)
+
+
+def sync_garage_sidebar():
+	"""Remove generic ERPNext module groups from the Garage sidebar.
+
+	The Garage sidebar is site-owned (standard=0), so it has to be trimmed in place.
+	"""
+	if not frappe.db.exists("Sidebar", GARAGE):
+		return
+
+	doc = frappe.get_doc("Sidebar", GARAGE)
+	remove = set()
+	skip_children = False
+
+	for row in doc.items:
+		if row.get("type") == "Section Break":
+			skip_children = row.label in GARAGE_REMOVED_GROUPS
+			if skip_children:
+				remove.add(row.name)
+			continue
+		if skip_children and row.get("child"):
+			remove.add(row.name)
+			continue
+		skip_children = False
+
+	if not remove:
+		return
+
+	for row in list(doc.items):
+		if row.name in remove:
+			doc.remove(row)
+	for index, row in enumerate(doc.items, start=1):
+		row.idx = index
+	doc.flags.ignore_links = True
+	doc.flags.ignore_permissions = True
+	doc.save()
 
 
 def _base_rows():

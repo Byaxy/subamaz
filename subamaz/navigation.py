@@ -21,6 +21,10 @@ DOCK_ADDITIONS = {
 	],
 }
 
+# The Garage workspace lives in the subamaz app, so its dock comes from the subamaz app
+# layer. Mirror ERPNext's resolved dock so Garage shows the same module rail as ERPNext.
+DOCK_MIRRORS = {"subamaz": "erpnext"}
+
 # Desktop Icon rows removed from the Apps screen. The Framework children are
 # listed explicitly: hiding a parent promotes its children to top level, so the
 # whole group has to go for the tile to actually disappear. Those modules stay
@@ -44,10 +48,47 @@ DESKTOP_HIDES = {
 
 def after_migrate():
 	_sync_dock_layers()
+	_sync_dock_mirrors()
 	_sync_desktop_hides()
-	from subamaz.sidebars import sync_accounts_sidebar
+	from subamaz.sidebars import sync_accounts_sidebar, sync_garage_sidebar
 
 	sync_accounts_sidebar()
+	sync_garage_sidebar()
+
+
+def _sync_dock_mirrors():
+	for target, source in DOCK_MIRRORS.items():
+		_sync_dock_mirror(target, source)
+
+
+def _sync_dock_mirror(target, source):
+	from frappe.desk.doctype.dock.dock import _save_layer, get_dock, resolve_app_dock
+
+	items = _mirrored_dock_items(source)
+	target_dock = get_dock(target, user=None)
+	if target_dock and [_dock_row(row) for row in target_dock.items] == items:
+		return
+
+	_save_layer(target, items, user=None, require_visible=False)
+
+
+def _mirrored_dock_items(source):
+	from frappe.desk.doctype.dock.dock import resolve_app_dock
+
+	items = []
+	for row in resolve_app_dock(source):
+		items.append(
+			{
+				"link_type": row.get("link_type"),
+				"link_to": row.get("link_to"),
+				"url": row.get("url"),
+				"icon": row.get("icon"),
+				"title": row.get("title"),
+				"hidden": row.get("hidden") or 0,
+				"added": 1,
+			}
+		)
+	return items
 
 
 def _sync_dock_layers():

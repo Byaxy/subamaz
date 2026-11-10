@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.desk.doctype.custom_sidebar.custom_sidebar import get_customization
+from frappe.desk.doctype.dock.dock import resolve_app_dock
 
 from subamaz.testing import SubamazTestCase, ignore_missing_dependency_doctypes
 
@@ -40,3 +41,61 @@ class TestSidebars(SubamazTestCase):
 		}
 		self.assertNotIn(("DocType", "Expense"), links)
 		self.assertNotIn(("DocType", "Expense Category"), links)
+
+	def test_garage_dock_matches_erpnext_dock(self):
+		def dock_rows(app):
+			return [
+				(row["link_type"], row["link_to"], row["title"], row["hidden"])
+				for row in resolve_app_dock(app)
+			]
+
+		self.assertEqual(dock_rows("subamaz"), dock_rows("erpnext"))
+
+		visible = {(row["link_type"], row["link_to"]) for row in resolve_app_dock("subamaz") if not row["hidden"]}
+		for expected in [
+			("Sidebar", "Setup"),
+			("Sidebar", "Accounts"),
+			("Sidebar", "Selling"),
+			("Sidebar", "Buying"),
+			("Sidebar", "Stock"),
+			("Workspace", "Garage"),
+			("Sidebar", "Projects"),
+			("Sidebar", "Assets"),
+			("Sidebar", "Portal"),
+		]:
+			self.assertIn(expected, visible)
+
+	def test_garage_sidebar_has_no_generic_groups(self):
+		doc = frappe.get_doc("Sidebar", "Garage")
+		labels = {row.label for row in doc.items if row.type == "Section Break"}
+		self.assertFalse(labels & {"Sales", "Purchases", "Accounting", "Stock & Parts"})
+
+		links = {(row.link_type, row.link_to) for row in doc.items}
+		for removed in [
+			("DocType", "Customer"),
+			("DocType", "Quotation"),
+			("DocType", "Sales Order"),
+			("DocType", "Sales Invoice"),
+			("DocType", "Supplier"),
+			("DocType", "Purchase Order"),
+			("DocType", "Purchase Invoice"),
+			("DocType", "Payment Entry"),
+			("DocType", "Journal Entry"),
+			("DocType", "Item"),
+			("DocType", "Stock Entry"),
+		]:
+			self.assertNotIn(removed, links)
+
+	def test_garage_sidebar_keeps_garage_groups(self):
+		doc = frappe.get_doc("Sidebar", "Garage")
+		labels = {row.label for row in doc.items if row.type == "Section Break"}
+		self.assertTrue({"Operations", "Projects", "Reports", "Setup"} <= labels)
+
+		links = {(row.link_type, row.link_to) for row in doc.items}
+		for kept in [
+			("DocType", "Garage Vehicle"),
+			("DocType", "Repair Task"),
+			("DocType", "Garage Settings"),
+			("DocType", "Theme"),
+		]:
+			self.assertIn(kept, links)
