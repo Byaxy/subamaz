@@ -1,20 +1,67 @@
 <script>
 	(() => {
+		const CLOSING = "suba-closing";
+		const CLOSING_NEW_PAGE = "suba-closing--new-page";
+		const CLOSING_SOLO = "suba-closing--solo";
+		const BOTTOM = "suba-bottom";
+
+		const resetBottom = (bottom) => {
+			for (const prop of ["display", "flex-direction", "justify-content", "margin-top", "min-height"]) {
+				bottom.style.removeProperty(prop);
+			}
+		};
+
+		const unwrapClosing = (bottom) => {
+			const wrapper = bottom.closest(`.${CLOSING}`);
+			if (!wrapper) return;
+
+			const parent = wrapper.parentElement;
+			const totals = wrapper.querySelector(".suba-totals-wrap");
+			if (totals) parent.insertBefore(totals, wrapper);
+			parent.insertBefore(bottom, wrapper);
+			wrapper.remove();
+		};
+
+		const wrapClosing = (body, bottom) => {
+			const existing = bottom.closest(`.${CLOSING}`);
+			if (existing) return existing;
+
+			const totals = body.querySelector(".suba-totals-wrap");
+			const wrapper = document.createElement("div");
+			wrapper.className = CLOSING;
+
+			if (totals) {
+				totals.parentElement.insertBefore(wrapper, totals);
+				wrapper.appendChild(totals);
+			} else {
+				wrapper.classList.add(CLOSING_SOLO);
+				bottom.parentElement.insertBefore(wrapper, bottom);
+			}
+
+			wrapper.appendChild(bottom);
+			return wrapper;
+		};
+
 		const layout = () => {
 			const body = document.querySelector(".suba-body");
-			const bottom = body?.querySelector(".suba-bottom");
+			const bottom = body?.querySelector(`.${BOTTOM}`);
 			if (!body || !bottom) return;
 
 			const bodyHeight = getComputedStyle(body).getPropertyValue("--suba-page-body-height").trim();
 			if (!bodyHeight) return;
 
-			bottom.classList.remove("suba-bottom--new-page");
-			for (const prop of ["display", "flex-direction", "justify-content", "margin-top", "min-height"]) {
-				bottom.style.removeProperty(prop);
-			}
+			const existingClosing = bottom.closest(`.${CLOSING}`);
+			existingClosing?.classList.remove(CLOSING_NEW_PAGE);
+			document.body.classList.remove("suba-multi-page");
+			resetBottom(bottom);
 			body.style.minHeight = "0";
 
+			const totals = body.querySelector(".suba-totals-wrap");
+			const totalsDisplay = totals?.style.display;
+			if (totals) totals.style.display = "none";
 			bottom.style.display = "none";
+			const itemsHeight = body.getBoundingClientRect().height;
+			if (totals) totals.style.display = totalsDisplay || "";
 			const contentHeight = body.getBoundingClientRect().height;
 			body.style.removeProperty("min-height");
 
@@ -28,16 +75,33 @@
 			const bottomHeight = bottom.getBoundingClientRect().height;
 			if (!pageHeight || !bottomHeight) return;
 
+			const totalsHeight = totals?.getBoundingClientRect().height || 0;
+			const closingHeight = totalsHeight + bottomHeight;
+			const itemsFitOnePage = itemsHeight + 1 <= pageHeight;
 			const pages = Math.max(1, Math.ceil(contentHeight / pageHeight));
 			let used = contentHeight - (pages - 1) * pageHeight;
 			if (used < 1) used = pageHeight;
 
 			const remaining = pageHeight - used;
-			if (bottomHeight + 2 <= remaining) {
-				bottom.style.marginTop = `${remaining - bottomHeight}px`;
-			} else {
-				bottom.classList.add("suba-bottom--new-page");
+			const multiPage = pages > 1 || bottomHeight + 2 > remaining;
+			document.body.classList.toggle("suba-multi-page", multiPage);
+
+			if (itemsFitOnePage && multiPage && closingHeight + 4 <= pageHeight) {
+				const closing = wrapClosing(body, bottom);
+				closing.classList.add(CLOSING_NEW_PAGE);
+				if (!totals) closing.classList.add(CLOSING_SOLO);
+				bottom.style.removeProperty("margin-top");
+				return;
 			}
+
+			if (bottomHeight + 2 <= remaining) {
+				unwrapClosing(bottom);
+				bottom.style.marginTop = `${remaining - bottomHeight}px`;
+				return;
+			}
+
+			unwrapClosing(bottom);
+			bottom.style.removeProperty("margin-top");
 		};
 
 		if (document.readyState === "complete") layout();
@@ -46,4 +110,3 @@
 		window.addEventListener("beforeprint", layout);
 	})();
 </script>
-

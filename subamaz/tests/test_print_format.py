@@ -126,9 +126,10 @@ class TestPrintFormatSandbox(SubamazTestCase):
 					amount=100000,
 				)
 			],
-			taxes=[],
+			taxes=[frappe._dict(description="VAT", tax_amount=26000)],
 			total=100000,
 			discount_amount=0,
+			total_taxes_and_charges=26000,
 			grand_total=130000,
 			outstanding_amount=100000,
 			paid_amount=30000,
@@ -145,6 +146,9 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("Test Customer", html)
 		self.assertIn("130,000", html)
 		self.assertIn("BALANCE DUE", html)
+		self.assertIn("Tax", html)
+		self.assertIn("26,000", html)
+		self.assertNotIn("VAT", html)
 
 	def test_proforma_invoice_body_renders_without_vehicle(self):
 		from frappe.utils.jinja import render_template
@@ -172,9 +176,10 @@ class TestPrintFormatSandbox(SubamazTestCase):
 					amount=100000,
 				)
 			],
-			taxes=[],
+			taxes=[frappe._dict(description="VAT", tax_amount=26000)],
 			total=100000,
 			discount_amount=0,
+			total_taxes_and_charges=26000,
 			grand_total=130000,
 			terms="",
 		)
@@ -190,6 +195,9 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("Valid Until", html)
 		self.assertIn("130,000", html)
 		self.assertIn("not a tax invoice", html)
+		self.assertIn("Tax", html)
+		self.assertIn("26,000", html)
+		self.assertNotIn("VAT", html)
 		self.assertNotIn("BALANCE DUE", html)
 
 	def test_purchase_order_body_renders_with_advance(self):
@@ -218,9 +226,10 @@ class TestPrintFormatSandbox(SubamazTestCase):
 					amount=100000,
 				)
 			],
-			taxes=[],
+			taxes=[frappe._dict(description="VAT", tax_amount=30000)],
 			total=100000,
 			discount_amount=0,
+			total_taxes_and_charges=30000,
 			grand_total=130000,
 			advance_paid=50000,
 			terms="",
@@ -239,6 +248,9 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("Advance Paid", html)
 		self.assertIn("BALANCE PAYABLE", html)
 		self.assertIn("80,000", html)
+		self.assertIn("Tax", html)
+		self.assertIn("30,000", html)
+		self.assertNotIn("VAT", html)
 
 	def test_request_for_quotation_uses_first_supplier_only(self):
 		from frappe.utils.jinja import render_template
@@ -333,3 +345,20 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		]
 		for path in paths:
 			self.assertNotIn("#C9A227", path.read_text().upper(), f"{path.name} uses legacy gold")
+
+	def test_desk_preview_releases_bottom_on_multi_page(self):
+		import pathlib
+
+		root = pathlib.Path(__file__).parents[1]
+		script = (root / "templates" / "print_formats" / "print_layout_script.html").read_text()
+		css = (root / "public" / "css" / "print_formats.css").read_text()
+		self.assertIn('classList.toggle("suba-multi-page", multiPage)', script)
+		self.assertIn("pages > 1 || bottomHeight + 2 > remaining", script)
+		self.assertIn("body.print-format-doc.suba-multi-page .suba-bottom", css)
+		self.assertIn("margin-top: 0 !important;", css)
+		self.assertIn("wrapClosing", script)
+		self.assertIn("suba-closing--new-page", script)
+		self.assertIn(".suba-closing.suba-closing--new-page", css)
+		self.assertIn("justify-content: space-between;", css)
+		self.assertIn("height: calc(var(--suba-page-body-height) - 1mm);", css)
+		self.assertNotIn(".suba-bottom.suba-bottom--new-page", css)

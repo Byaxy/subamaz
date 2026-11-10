@@ -49,11 +49,11 @@
 	<table class="suba-table">
 		<thead>
 			<tr>
-				<th style="width: 9%">#</th>
+				<th style="width: 8%">#</th>
 				<th>DESCRIPTION</th>
-				<th style="width: 13%; text-align: center">QTY</th>
-				<th style="width: 23%; text-align: right">UNIT PRICE</th>
-				<th style="width: 25%; text-align: right">AMOUNT</th>
+				<th style="width: 10%; text-align: center">QTY</th>
+				<th style="width: 20%; text-align: right">UNIT PRICE</th>
+				<th style="width: 22%; text-align: right">AMOUNT</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -80,9 +80,8 @@
 			{% if doc.discount_amount %}
 			<div class="suba-total-line"><span>Discount</span><span>-{{ subamaz_num(doc.discount_amount) }}</span></div>
 			{% endif %}
-			{% for tax in doc.get("taxes") or [] %}
-			<div class="suba-total-line"><span>{{ tax.description or "Tax" }}</span><span>{{ subamaz_num(tax.tax_amount) }}</span></div>
-			{% endfor %}
+			{%- set tax_total = doc.total_taxes_and_charges or 0 -%}
+			<div class="suba-total-line"><span>Tax</span><span>{{ subamaz_num(tax_total) }}</span></div>
 			<div class="suba-grand-total"><span>TOTAL</span><span>{{ subamaz_money(doc.grand_total, currency) }}</span></div>
 			<div class="suba-total-line"><span>Amount Paid</span><span>{{ subamaz_num(amount_paid) }}</span></div>
 			<div class="suba-balance-due"><span>BALANCE DUE</span><span>{{ subamaz_money(doc.outstanding_amount, currency) }}</span></div>

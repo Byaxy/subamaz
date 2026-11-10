@@ -636,6 +636,12 @@
 		flex: 1 0 auto;
 		min-height: var(--suba-page-body-height);
 	}
+	body.print-format-doc .suba-closing {
+		display: contents;
+	}
+	body.print-format-doc.suba-multi-page .suba-bottom {
+		margin-top: 0 !important;
+	}
 	body.print-format-doc .suba-watermark {
 		position: absolute !important;
 		top: 148.5mm !important;
@@ -684,13 +690,21 @@
 		flex-direction: column;
 		min-height: var(--suba-page-body-height);
 	}
-	.suba-bottom.suba-bottom--new-page {
+	.suba-closing.suba-closing--new-page {
 		page-break-before: always;
 		break-before: page;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
+		height: calc(var(--suba-page-body-height) - 1mm);
+		margin-top: 0;
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+	.suba-closing.suba-closing--new-page.suba-closing--solo {
 		justify-content: flex-end;
-		min-height: var(--suba-page-body-height);
+	}
+	.suba-closing.suba-closing--new-page .suba-bottom {
 		margin-top: 0;
 	}
 	.suba-section,
