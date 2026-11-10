@@ -11,6 +11,16 @@ ignore_missing_dependency_doctypes()
 
 class TestSidebars(SubamazTestCase):
 	def test_expense_and_category_are_in_accounts_sidebar(self):
+		self._assert_accounts_positions()
+
+	def test_sync_keeps_accounts_sidebar_positions(self):
+		from subamaz.sidebars import sync_accounts_sidebar
+
+		sync_accounts_sidebar()
+		sync_accounts_sidebar()
+		self._assert_accounts_positions()
+
+	def _assert_accounts_positions(self):
 		layer = get_customization("Accounts", None)
 		self.assertIsNotNone(layer)
 

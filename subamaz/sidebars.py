@@ -90,7 +90,7 @@ def _layer_rows(layer):
 
 def _ensure_item(rows, spec):
 	existing = next((index for index, row in enumerate(rows) if _same_item(row, spec)), None)
-	anchor = next((index for index, row in enumerate(rows) if row.get("label") == spec["after"]), None)
+	anchor = _anchor_index(rows, spec["after"])
 	target = anchor + 1 if anchor is not None else len(rows)
 
 	if existing is None:
@@ -104,6 +104,23 @@ def _ensure_item(rows, spec):
 		target -= 1
 	rows.insert(target, _added_item(spec))
 	return True
+
+
+def _anchor_index(rows, label):
+	"""Find the anchor by identity, because stored references do not keep base labels."""
+	from frappe.desk.doctype.sidebar.sidebar import LINKED_IDENTITY_FIELDS, unlinked_key
+
+	anchor = next((row for row in frappe.get_doc("Sidebar", ACCOUNTS).items if row.label == label), None)
+	if not anchor:
+		return None
+	if anchor.get("link_to") or anchor.get("url"):
+		identity = tuple(anchor.get(field) for field in LINKED_IDENTITY_FIELDS)
+		for index, row in enumerate(rows):
+			if tuple(row.get(field) for field in LINKED_IDENTITY_FIELDS) == identity:
+				return index
+		return None
+	key = anchor.get("key") or unlinked_key(anchor)
+	return next((index for index, row in enumerate(rows) if row.get("key") == key), None)
 
 
 def _same_item(row, spec):
