@@ -263,6 +263,17 @@
    "collapsible": 1,
    "indent": 0,
    "keep_closed": 0,
+   "label": "Expense",
+   "link_to": "Expense",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
    "label": "Journal Entry",
    "link_to": "Journal Entry",
    "link_type": "DocType",
@@ -529,6 +540,17 @@
    "keep_closed": 0,
    "label": "Service Checklist Template",
    "link_to": "Service Checklist Template",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Expense Category",
+   "link_to": "Expense Category",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"

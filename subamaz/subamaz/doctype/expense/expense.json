@@ -1,0 +1,360 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-11-10 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "expense_description",
+  "amount",
+  "payee",
+  "column_break_main",
+  "expense_date",
+  "payment_type",
+  "expense_category",
+  "purchase_invoice",
+  "mode_of_payment",
+  "section_break_payment_accounts",
+  "paid_from",
+  "paid_from_account_currency",
+  "column_break_payment_accounts",
+  "paid_to",
+  "paid_to_account_currency",
+  "section_break_reference",
+  "reference_no",
+  "column_break_reference",
+  "reference_date",
+  "section_break_company",
+  "company",
+  "column_break_company",
+  "cost_center",
+  "section_break_accompanying",
+  "is_accompanying",
+  "purchase_orders",
+  "column_break_accompanying",
+  "landed_cost_voucher",
+  "section_break_links",
+  "journal_entry",
+  "column_break_links",
+  "payment_entry",
+  "section_break_notes",
+  "notes",
+  "amended_from",
+  "amended_by"
+ ],
+ "fields": [
+  {
+   "default": "EXP-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "EXP-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expense_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Expense Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Paid Amount",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "payee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Payee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "expense_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Expense Date",
+   "reqd": 1
+  },
+  {
+   "default": "Direct Payment",
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "label": "Payment Type",
+   "options": "Direct Payment\nAgainst Purchase Invoice",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.payment_type == 'Direct Payment' || doc.is_accompanying == 1",
+   "fieldname": "expense_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Expense Category",
+   "mandatory_depends_on": "eval:doc.payment_type == 'Direct Payment' || doc.is_accompanying == 1",
+   "options": "Expense Category"
+  },
+  {
+   "depends_on": "eval:doc.payment_type == 'Against Purchase Invoice'",
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice",
+   "mandatory_depends_on": "eval:doc.payment_type == 'Against Purchase Invoice'",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Payment Method",
+   "options": "Mode of Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_payment_accounts",
+   "fieldtype": "Section Break",
+   "label": "Payment Accounts"
+  },
+  {
+   "fieldname": "paid_from",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Account Paid From",
+   "options": "Account",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "paid_from_account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency (From)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_payment_accounts",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paid_to",
+   "fieldtype": "Link",
+   "label": "Account Paid To",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paid_to_account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency (To)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_reference",
+   "fieldtype": "Section Break",
+   "label": "Payment Reference"
+  },
+  {
+   "description": "Bank transfer number or other payment reference. Required for Bank payments.",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Payment Reference No"
+  },
+  {
+   "fieldname": "column_break_reference",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "label": "Payment Reference Date"
+  },
+  {
+   "fieldname": "section_break_company",
+   "fieldtype": "Section Break",
+   "label": "Company Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_company",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "depends_on": "eval:doc.is_accompanying == 1",
+   "fieldname": "section_break_accompanying",
+   "fieldtype": "Section Break",
+   "label": "Accompanying Expense Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_accompanying",
+   "fieldtype": "Check",
+   "label": "Is Accompanying Expense"
+  },
+  {
+   "depends_on": "eval:doc.is_accompanying == 1",
+   "fieldname": "purchase_orders",
+   "fieldtype": "Table",
+   "label": "Purchase Orders",
+   "options": "Expense Purchase Order"
+  },
+  {
+   "fieldname": "column_break_accompanying",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "landed_cost_voucher",
+   "fieldtype": "Link",
+   "label": "Landed Cost Voucher",
+   "options": "Landed Cost Voucher",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_links",
+   "fieldtype": "Section Break",
+   "label": "Payment / Journal Entry Details"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_links",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "label": "Payment Entry",
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Expense",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_by",
+   "fieldtype": "Data",
+   "label": "Amended By",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-11-10 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Expense",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Accountant",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Garage Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "expense_description,payee,expense_category",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

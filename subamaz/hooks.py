@@ -114,7 +114,7 @@ doctype_js = {
 	"Sales Order": "public/js/sales_order.js",
 	"Sales Invoice": "public/js/sales_invoice.js",
 }
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_list_js = {"Expense": "public/js/expense_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -227,6 +227,13 @@ doc_events = {
 	},
 	"Garage Job Card": {
 		"on_update": "subamaz.subamaz.doctype.service_order.service_order.on_job_card_update"
+	},
+	"Landed Cost Voucher": {
+		"validate": "subamaz.subamaz.doctype.expense.landed_cost.validate_unique_expense_lcv",
+		"after_insert": "subamaz.subamaz.doctype.expense.landed_cost.link_expense_lcv",
+		"on_submit": "subamaz.subamaz.doctype.expense.landed_cost.link_expense_lcv",
+		"on_cancel": "subamaz.subamaz.doctype.expense.landed_cost.unlink_expense_lcv",
+		"on_trash": "subamaz.subamaz.doctype.expense.landed_cost.unlink_expense_lcv",
 	},
 }
 
