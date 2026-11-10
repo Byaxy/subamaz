@@ -58,6 +58,7 @@ def get_supplier_payable_details(supplier: str, company: str):
 	}
 
 
+@frappe.whitelist()
 def get_purchase_invoices_search(doctype, txt, searchfield, start, page_len, filters):
 	"""Link search for unpaid submitted Purchase Invoices."""
 	company = (filters or {}).get("company") if isinstance(filters, dict) else None
@@ -90,6 +91,7 @@ def get_purchase_invoices_search(doctype, txt, searchfield, start, page_len, fil
 	)
 
 
+@frappe.whitelist()
 def get_purchase_orders_search(doctype, txt, searchfield, start, page_len, filters):
 	"""Link search for submitted Purchase Orders."""
 	company = (filters or {}).get("company") if isinstance(filters, dict) else None
