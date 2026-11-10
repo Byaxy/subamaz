@@ -219,16 +219,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Expense",
-   "link_count": 0,
-   "link_to": "Expense",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Journal Entry",
    "link_count": 0,
    "link_to": "Journal Entry",
@@ -339,16 +329,6 @@
    "label": "Service Checklist Template",
    "link_count": 0,
    "link_to": "Service Checklist Template",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Expense Category",
-   "link_count": 0,
-   "link_to": "Expense Category",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"

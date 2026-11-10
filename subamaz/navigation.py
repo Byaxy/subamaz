@@ -45,6 +45,9 @@ DESKTOP_HIDES = {
 def after_migrate():
 	_sync_dock_layers()
 	_sync_desktop_hides()
+	from subamaz.sidebars import sync_accounts_sidebar
+
+	sync_accounts_sidebar()
 
 
 def _sync_dock_layers():
