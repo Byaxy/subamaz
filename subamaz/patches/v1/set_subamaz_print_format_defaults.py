@@ -2,7 +2,7 @@ import frappe
 
 DEFAULTS = {
 	"Sales Invoice": "SubaMaz Sales Invoice",
-	"Payment Entry": "SubaMaz Payment Receipt",
+	"Receipt": "SubaMaz Payment Receipt",
 	"Quotation": "SubaMaz Pro-Forma Invoice",
 	"Purchase Order": "SubaMaz Purchase Order",
 	"Request for Quotation": "SubaMaz Request for Quotation",

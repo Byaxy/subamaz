@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-06-11 08:50:46.118757",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "payment_method",
+  "check_bank",
+  "bank_name",
+  "reference_no",
+  "reference_date",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Payment Method",
+   "options": "Mode of Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "check_bank",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Check Bank",
+   "options": "Bank"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cheque/Reference #"
+  },
+  {
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "label": "Cheque/Reference Date"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-12 13:06:12.462796",
+ "modified_by": "Administrator",
+ "module": "Subamaz",
+ "name": "Receipt Payment Method",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

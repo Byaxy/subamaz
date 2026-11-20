@@ -43,7 +43,7 @@ class TestPrintFormatSandbox(SubamazTestCase):
 
 		for name, doctype, body_template in (
 			("SubaMaz Sales Invoice", "Sales Invoice", "sales_invoice.html"),
-			("SubaMaz Payment Receipt", "Payment Entry", "payment_receipt.html"),
+			("SubaMaz Payment Receipt", "Receipt", "receipt.html"),
 			("SubaMaz Pro-Forma Invoice", "Quotation", "proforma_invoice.html"),
 			("SubaMaz Purchase Order", "Purchase Order", "purchase_order.html"),
 			("SubaMaz Request for Quotation", "Request for Quotation", "request_for_quotation.html"),
@@ -72,7 +72,7 @@ class TestPrintFormatSandbox(SubamazTestCase):
 	def test_default_print_formats(self):
 		expected = {
 			"Sales Invoice": "SubaMaz Sales Invoice",
-			"Payment Entry": "SubaMaz Payment Receipt",
+			"Receipt": "SubaMaz Payment Receipt",
 			"Quotation": "SubaMaz Pro-Forma Invoice",
 			"Purchase Order": "SubaMaz Purchase Order",
 			"Request for Quotation": "SubaMaz Request for Quotation",
@@ -90,6 +90,40 @@ class TestPrintFormatSandbox(SubamazTestCase):
 				)
 				self.assertIn(print_format, values)
 
+		payment_entry_values = frappe.get_all(
+			"Property Setter",
+			filters={
+				"doc_type": "Payment Entry",
+				"property": "default_print_format",
+				"doctype_or_field": "DocType",
+			},
+			pluck="value",
+		)
+		self.assertNotIn("SubaMaz Payment Receipt", payment_entry_values)
+
+	def test_payment_entry_receipt_fields_are_fixture_scoped(self):
+		import json
+		import pathlib
+
+		root = pathlib.Path(__file__).parents[1]
+		fields = {
+			row["name"]: row
+			for row in json.loads((root / "fixtures" / "custom_field.json").read_text())
+		}
+		for name in ("Payment Entry-custom_receipt", "Payment Entry-check_bank"):
+			with self.subTest(field=name):
+				self.assertIn(name, fields)
+				self.assertEqual(fields[name]["module"], "Subamaz")
+
+		custom_field_hooks = [
+			hook
+			for hook in frappe.get_hooks("fixtures")
+			if isinstance(hook, dict) and hook.get("doctype") == "Custom Field"
+		]
+		self.assertTrue(
+			any(hook.get("filters", {}).get("module") == "Subamaz" for hook in custom_field_hooks)
+		)
+
 	def test_print_format_templates_avoid_unsafe_jinja(self):
 		import pathlib
 
@@ -101,6 +135,35 @@ class TestPrintFormatSandbox(SubamazTestCase):
 			self.assertNotIn("frappe.get_single(", html, f"{path.name} uses frappe.get_single")
 			self.assertNotIn("get_singles_dict", html, f"{path.name} uses get_singles_dict")
 			self.assertNotIn("frappe.get_doc", html, f"{path.name} uses frappe.get_doc")
+
+	def test_item_description_appends_code_only_when_different(self):
+		from frappe.utils.jinja import render_template
+
+		template = (
+			'{% from "subamaz/templates/print_formats/macros.html" import subamaz_item_description %}'
+			"{{ subamaz_item_description(item) }}"
+		)
+		cases = (
+			({"item_name": "Brake Pad", "item_code": "SP-1042"}, "Brake Pad - SP-1042"),
+			({"item_name": "Brake Pad", "item_code": "BRAKE PAD"}, "Brake Pad"),
+			({"item_name": None, "item_code": "SP-1042"}, "SP-1042"),
+			({"item_name": "Generic Part", "item_code": None}, "Generic Part"),
+			(
+				{"item_name": "Brake Pad", "description": "Ignored", "item_code": "SP-1042"},
+				"Brake Pad - SP-1042",
+			),
+		)
+		for values, expected in cases:
+			with self.subTest(values=values):
+				html = render_template(template, {"item": frappe._dict(values)}, is_path=False)
+				self.assertEqual(html.strip(), expected)
+
+	def test_legacy_print_formats_removed(self):
+		for name in ("Garage Invoice", "Garage Quotation", "Job Sheet"):
+			with self.subTest(print_format=name):
+				self.assertFalse(frappe.db.exists("Print Format", name))
+		self.assertTrue(frappe.db.exists("Print Format", "Delivery Note"))
+		self.assertTrue(frappe.db.exists("Print Format", "Vehicle Inspection Report"))
 
 	def test_sales_invoice_body_renders_without_garage_data(self):
 		from frappe.utils.jinja import render_template
@@ -148,7 +211,41 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("BALANCE DUE", html)
 		self.assertIn("Tax", html)
 		self.assertIn("26,000", html)
+		self.assertIn("Amount in Words", html)
+		self.assertIn("One Hundred Thirty Thousand Uganda Shillings Only", html)
+		self.assertIn("<span>Discount</span><span>0</span>", html)
+		self.assertIn("Engine Oil - OIL-001", html)
 		self.assertNotIn("VAT", html)
+
+	def test_sales_invoice_body_shows_non_zero_discount(self):
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			currency="UGX",
+			posting_date="2026-11-09",
+			name="ACC-SINV-2026-00002",
+			customer_name="Test Customer",
+			customer_address=None,
+			contact_mobile=None,
+			contact_email=None,
+			garage_vehicle=None,
+			items=[],
+			taxes=[],
+			total=100000,
+			discount_amount=5000,
+			total_taxes_and_charges=0,
+			grand_total=95000,
+			outstanding_amount=95000,
+			paid_amount=0,
+			terms="",
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/sales_invoice.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+		self.assertIn("<span>Discount</span><span>-5,000</span>", html)
+		self.assertIn("Ninety Five Thousand", html)
 
 	def test_proforma_invoice_body_renders_without_vehicle(self):
 		from frappe.utils.jinja import render_template
@@ -197,6 +294,10 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("not a tax invoice", html)
 		self.assertIn("Tax", html)
 		self.assertIn("26,000", html)
+		self.assertIn("Amount in Words", html)
+		self.assertIn("One Hundred And Thirty Thousand", html)
+		self.assertIn("<span>Discount</span><span>0</span>", html)
+		self.assertIn("Engine Oil - OIL-001", html)
 		self.assertNotIn("VAT", html)
 		self.assertNotIn("BALANCE DUE", html)
 
@@ -250,6 +351,10 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn("80,000", html)
 		self.assertIn("Tax", html)
 		self.assertIn("30,000", html)
+		self.assertIn("Amount in Words", html)
+		self.assertIn("One Hundred And Thirty Thousand", html)
+		self.assertIn("<span>Discount</span><span>0</span>", html)
+		self.assertIn("Brake Pad - BRK-001", html)
 		self.assertNotIn("VAT", html)
 
 	def test_request_for_quotation_uses_first_supplier_only(self):
@@ -301,38 +406,191 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertNotIn("second@example.com", html)
 		self.assertIn("20-11-2026", html)
 		self.assertIn("Please supply", html)
+		self.assertIn("Oil Filter - FLT-001", html)
 		self.assertNotIn("UNIT PRICE", html)
 		self.assertNotIn("AMOUNT", html)
 
-	def test_payment_receipt_body_renders_without_references(self):
+	def test_receipt_body_renders_snapshot_balances(self):
 		from frappe.utils.jinja import render_template
 
 		doc = frappe._dict(
-			paid_from_account_currency="UGX",
-			paid_to_account_currency="UGX",
-			party_type="Customer",
-			party=None,
-			party_name="Test Customer",
-			contact_email=None,
-			posting_date="2026-11-09",
-			name="PE-2026-00001",
-			paid_amount=130000,
-			unallocated_amount=0,
-			mode_of_payment="Cash",
-			reference_no=None,
-			reference_date=None,
-			references=[],
-			in_words="One Hundred Thirty Thousand Uganda Shillings Only",
+			currency="UGX",
+			receipt_date="2026-11-09",
+			name="RCPT-2026-00001",
+			customer_name="Test Customer",
+			customer_address=None,
+			billing_address=None,
+			amount_in_words="One Hundred Thirty Thousand Uganda Shillings Only",
+			total_amount_due=130000,
+			total_amount_received=30000,
+			total_balance_due=100000,
+			customer_total_outstanding=250000,
+			receipt_payments=[
+				frappe._dict(
+					sales_invoice="ACC-SINV-2026-00001",
+					invoice_date="2026-11-01",
+					amount_due=130000,
+					amount_received=30000,
+					balance_due=100000,
+				)
+			],
+			receipt_payment_methods=[
+				frappe._dict(
+					payment_method="Cash",
+					check_bank=None,
+					bank_name=None,
+					reference_no=None,
+					reference_date=None,
+					amount=30000,
+				)
+			],
 		)
 		html = render_template(
-			"subamaz/templates/print_formats/payment_receipt.html",
+			"subamaz/templates/print_formats/receipt.html",
 			{"doc": doc, "letter_head": "", "footer": ""},
 			is_path=True,
 		)
 		self.assertIn("PAYMENT RECEIPT", html)
 		self.assertIn(doc.name, html)
-		self.assertIn("Advance payment", html)
-		self.assertIn("BALANCE DUE", html)
+		self.assertIn("Test Customer", html)
+		self.assertIn("One Hundred Thirty Thousand Uganda Shillings Only", html)
+		self.assertIn("ACC-SINV-2026-00001", html)
+		self.assertIn("130,000", html)
+		self.assertIn("30,000", html)
+		self.assertIn("100,000", html)
+		self.assertIn("250,000", html)
+		self.assertIn("Cash", html)
+		self.assertIn("Cash (UGX)", html)
+		self.assertIn("Mobile Money (UGX)", html)
+		self.assertIn("Cheque / Bank (UGX)", html)
+		self.assertIn("Total Amount (UGX)", html)
+		self.assertIn("Total Amount Due:", html)
+		self.assertIn("Total Amount Paid:", html)
+		self.assertIn("Balance Due:", html)
+		self.assertIn("Total Outstanding:", html)
+		self.assertIn(
+			'<div class="suba-total-line"><span>Total Amount Paid:</span>',
+			html,
+		)
+		self.assertIn(
+			'<div class="suba-grand-total suba-outstanding-total"><span>Total Outstanding:</span>',
+			html,
+		)
+		self.assertLess(html.index("Total Amount Due:"), html.index("Total Amount Paid:"))
+		self.assertLess(html.index("Total Amount Paid:"), html.index("Balance Due:"))
+		self.assertLess(html.index("Balance Due:"), html.index("Total Outstanding:"))
+
+	def test_receipt_payment_methods_groups_cash_mobile_bank(self):
+		import pathlib
+
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			currency="UGX",
+			receipt_date="2026-11-09",
+			name="RCPT-2026-00003",
+			customer_name="Test Customer",
+			customer_address=None,
+			billing_address=None,
+			amount_in_words="Fifty Thousand Uganda Shillings Only",
+			total_amount_due=50000,
+			total_amount_received=50000,
+			total_balance_due=0,
+			customer_total_outstanding=100000,
+			receipt_payments=[
+				frappe._dict(
+					sales_invoice="ACC-SINV-2026-00003",
+					invoice_date="2026-11-01",
+					amount_due=50000,
+					amount_received=50000,
+					balance_due=0,
+				)
+			],
+			receipt_payment_methods=[
+				frappe._dict(payment_method="Cash", amount=10000),
+				frappe._dict(payment_method="Mobile Money", amount=15000),
+				frappe._dict(
+					payment_method="Bank",
+					check_bank="Test Bank",
+					reference_no="CHQ-001",
+					amount=20000,
+				),
+				frappe._dict(
+					payment_method="Bank",
+					check_bank="Test Bank",
+					reference_no="CHQ-002",
+					amount=5000,
+				),
+			],
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/receipt.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+
+		self.assertIn("Cash (UGX)", html)
+		self.assertIn("Mobile Money (UGX)", html)
+		self.assertIn("Cheque / Bank (UGX)", html)
+		self.assertIn("Total Amount (UGX)", html)
+		self.assertIn(
+			'<td rowspan="2" class="suba-cell-center suba-cell-strong">UGX 10,000</td>',
+			html,
+		)
+		self.assertIn(
+			'<td rowspan="2" class="suba-cell-center suba-cell-strong">UGX 15,000</td>',
+			html,
+		)
+		self.assertIn("UGX 20,000", html)
+		self.assertIn("UGX 5,000", html)
+		self.assertIn("UGX 50,000", html)
+		self.assertIn("Test Bank", html)
+		self.assertIn("CHQ-001", html)
+		self.assertIn("CHQ-002", html)
+		self.assertNotIn("Reference Date", html)
+
+		css = (
+			pathlib.Path(__file__).parents[1] / "public" / "css" / "print_formats.css"
+		).read_text()
+		self.assertIn(".suba-methods-table", css)
+		self.assertIn("margin-top: 4mm;", css)
+		self.assertIn("border-left: 0.25mm solid #cbd5e1;", css)
+
+	def test_receipt_body_renders_advance_without_invoice(self):
+		from frappe.utils.jinja import render_template
+
+		doc = frappe._dict(
+			currency="UGX",
+			receipt_date="2026-11-09",
+			name="RCPT-2026-00002",
+			customer_name="Test Customer",
+			customer_address=None,
+			billing_address=None,
+			amount_in_words="Fifty Thousand Uganda Shillings Only",
+			total_amount_due=0,
+			total_amount_received=50000,
+			total_balance_due=0,
+			customer_total_outstanding=0,
+			receipt_payments=[
+				frappe._dict(
+					sales_invoice=None,
+					invoice_date=None,
+					amount_due=0,
+					amount_received=50000,
+					balance_due=0,
+				)
+			],
+			receipt_payment_methods=[],
+		)
+		html = render_template(
+			"subamaz/templates/print_formats/receipt.html",
+			{"doc": doc, "letter_head": "", "footer": ""},
+			is_path=True,
+		)
+		self.assertIn("Advance / On account", html)
+		self.assertIn("50,000", html)
+		self.assertIn("Balance Due:", html)
+		self.assertIn("Total Outstanding:", html)
 
 	def test_new_print_format_assets_avoid_legacy_gold(self):
 		import pathlib

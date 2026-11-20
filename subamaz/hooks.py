@@ -113,6 +113,7 @@ web_include_css = ["/assets/subamaz/css/theme.css"]
 doctype_js = {
 	"Sales Order": "public/js/sales_order.js",
 	"Sales Invoice": "public/js/sales_invoice.js",
+	"Payment Entry": "public/js/payment_entry.js",
 }
 doctype_list_js = {"Expense": "public/js/expense_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

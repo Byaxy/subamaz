@@ -6,6 +6,20 @@
 {{ frappe.utils.fmt_money(value or 0, precision=0) }}
 {%- endmacro %}
 
+{% macro subamaz_amount_in_words(doc, currency) %}
+{%- set words = doc.in_words or frappe.utils.money_in_words(doc.rounded_total or doc.grand_total, currency) -%}
+<div class="suba-amount-words">
+	<div class="suba-amount-words-label">Amount in Words</div>
+	<div class="suba-amount-words-text">{{ words }}</div>
+</div>
+{% endmacro %}
+
+{% macro subamaz_item_description(item) -%}
+{%- set name = (item.item_name or item.item_code or "")|trim -%}
+{%- set code = (item.item_code or "")|trim -%}
+{{ name }}{% if code and code|upper != name|upper %} - {{ code }}{% endif %}
+{%- endmacro %}
+
 {% macro subamaz_qty(value) -%}
 {{ frappe.utils.fmt_money(value or 0, precision=2).rstrip("0").rstrip(".") }}
 {%- endmacro %}
@@ -129,49 +143,4 @@
 
 {% macro subamaz_signature(label) %}
 <div class="suba-signature">{{ label }}</div>
-{% endmacro %}
-
-{% macro subamaz_payment_lanes(doc) %}
-{%- set mode = (doc.mode_of_payment or "")|lower -%}
-{%- set is_cash = "cash" in mode -%}
-{%- set is_mobile = "mobile" in mode or "momo" in mode or "mtn" in mode or "airtel" in mode -%}
-{%- set is_bank = "bank" in mode or "cheque" in mode or "draft" in mode or "wire" in mode or "credit card" in mode -%}
-{%- set is_other = not (is_cash or is_mobile or is_bank) -%}
-{%- set amount = doc.paid_amount or 0 -%}
-{%- set reference = doc.reference_no or "—" -%}
-{%- set currency = doc.paid_from_account_currency or doc.paid_to_account_currency or "UGX" -%}
-{%- set bank = frappe.db.get_value("Bank Account", doc.bank_account, "bank") if doc.bank_account else (doc.paid_to or "—") -%}
-<table class="suba-lanes">
-	<thead>
-		<tr>
-			<th style="width: 12%">CASH</th>
-			<th colspan="2" style="width: 28%">MOBILE MONEY</th>
-			<th colspan="3" style="width: 42%">BANK / CHEQUE</th>
-			<th style="width: 18%">TOTAL RECEIVED</th>
-		</tr>
-		<tr>
-			<th class="suba-lane-sub">Amount</th>
-			<th class="suba-lane-sub">Reference #</th>
-			<th class="suba-lane-sub">Amount</th>
-			<th class="suba-lane-sub">Bank</th>
-			<th class="suba-lane-sub">Reference #</th>
-			<th class="suba-lane-sub">Amount</th>
-			<th class="suba-lane-sub">{{ currency }}</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>{{ subamaz_num(amount) if is_cash else "—" }}</td>
-			<td>{{ reference if is_mobile else "—" }}</td>
-			<td>{{ subamaz_num(amount) if is_mobile else "—" }}</td>
-			<td>{{ bank if is_bank else "—" }}</td>
-			<td>{{ reference if is_bank else "—" }}</td>
-			<td>{{ subamaz_num(amount) if is_bank else "—" }}</td>
-			<td class="suba-lane-total">{{ subamaz_num(amount) }}</td>
-		</tr>
-	</tbody>
-</table>
-{% if is_other %}
-<div class="suba-other-lane">Other: {{ doc.mode_of_payment }} · {{ reference }} · {{ subamaz_money(amount, currency) }}</div>
-{% endif %}
 {% endmacro %}

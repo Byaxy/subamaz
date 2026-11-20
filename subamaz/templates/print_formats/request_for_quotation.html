@@ -1,5 +1,6 @@
 {%- from "subamaz/templates/print_formats/macros.html" import
-	subamaz_address, subamaz_signature, subamaz_qty, subamaz_date, subamaz_detail_list -%}
+	subamaz_address, subamaz_signature, subamaz_qty, subamaz_date, subamaz_detail_list,
+	subamaz_item_description -%}
 {%- set suppliers = doc.get("suppliers") or [] -%}
 {%- set first_supplier = suppliers[0] if suppliers else None -%}
 {%- set supplier_name = (first_supplier.supplier_name or first_supplier.supplier) if first_supplier else None -%}
@@ -67,7 +68,7 @@
 			{% for item in doc.get("items") or [] %}
 			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
 				<td class="suba-cell-center suba-cell-muted">{{ item.idx or loop.index }}</td>
-				<td class="suba-desc">{{ item.item_name or item.description or item.item_code }}</td>
+				<td class="suba-desc">{{ subamaz_item_description(item) }}</td>
 				<td class="suba-cell-center">{{ subamaz_qty(item.qty) }}</td>
 				<td class="suba-cell-center">{{ item.uom or "—" }}</td>
 			</tr>

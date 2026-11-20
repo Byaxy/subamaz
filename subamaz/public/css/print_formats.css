@@ -396,6 +396,21 @@
 	padding: 0;
 	line-height: 0;
 }
+.suba-methods-table {
+	margin-top: 4mm;
+}
+.suba-methods-table th {
+	text-align: center;
+	vertical-align: middle;
+	border-left: 0.25mm solid rgba(255, 255, 255, 0.35);
+}
+.suba-methods-table td {
+	border-left: 0.25mm solid #cbd5e1;
+}
+.suba-methods-table thead tr:first-child > th:first-child,
+.suba-methods-table tbody tr:first-child > td:first-child {
+	border-left: 0;
+}
 
 .suba-line-total {
 	border-top: 0.4mm solid #1a2e72;
@@ -404,11 +419,37 @@
 /* Totals */
 .suba-totals-wrap {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 8mm;
 	margin-top: 3mm;
 }
+.suba-amount-words {
+	flex: 0 1 105mm;
+	max-width: 105mm;
+	border-left: 1mm solid #1a2e72;
+	background: #f4f7fc;
+	border-radius: 1mm;
+	padding: 2mm 3mm;
+}
+.suba-amount-words-label {
+	color: #1a2e72;
+	font-size: 10.5pt;
+	font-weight: 700;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+.suba-amount-words-text {
+	margin-top: 1mm;
+	color: #1e293b;
+	font-size: 9pt;
+	font-weight: 500;
+	line-height: 1.45;
+}
 .suba-totals {
+	flex: 0 0 72mm;
 	width: 72mm;
+	margin-left: auto;
 	font-feature-settings: "tnum" 1;
 }
 .suba-total-line {
@@ -439,6 +480,21 @@
 	font-size: 10pt;
 	font-weight: 800;
 	line-height: 1.35;
+	white-space: nowrap;
+}
+.suba-outstanding-total {
+	gap: 2mm;
+	padding-right: 2.5mm;
+	font-size: 9pt;
+	white-space: normal;
+}
+.suba-outstanding-total span:first-child {
+	flex: 1 1 auto;
+	min-width: 0;
+	white-space: normal;
+}
+.suba-outstanding-total span:last-child {
+	flex: 0 0 auto;
 	white-space: nowrap;
 }
 .suba-balance-due {
@@ -710,6 +766,7 @@
 	.suba-section,
 	.suba-bottom,
 	.suba-signatures,
+	.suba-totals-wrap,
 	.suba-totals,
 	.suba-particulars,
 	.suba-lanes {

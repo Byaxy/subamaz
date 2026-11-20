@@ -1,5 +1,6 @@
 {%- from "subamaz/templates/print_formats/macros.html" import
-	subamaz_address, subamaz_signature, subamaz_money, subamaz_num, subamaz_qty, subamaz_date, subamaz_detail_list -%}
+	subamaz_address, subamaz_signature, subamaz_money, subamaz_num, subamaz_qty, subamaz_date,
+	subamaz_detail_list, subamaz_amount_in_words, subamaz_item_description -%}
 {%- set currency = doc.currency or "UGX" -%}
 {%- set supplier_address = doc.supplier_address -%}
 {%- if not supplier_address and doc.supplier -%}
@@ -50,7 +51,7 @@
 			{% for item in doc.get("items") or [] %}
 			<tr class="{{ 'suba-row-even' if loop.index % 2 == 0 else '' }}">
 				<td class="suba-cell-center suba-cell-muted">{{ item.idx or loop.index }}</td>
-				<td class="suba-desc">{{ item.item_name or item.description or item.item_code }}</td>
+				<td class="suba-desc">{{ subamaz_item_description(item) }}</td>
 				<td class="suba-cell-center">{{ subamaz_qty(item.qty) }} {{ item.uom or "" }}</td>
 				<td class="suba-cell-right">{{ subamaz_num(item.rate) }}</td>
 				<td class="suba-cell-right suba-cell-strong">{{ subamaz_num(item.amount) }}</td>
@@ -65,11 +66,10 @@
 	</table>
 
 	<div class="suba-totals-wrap">
+		{{ subamaz_amount_in_words(doc, currency) }}
 		<div class="suba-totals">
 			<div class="suba-total-line"><span>Subtotal</span><span>{{ subamaz_num(doc.total) }}</span></div>
-			{% if doc.discount_amount %}
-			<div class="suba-total-line"><span>Discount</span><span>-{{ subamaz_num(doc.discount_amount) }}</span></div>
-			{% endif %}
+			<div class="suba-total-line"><span>Discount</span><span>{% if doc.discount_amount %}-{{ subamaz_num(doc.discount_amount) }}{% else %}{{ subamaz_num(0) }}{% endif %}</span></div>
 			{%- set tax_total = doc.total_taxes_and_charges or 0 -%}
 			<div class="suba-total-line"><span>Tax</span><span>{{ subamaz_num(tax_total) }}</span></div>
 			<div class="suba-grand-total"><span>TOTAL</span><span>{{ subamaz_money(doc.grand_total, currency) }}</span></div>
