@@ -403,9 +403,11 @@
 	text-align: center;
 	vertical-align: middle;
 	border-left: 0.25mm solid rgba(255, 255, 255, 0.35);
+	border-bottom: 0.25mm solid rgba(255, 255, 255, 0.35);
 }
 .suba-methods-table td {
 	border-left: 0.25mm solid #cbd5e1;
+	border-bottom: 0.25mm solid #cbd5e1;
 }
 .suba-methods-table thead tr:first-child > th:first-child,
 .suba-methods-table tbody tr:first-child > td:first-child {

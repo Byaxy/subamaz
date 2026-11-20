@@ -555,6 +555,8 @@ class TestPrintFormatSandbox(SubamazTestCase):
 		self.assertIn(".suba-methods-table", css)
 		self.assertIn("margin-top: 4mm;", css)
 		self.assertIn("border-left: 0.25mm solid #cbd5e1;", css)
+		self.assertIn("border-bottom: 0.25mm solid rgba(255, 255, 255, 0.35);", css)
+		self.assertIn("border-bottom: 0.25mm solid #cbd5e1;", css)
 
 	def test_receipt_body_renders_advance_without_invoice(self):
 		from frappe.utils.jinja import render_template
